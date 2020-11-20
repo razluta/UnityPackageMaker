@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:VisualElement name="VE_IncludedPackageContents" class="property_box">
         <Style src="PackageMaker.uss" />
-        <ui:Label text="Included Package Contents" name="LB_IncludedPackageContents" />
+        <ui:Label text="Included Package Contents" name="LB_IncludedPackageContents" class="section_title" />
         <ui:VisualElement name="VE_PackageManifestRow" class="package_contents_row mandatory">
             <ui:VisualElement name="VE_PackageManifest" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
             <ui:Label text="package.json" name="LB_PackageManifest" class="property_contents_label" />

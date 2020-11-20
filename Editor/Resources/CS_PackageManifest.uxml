@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:VisualElement name="VE_PackageManifest" class="property_box">
         <Style src="PackageMaker.uss" />
-        <ui:Label text="Package Manifest Properties" name="LB_IncludedPackageContents" />
+        <ui:Label text="Package Manifest Properties" name="LB_IncludedPackageContents" class="section_title" />
         <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
             <ui:TextField picking-mode="Ignore" label="Display Name" value="Package Name" text="Package Name" name="TF_PackageDisplayName" class="text_field" />
         </ui:VisualElement>
@@ -12,7 +12,9 @@
         </ui:VisualElement>
         <ui:VisualElement name="VE_PackageDescription" class="package_contents_row" style="flex-direction: column;">
             <ui:Label text="Description" class="label" style="flex-grow: 1;" />
-            <ui:TextField picking-mode="Ignore" value="Text Description." text="A brief description of the package. This is the text that appears in the details view of the Package Manager window. Any UTF–8 character code is supported. This means that you can use special formatting character codes, such as line breaks (\n) and bullets (\u25AA)." name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal;" />
+            <ui:ListView focusable="True" name="LV_PackageDescription" class="listview_text_field">
+                <ui:TextField picking-mode="Ignore" value="Text Description." text="A brief description of the package. This is the text that appears in the details view of the Package Manager window. Any UTF–8 character code is supported. This means that you can use special formatting character codes, such as line breaks (\n) and bullets (\u25AA).&#10;&#10;&#10; &#10;&#10;&#10;" name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal;" />
+            </ui:ListView>
         </ui:VisualElement>
         <ui:VisualElement name="VE_Example" class="package_contents_row">
             <ui:TextField picking-mode="Ignore" label="Example" value="Input" text="Input" name="TF_Example" class="text_field" />

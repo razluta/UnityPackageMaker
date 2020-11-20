@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="VE_License" class="property_box">
+        <Style src="PackageMaker.uss" />
+        <ui:Label text="&apos;LICENSE&apos; Contents" name="LB_LicenseContents" class="section_title" />
+        <ui:Label text="Paste licence below. Leave license file empty if not license is provided with the package." style="opacity: 0.5; margin-left: 3px; white-space: normal;" />
+        <ui:VisualElement name="VE_LicenseContents" class="package_contents_row" style="flex-direction: column;">
+            <ui:ListView focusable="True" name="LV_LicenseContents" class="listview_text_field">
+                <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_LicenseContents" class="text_field" style="flex-wrap: wrap; white-space: normal; color: rgba(84, 84, 84, 255); min-height: 150px;" />
+            </ui:ListView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

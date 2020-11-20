@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="VE_Changelog" class="property_box">
+        <Style src="PackageMaker.uss" />
+        <ui:Label text="&apos;CHANGELOG.md&apos; Contents" name="LB_ChangelogContents" class="section_title" />
+        <ui:VisualElement name="VE_ChangelogContents" class="package_contents_row" style="flex-direction: column;">
+            <ui:ListView focusable="True" name="LV_ChangelogContents" class="listview_text_field">
+                <ui:TextField picking-mode="Ignore" value="Text Description." text="# Changelog&#10;All notable changes to this project will be documented in this file.&#10;&#10;## [0.1.0] - 2020-11-20&#10;### Added&#10;- this thing&#10;- this other thing&#10;&#10;### Changed&#10;- that thing&#10;- the other thing&#10;&#10;### Removed&#10;- this file&#10;- this functionality" name="TF_ChangelogContents" class="text_field" style="flex-wrap: wrap; white-space: normal;" />
+            </ui:ListView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -2,6 +2,6 @@
     <ui:VisualElement name="VE_CreateUnityPackage" class="property_box">
         <Style src="BT_CreatePackage.uss" />
         <Style src="PackageMaker.uss" />
-        <ui:Button text="Create New Unity Package" name="BT_CreatePackage" class="create_package_button" />
+        <ui:Button text="Update Existing Unity Package" name="BT_UpdatePackage" class="create_package_button innactive" />
     </ui:VisualElement>
 </ui:UXML>
