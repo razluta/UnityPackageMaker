@@ -1,0 +1,12 @@
+{
+  "name": "com.razluta.unitypackagemaker",
+  "version": "0.1.0",
+  "displayName": "Package Maker",
+  "description": "This a package for making the base setup for a new Unity package compatible with the Unity Package Manager.",
+  "unity": "2019.1",
+  "author": {
+    "name": "Razvan Luta",
+    "email": "contact@razluta.com",
+    "url": "https://github.com/razluta"
+  }
+}

@@ -1,0 +1,56 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="VE_IncludedPackageContents" class="property_box">
+        <Style src="PackageMaker.uss" />
+        <ui:Label text="Included Package Contents" name="LB_IncludedPackageContents" />
+        <ui:VisualElement name="VE_PackageManifestRow" class="package_contents_row mandatory">
+            <ui:VisualElement name="VE_PackageManifest" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
+            <ui:Label text="package.json" name="LB_PackageManifest" class="property_contents_label" />
+            <ui:Toggle name="TG_PackageManifest" value="true" class="toggle" style="visibility: hidden;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_ReadmeRow" class="package_contents_row mandatory">
+            <ui:VisualElement name="VE_Readme" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
+            <ui:Label text="README.MD" name="LB_Readme" class="property_contents_label" />
+            <ui:Toggle name="TG_Readme" value="true" class="toggle" style="visibility: hidden;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_ChangelogRow" class="package_contents_row mandatory">
+            <ui:VisualElement name="VE_Changelog" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
+            <ui:Label text="CHANGELOG.MD" name="LB_Changelog" class="property_contents_label" />
+            <ui:Toggle name="TG_Changelog" value="true" class="toggle" style="visibility: hidden;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_LicenseRow" class="package_contents_row">
+            <ui:VisualElement name="VE_License" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
+            <ui:Label text="LICENSE" name="LB_License" class="property_contents_label" />
+            <ui:Toggle name="TG_License" value="false" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_EditorRow" class="package_contents_row">
+            <ui:VisualElement name="VE_Editor" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+            <ui:Label text="Editor" name="LB_Editor" class="property_contents_label" />
+            <ui:Toggle name="TG_Editor" value="true" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_RuntimeRow" class="package_contents_row">
+            <ui:VisualElement name="VE_Runtime" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+            <ui:Label text="Runtime" name="LB_Runtime" class="property_contents_label" />
+            <ui:Toggle name="TG_Runtime" value="false" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_TestsRow" class="package_contents_row">
+            <ui:VisualElement name="VE_Tests" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+            <ui:Label text="Tests" name="LB_Tests" class="property_contents_label" />
+            <ui:Toggle name="TG_Tests" value="false" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_DocumentationRow" class="package_contents_row">
+            <ui:VisualElement name="VE_Documentation" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+            <ui:Label text="Documentation" name="LB_Documentation" class="property_contents_label" />
+            <ui:Toggle name="TG_Documentation" value="false" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_SamplesRow" class="package_contents_row">
+            <ui:VisualElement name="VE_Samples" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+            <ui:Label text="Samples" name="LB_Samples" class="property_contents_label" />
+            <ui:Toggle name="TG_Samples" value="false" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_Screenshots" class="package_contents_row">
+            <ui:VisualElement name="VE_Screenshots" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+            <ui:Label text="Screenshots" name="LB_Screenshots" class="property_contents_label" />
+            <ui:Toggle name="TG_Screenshots" value="false" class="toggle" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

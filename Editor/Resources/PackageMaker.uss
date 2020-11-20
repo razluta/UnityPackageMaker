@@ -1,0 +1,68 @@
+.package_contents_row {
+    flex-direction: row;
+    -unity-background-scale-mode: stretch-to-fill;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.property_box {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(36, 36, 36, 255);
+    border-right-color: rgba(36, 36, 36, 255);
+    border-top-color: rgba(36, 36, 36, 255);
+    border-bottom-color: rgba(36, 36, 36, 255);
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.package_contents_image {
+    max-width: 15px;
+    max-height: 15px;
+    min-width: 15px;
+    min-height: 15px;
+    width: 15px;
+    height: 15px;
+    -unity-background-scale-mode: scale-to-fit;
+    margin-left: 5px;
+}
+
+.property_contents_label {
+    flex-grow: 1;
+    margin-left: 5px;
+}
+
+.mandatory {
+    opacity: 0.35;
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+}
+
+.text_field {
+    flex-grow: 1;
+}
+
+.toggle {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 2px;
+    margin-bottom: 3px;
+}
+
+.label {
+    padding-left: 4px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
