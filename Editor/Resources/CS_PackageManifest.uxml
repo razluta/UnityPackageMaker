@@ -1,24 +1,94 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Template name="CS_DependenciesEntry" src="CS_DependenciesEntry.uxml" />
+    <ui:Template name="CS_KeywordsEntry" src="CS_KeywordsEntry.uxml" />
     <ui:VisualElement name="VE_PackageManifest" class="property_box">
         <Style src="PackageMaker.uss" />
         <ui:Label text="Package Manifest Properties" name="LB_IncludedPackageContents" class="section_title" />
-        <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
-            <ui:TextField picking-mode="Ignore" label="Display Name" value="Package Name" text="Package Name" name="TF_PackageDisplayName" class="text_field" />
+        <ui:VisualElement name="VE_Required" class="property_box">
+            <ui:VisualElement name="VE_PackageName" class="package_contents_row">
+                <ui:Label text="Name" class="label text_required" style="margin-top: 1px;" />
+                <ui:TextField picking-mode="Ignore" value="Package Name" text="com" name="TF_PackageNameCom" readonly="true" class="text_field" style="flex-shrink: 1;" />
+                <ui:Label text="." class="label version_dot" />
+                <ui:TextField picking-mode="Ignore" value="company" text="company" name="TF_PackageNameCompany" class="text_field" style="flex-shrink: 1;" />
+                <ui:Label text="." class="label version_dot" />
+                <ui:TextField picking-mode="Ignore" value="hereisthepackagename" text="hereisthepackagename" name="TF_PackageName" class="text_field" style="flex-shrink: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_PackageVersion" class="package_contents_row">
+                <ui:Label text="Version" class="label text_required" style="margin-top: 1px;" />
+                <ui:TextField picking-mode="Ignore" value="Package Name" text="0" name="TF_PackageVersionMajor" readonly="true" class="text_field" style="flex-shrink: 1;" />
+                <ui:Label text="." class="label version_dot" />
+                <ui:TextField picking-mode="Ignore" value="company" text="1" name="TF_PackageVersionMinor" class="text_field" style="flex-shrink: 1;" />
+                <ui:Label text="." class="label version_dot" />
+                <ui:TextField picking-mode="Ignore" value="packagename" text="0" name="TF_PackageVersionPatch" readonly="false" class="text_field" style="flex-shrink: 1;" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="VE_PackageUnityVersion" class="package_contents_row">
-            <ui:Label text="Unity Version" class="label" style="flex-grow: 1;" />
-            <uie:IntegerField value="2019" />
-            <uie:IntegerField value="1" />
+        <ui:VisualElement name="VE_Mandatory" class="property_box">
+            <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
+                <ui:TextField picking-mode="Ignore" label="Display Name" value="Package Name" text="Package Name" name="TF_PackageDisplayName" class="text_field" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_PackageUnityVersion" class="package_contents_row">
+                <ui:Label text="Unity Version" class="label" style="flex-grow: 1;" />
+                <uie:IntegerField value="2019" />
+                <ui:Label text="." class="label version_dot" />
+                <uie:IntegerField value="1" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_PackageDescription" class="package_contents_row" style="flex-direction: column;">
+                <ui:Label text="Description" class="label" style="flex-grow: 1;" />
+                <ui:ListView focusable="True" name="LV_PackageDescription" class="listview_text_field" style="max-height: 150px; min-height: 150px;">
+                    <ui:TextField picking-mode="Ignore" value="Text Description." text="A brief description of the package. This is the text that appears in the details view of the Package Manager window. Any UTF–8 character code is supported. This means that you can use special formatting character codes, such as line breaks (\n) and bullets (\u25AA).&#10;&#10;&#10; &#10;&#10;&#10;" name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal; min-height: auto;" />
+                </ui:ListView>
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="VE_PackageDescription" class="package_contents_row" style="flex-direction: column;">
-            <ui:Label text="Description" class="label" style="flex-grow: 1;" />
-            <ui:ListView focusable="True" name="LV_PackageDescription" class="listview_text_field">
-                <ui:TextField picking-mode="Ignore" value="Text Description." text="A brief description of the package. This is the text that appears in the details view of the Package Manager window. Any UTF–8 character code is supported. This means that you can use special formatting character codes, such as line breaks (\n) and bullets (\u25AA).&#10;&#10;&#10; &#10;&#10;&#10;" name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal;" />
-            </ui:ListView>
+        <ui:VisualElement name="VE_Author" class="property_box">
+            <ui:VisualElement name="VE_AuthorName" style="flex-direction: row;">
+                <ui:Label text="Author Name" name="LB_AuthorName" class="label_centered" />
+                <ui:TextField picking-mode="Ignore" value="FirstName LastName" text="FirstName LastName" name="TF_AuthorName" class="text_field" />
+                <ui:Toggle name="TG_AuthorName" value="false" class="toggle" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_AuthorEmail" style="flex-direction: row;">
+                <ui:Label text="Email" name="LB_AuthorEmail" class="label_centered" />
+                <ui:TextField picking-mode="Ignore" value="firstname@lastname.com" text="firstname@lastname.com" name="TF_AuthorEmail" class="text_field" />
+                <ui:Toggle name="TG_AuthorEmail" value="false" class="toggle" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_AuthorUrl" style="flex-direction: row;">
+                <ui:Label text="Url" name="LB_AuthorUrl" class="label_centered" />
+                <ui:TextField picking-mode="Ignore" value="www.firstnamelastname.com" text="www.firstnamelastname.com" name="TF_AuthorUrl" class="text_field" />
+                <ui:Toggle name="TG_AuthorUrl" value="false" class="toggle" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="VE_Example" class="package_contents_row">
-            <ui:TextField picking-mode="Ignore" label="Example" value="Input" text="Input" name="TF_Example" class="text_field" />
-            <ui:Toggle name="TG_Example" value="false" class="toggle" />
+        <ui:VisualElement name="VE_Optional" class="property_box">
+            <ui:VisualElement name="VE_UnityRelease" class="package_contents_row">
+                <ui:TextField picking-mode="Ignore" label="Unity Release" value="0b4" text="0b4" name="TF_UnityRelease" class="text_field" />
+                <ui:Toggle name="TG_UnityRelease" value="false" class="toggle" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_Dependencies" class="package_contents_row" style="flex-direction: column;">
+                <ui:VisualElement style="flex-direction: row;">
+                    <ui:Label text="Dependencies" class="label" style="flex-grow: 1;" />
+                    <ui:Toggle name="TG_Dependencies" value="false" class="toggle" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VE_DependenciesContents" class="property_box">
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:Label text="ex:" style="margin-top: 3px; margin-left: 5px;" />
+                        <ui:Instance template="CS_DependenciesEntry" name="CS_SampleDependenciesEntry" style="opacity: 0.5; flex-grow: 1;" />
+                    </ui:VisualElement>
+                    <ui:Button text="Add Dependency" name="BT_DependenciesAdd" class="button_add_dependency" />
+                    <ui:ListView focusable="True" name="LV_Dependencies" class="listview_text_field" style="max-height: 150px; min-height: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_Keywords" class="package_contents_row" style="flex-direction: column;">
+                <ui:VisualElement style="flex-direction: row;">
+                    <ui:Label text="Keywords" class="label" style="flex-grow: 1;" />
+                    <ui:Toggle name="TG_Keywords" value="false" class="toggle" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VE_KeywordsContents" class="property_box">
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:Label text="ex:" style="margin-top: 3px; margin-left: 5px;" />
+                        <ui:Instance template="CS_KeywordsEntry" name="CS_KeywordsEntry" style="opacity: 0.5; flex-grow: 1;" />
+                    </ui:VisualElement>
+                    <ui:Button text="Add Keyword" name="BT_KeywordsAdd" class="button_add_dependency" />
+                    <ui:ListView focusable="True" name="LV_Keywords" class="listview_text_field" style="max-height: 150px; min-height: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,22 +8,26 @@ namespace UnityPackageMaker.Editor
     {
         private const string PackageMakerName = "Package Maker";
         private const string PackageMakerMenuItemPath = "Raz's Tools/Package Maker";
-        
+        private const string PackageMakerToolsUrl = "https://github.com/razluta/UnityPackageMaker";
+
+        private const string HeaderUxmlPath = "BT_Header";
+        private const string LoadPackageButtonUxmlPath = "BT_LoadPackage";
         private const string IncludedPackageContentsUxmlPath = "CS_IncludedPackageContents";
         private const string AllPackagesUxmlPath = "CS_AllPackages";
         private const string PackageManifestUxmlPath = "CS_PackageManifest";
         private const string ReadmeUxmlPath = "CS_Readme";
         private const string ChangelogUxmlPath = "CS_Changelog";
         private const string LicenseUxmlPath = "CS_License";
-        private const string LoadPackageButtonUxmlPath = "BT_LoadPackage";
+
         private const string UpdatePackageButtonUxmlPath = "BT_UpdatePackage";
         private const string CreatePackageButtonUxmlPath = "BT_CreatePackage";
 
+        private const string PackMakButtonName = "BT_Logo";
         private const string AllPackagesVisualElementName = "VE_AllPackages";
         private const string UpdatePackageButtonName = "BT_UpdatePackage";
         private const string CreatePackageButtonName = "BT_CreatePackage";
 
-        private static readonly Vector2 PackageMakerWindowSize = new Vector2(350, 700);
+        private static readonly Vector2 PackageMakerWindowSize = new Vector2(450, 900);
 
         private VisualElement _root;
         private ScrollView _contentsView;
@@ -42,7 +45,13 @@ namespace UnityPackageMaker.Editor
             _root = rootVisualElement;
             _contentsView = new ScrollView();
             
-            // load Package Button
+            // Header
+            var headerVisualTree = Resources.Load<VisualTreeAsset>(HeaderUxmlPath);
+            headerVisualTree.CloneTree(_root);
+            var logoButton = _root.Q<Button>(PackMakButtonName);
+            logoButton.clickable.clicked += () => Application.OpenURL(PackageMakerToolsUrl);
+            
+            // Load Package Button
             var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);
             loadPackageButtonVisualTree.CloneTree(_root);
 

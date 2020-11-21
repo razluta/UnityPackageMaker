@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="VE_KeywordsEntry" style="flex-direction: row;">
+        <Style src="PackageMaker.uss" />
+        <ui:TextField picking-mode="Ignore" value="filler text" text="keyword1" name="TF_KeywordsEntryName" style="flex-grow: 1;" />
+        <ui:Button text="X" name="TF_KeywordsEntryRemove" class="button_remove" />
+    </ui:VisualElement>
+</ui:UXML>
