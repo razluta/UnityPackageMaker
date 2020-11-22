@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="CS_PackageMaker" style="flex-direction: row; flex-grow: 1;">
+        <Style src="PackageMaker.uss" />
+        <ui:VisualElement name="VE_PmLeftPanel" class="property_box" style="flex-grow: 1;">
+            <ui:Label text="Step 01 / 02" class="core_boxes_text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_PmRightPanel" class="property_box" style="flex-grow: 1;">
+            <ui:Label text="Step 02 / 02" class="core_boxes_text" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

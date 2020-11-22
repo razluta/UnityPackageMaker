@@ -120,7 +120,7 @@
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    background-color: rgba(137, 5, 5, 255);
+    background-color: rgb(137, 5, 5);
 }
 
 .button_add_dependency {
@@ -140,4 +140,9 @@
 
 .label_centered {
     margin-top: 3px;
+}
+
+.core_boxes_text {
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
 }

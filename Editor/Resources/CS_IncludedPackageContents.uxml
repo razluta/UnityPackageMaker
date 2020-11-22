@@ -7,15 +7,15 @@
             <ui:Label text="package.json" name="LB_PackageManifest" class="property_contents_label" />
             <ui:Toggle name="TG_PackageManifest" value="true" class="toggle" style="visibility: hidden;" />
         </ui:VisualElement>
-        <ui:VisualElement name="VE_ReadmeRow" class="package_contents_row mandatory">
+        <ui:VisualElement name="VE_ReadmeRow" class="package_contents_row">
             <ui:VisualElement name="VE_Readme" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
             <ui:Label text="README.MD" name="LB_Readme" class="property_contents_label" />
-            <ui:Toggle name="TG_Readme" value="true" class="toggle" style="visibility: hidden;" />
+            <ui:Toggle name="TG_Readme" value="true" class="toggle" />
         </ui:VisualElement>
-        <ui:VisualElement name="VE_ChangelogRow" class="package_contents_row mandatory">
+        <ui:VisualElement name="VE_ChangelogRow" class="package_contents_row">
             <ui:VisualElement name="VE_Changelog" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
             <ui:Label text="CHANGELOG.MD" name="LB_Changelog" class="property_contents_label" />
-            <ui:Toggle name="TG_Changelog" value="true" class="toggle" style="visibility: hidden;" />
+            <ui:Toggle name="TG_Changelog" value="true" class="toggle" />
         </ui:VisualElement>
         <ui:VisualElement name="VE_LicenseRow" class="package_contents_row">
             <ui:VisualElement name="VE_License" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
@@ -25,7 +25,7 @@
         <ui:VisualElement name="VE_EditorRow" class="package_contents_row">
             <ui:VisualElement name="VE_Editor" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
             <ui:Label text="Editor" name="LB_Editor" class="property_contents_label" />
-            <ui:Toggle name="TG_Editor" value="true" class="toggle" />
+            <ui:Toggle name="TG_Editor" class="toggle" />
         </ui:VisualElement>
         <ui:VisualElement name="VE_RuntimeRow" class="package_contents_row">
             <ui:VisualElement name="VE_Runtime" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
