@@ -5,51 +5,75 @@
         <Style src="PackageMaker.uss" />
         <ui:Label text="Package Manifest Properties" name="LB_IncludedPackageContents" class="section_title" />
         <ui:VisualElement name="VE_Required" class="property_box">
-            <ui:VisualElement name="VE_PackageName" class="package_contents_row">
+            <ui:VisualElement name="VE_PackageNameRoot">
                 <ui:Label text="Name" class="label text_required" style="margin-top: 1px;" />
-                <ui:TextField picking-mode="Ignore" value="Package Name" text="com" name="TF_PackageNameCom" readonly="true" class="text_field" style="flex-shrink: 1;" />
-                <ui:Label text="." class="label version_dot" />
-                <ui:TextField picking-mode="Ignore" value="company" text="company" name="TF_PackageNameCompany" class="text_field" style="flex-shrink: 1;" />
-                <ui:Label text="." class="label version_dot" />
-                <ui:TextField picking-mode="Ignore" value="hereisthepackagename" text="hereisthepackagename" name="TF_PackageName" class="text_field" style="flex-shrink: 1;" />
+                <ui:Label text="ex: com.company.packagename" class="text_example" />
+                <ui:VisualElement name="VE_PackageName" class="package_contents_row">
+                    <ui:TextField picking-mode="Ignore" name="TF_PackageNameExtension" class="text_field" style="flex-shrink: 1;" />
+                    <ui:Label text="." class="label version_dot" />
+                    <ui:TextField picking-mode="Ignore" name="TF_PackageNameCompany" class="text_field" style="flex-shrink: 1;" />
+                    <ui:Label text="." class="label version_dot" />
+                    <ui:TextField picking-mode="Ignore" name="TF_PackageName" class="text_field" style="flex-shrink: 1;" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="VE_PackageVersion" class="package_contents_row">
+            <ui:VisualElement name="Separator" class="separator" style="flex-grow: 1; max-height: 1px; min-height: 1px;" />
+            <ui:VisualElement name="VE_PackageVersionRoot">
                 <ui:Label text="Version" class="label text_required" style="margin-top: 1px;" />
-                <ui:TextField picking-mode="Ignore" value="Package Name" text="0" name="TF_PackageVersionMajor" readonly="true" class="text_field" style="flex-shrink: 1;" />
-                <ui:Label text="." class="label version_dot" />
-                <ui:TextField picking-mode="Ignore" value="company" text="1" name="TF_PackageVersionMinor" class="text_field" style="flex-shrink: 1;" />
-                <ui:Label text="." class="label version_dot" />
-                <ui:TextField picking-mode="Ignore" value="packagename" text="0" name="TF_PackageVersionPatch" readonly="false" class="text_field" style="flex-shrink: 1;" />
+                <ui:Label text="ex: 0.1.1" class="text_example" />
+                <ui:VisualElement name="VE_PackageVersion" class="package_contents_row">
+                    <uie:IntegerField name="IF_PackageVersionMajor" class="text_field" />
+                    <ui:Label text="." class="label version_dot" />
+                    <uie:IntegerField name="IF_PackageVersionMinor" class="text_field" />
+                    <ui:Label text="." class="label version_dot" />
+                    <uie:IntegerField name="IF_PackageVersionPatch" class="text_field" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="VE_Mandatory" class="property_box">
-            <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
-                <ui:TextField picking-mode="Ignore" label="Display Name" value="Package Name" text="Package Name" name="TF_PackageDisplayName" class="text_field" />
+            <ui:VisualElement name="VE_PackageDisplayNameRoot">
+                <ui:Label text="Display Name" class="text_required" />
+                <ui:Label text="ex: Package Name" class="text_example" />
+                <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
+                    <ui:TextField picking-mode="Ignore" name="TF_PackageDisplayName" class="text_field" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="VE_PackageUnityVersion" class="package_contents_row">
-                <ui:Label text="Unity Version" class="label" style="flex-grow: 1;" />
-                <uie:IntegerField value="2019" />
-                <ui:Label text="." class="label version_dot" />
-                <uie:IntegerField value="1" />
+            <ui:VisualElement name="Separator" class="separator" />
+            <ui:VisualElement name="VE_PackageUnityVersionRoot">
+                <ui:Label text="Unity Version" class="label text_required" style="flex-grow: 1;" />
+                <ui:Label text="ex: 2019.1" class="text_example" />
+                <ui:VisualElement name="VE_PackageUnityVersion" class="package_contents_row">
+                    <uie:IntegerField name="IF_PackageUnityVersionMajor" style="flex-grow: 1;" />
+                    <ui:Label text="." class="label version_dot" />
+                    <uie:IntegerField name="IF_PackageUnityVersionMinor" style="flex-grow: 1;" />
+                </ui:VisualElement>
             </ui:VisualElement>
+            <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_PackageDescription" class="package_contents_row" style="flex-direction: column;">
-                <ui:Label text="Description" class="label" style="flex-grow: 1;" />
+                <ui:Label text="Description" class="label text_required" style="flex-grow: 1;" />
+                <ui:VisualElement style="flex-grow: 1; width: 100%;">
+                    <ui:Label text="ex: A brief description of the package." class="text_example" style="flex-wrap: wrap; white-space: normal;" />
+                </ui:VisualElement>
                 <ui:ListView focusable="True" name="LV_PackageDescription" class="listview_text_field" style="max-height: 150px; min-height: 150px;">
-                    <ui:TextField picking-mode="Ignore" value="Text Description." text="A brief description of the package. This is the text that appears in the details view of the Package Manager window. Any UTF–8 character code is supported. This means that you can use special formatting character codes, such as line breaks (\n) and bullets (\u25AA).&#10;&#10;&#10; &#10;&#10;&#10;" name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal; min-height: auto;" />
+                    <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal; min-height: auto; height: 200px;" />
                 </ui:ListView>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="VE_Author" class="property_box">
-            <ui:VisualElement name="VE_AuthorName" style="flex-direction: row;">
-                <ui:Label text="Author Name" name="LB_AuthorName" class="label_centered" />
-                <ui:TextField picking-mode="Ignore" value="FirstName LastName" text="FirstName LastName" name="TF_AuthorName" class="text_field" />
-                <ui:Toggle name="TG_AuthorName" value="false" class="toggle" />
+            <ui:VisualElement name="VE_AuthorNameRoot" style="flex-direction: column;">
+                <ui:VisualElement name="VE_AuthorNameRow" style="flex-direction: row;">
+                    <ui:Label text="Author Name" name="LB_AuthorName" class="label_centered" style="flex-grow: 1;" />
+                    <ui:Toggle name="TG_AuthorName" value="false" class="toggle" />
+                </ui:VisualElement>
+                <ui:Label text="ex: Firstname Lastname" class="text_example" style="flex-wrap: wrap; white-space: normal;" />
+                <ui:TextField picking-mode="Ignore" name="TF_AuthorName" class="text_field" />
             </ui:VisualElement>
+            <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_AuthorEmail" style="flex-direction: row;">
                 <ui:Label text="Email" name="LB_AuthorEmail" class="label_centered" />
-                <ui:TextField picking-mode="Ignore" value="firstname@lastname.com" text="firstname@lastname.com" name="TF_AuthorEmail" class="text_field" />
+                <ui:TextField picking-mode="Ignore" value="contact@firstnamelastname.com" text="contact@firstnamelastname.com" name="TF_AuthorEmail" class="text_field" />
                 <ui:Toggle name="TG_AuthorEmail" value="false" class="toggle" />
             </ui:VisualElement>
+            <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_AuthorUrl" style="flex-direction: row;">
                 <ui:Label text="Url" name="LB_AuthorUrl" class="label_centered" />
                 <ui:TextField picking-mode="Ignore" value="www.firstnamelastname.com" text="www.firstnamelastname.com" name="TF_AuthorUrl" class="text_field" />

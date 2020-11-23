@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="VE_ConsoleLog" class="property_box">
+        <Style src="PackageMaker.uss" />
+        <ui:Label text="Console" />
+        <ui:ListView focusable="True" style="max-height: 100px; min-height: 100px; margin-bottom: 3px;">
+            <ui:VisualElement name="VE_Console" class="log_box" style="border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(70, 70, 70); border-right-color: rgb(70, 70, 70); border-top-color: rgb(70, 70, 70); border-bottom-color: rgb(70, 70, 70);">
+                <ui:Button name="VE_Error" class="log_message">
+                    <ui:Label text="Error: This is an error." name="VE_ErrorTitle" class="error" style="-unity-text-align: middle-left;" />
+                    <ui:Label text="Message explaining log here." name="VE_ErrorMessage" class="log_message_label" style="-unity-text-align: middle-left;" />
+                </ui:Button>
+                <ui:Button name="VE_Warning" class="log_message">
+                    <ui:Label text="Warning: This is a warning." name="VE_WarningTitle" class="warning" style="-unity-text-align: middle-left;" />
+                    <ui:Label text="Message explaining log here." name="VE_WarningMessage" class="log_message_label" style="-unity-text-align: middle-left;" />
+                </ui:Button>
+                <ui:Button name="VE_Success" class="log_message">
+                    <ui:Label text="Success: This is a success." name="VE_SuccessTitle" class="success" style="-unity-text-align: middle-left;" />
+                    <ui:Label text="Message explaining log here." name="VE_SuccessMessage" class="log_message_label" style="-unity-text-align: middle-left;" />
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:ListView>
+        <ui:Button text="Clear" name="BT_ClearConsole" class="button_remove" />
+    </ui:VisualElement>
+</ui:UXML>
