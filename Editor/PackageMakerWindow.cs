@@ -19,6 +19,7 @@ namespace UnityPackageMaker.Editor
         private const string ReadmeUxmlPath = "CS_Readme";
         private const string ChangelogUxmlPath = "CS_Changelog";
         private const string LicenseUxmlPath = "CS_License";
+        private const string ConsoleLogUxmlPath = "CS_ConsoleLog";
 
         private const string UpdatePackageButtonUxmlPath = "BT_UpdatePackage";
         private const string CreatePackageButtonUxmlPath = "BT_CreatePackage";
@@ -95,6 +96,10 @@ namespace UnityPackageMaker.Editor
             // Add contents to root
             _contentsView.style.flexGrow = 1.0f;
             rightPanel.Add(_contentsView);
+
+            // Add console to root
+            var consoleLogVisualTree = Resources.Load<VisualTreeAsset>(ConsoleLogUxmlPath);
+            consoleLogVisualTree.CloneTree(_root);
 
             // Update Package Button
             var updatePackageButtonVisualTree = Resources.Load<VisualTreeAsset>(UpdatePackageButtonUxmlPath);
