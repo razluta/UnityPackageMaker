@@ -10,17 +10,17 @@
         <ui:VisualElement name="VE_ReadmeRow" class="package_contents_row">
             <ui:VisualElement name="VE_Readme" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
             <ui:Label text="README.MD" name="LB_Readme" class="property_contents_label" />
-            <ui:Toggle name="TG_Readme" value="true" class="toggle" />
+            <ui:Toggle name="TG_Readme" class="toggle" />
         </ui:VisualElement>
         <ui:VisualElement name="VE_ChangelogRow" class="package_contents_row">
             <ui:VisualElement name="VE_Changelog" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
             <ui:Label text="CHANGELOG.MD" name="LB_Changelog" class="property_contents_label" />
-            <ui:Toggle name="TG_Changelog" value="true" class="toggle" />
+            <ui:Toggle name="TG_Changelog" class="toggle" />
         </ui:VisualElement>
         <ui:VisualElement name="VE_LicenseRow" class="package_contents_row">
             <ui:VisualElement name="VE_License" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
             <ui:Label text="LICENSE" name="LB_License" class="property_contents_label" />
-            <ui:Toggle name="TG_License" value="false" class="toggle" />
+            <ui:Toggle name="TG_License" class="toggle" />
         </ui:VisualElement>
         <ui:VisualElement name="VE_EditorRow" class="package_contents_row">
             <ui:VisualElement name="VE_Editor" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />

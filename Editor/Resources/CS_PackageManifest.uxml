@@ -91,7 +91,8 @@
                     <ui:Label text="Unity Release" class="section_title" />
                     <ui:Toggle name="TG_UnityRelease" value="false" class="toggle" />
                 </ui:VisualElement>
-                <ui:TextField picking-mode="Ignore" value="0b4" text="0b4" name="TF_UnityRelease" class="text_field" />
+                <ui:Label text="ex: 0b4" class="text_example" style="flex-wrap: wrap; white-space: normal;" />
+                <ui:TextField picking-mode="Ignore" name="TF_UnityRelease" class="text_field" />
             </ui:VisualElement>
             <ui:VisualElement name="VE_Dependencies" class="package_contents_row" style="flex-direction: column;">
                 <ui:VisualElement style="flex-direction: row;">

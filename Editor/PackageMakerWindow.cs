@@ -28,6 +28,10 @@ namespace UnityPackageMaker.Editor
         private const string LeftPanelName = "VE_PmLeftPanel";
         private const string RightPanelName = "VE_PmRightPanel";
         private const string AllPackagesVisualElementName = "VE_AllPackages";
+        private const string LoadPackageButtonName = "BT_LoadPackage";
+        private const string ReadmeToggleName = "TG_Readme";
+        private const string ChangelogToggleName = "TG_Changelog";
+        private const string LicenceToggleName = "TG_License";
         private const string UpdatePackageButtonName = "BT_UpdatePackage";
         private const string CreatePackageButtonName = "BT_CreatePackage";
 
@@ -49,6 +53,7 @@ namespace UnityPackageMaker.Editor
             _root = rootVisualElement;
             _contentsView = new ScrollView();
             
+            // Declaration
             // Header
             var headerVisualTree = Resources.Load<VisualTreeAsset>(HeaderUxmlPath);
             headerVisualTree.CloneTree(_root);
@@ -68,6 +73,9 @@ namespace UnityPackageMaker.Editor
             // Included Package Contents
             var includedPackageContentsVisualTree = Resources.Load<VisualTreeAsset>(IncludedPackageContentsUxmlPath);
             includedPackageContentsVisualTree.CloneTree(leftPanel);
+            var readmeToggle = leftPanel.Q<Toggle>(ReadmeToggleName);
+            var changelogToggle = leftPanel.Q<Toggle>(ChangelogToggleName);
+            var licenseToggle = leftPanel.Q<Toggle>(LicenceToggleName);
 
             // Package Manifest
             var packageManifestVisualTree = Resources.Load<VisualTreeAsset>(PackageManifestUxmlPath);
@@ -110,6 +118,28 @@ namespace UnityPackageMaker.Editor
             // Create Package Button
             var createPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(CreatePackageButtonUxmlPath);
             createPackageButtonVisualTree.CloneTree(_root);
+
+            // Behavior
+            // Readme
+            readmeVisualElement.SetEnabled(readmeToggle.value);
+            readmeToggle.RegisterValueChangedCallback(evt =>
+            {
+                readmeVisualElement.SetEnabled(readmeToggle.value);
+            });
+            
+            // Changelog
+            changelogVisualElement.SetEnabled(changelogToggle.value);
+            changelogToggle.RegisterValueChangedCallback(evt =>
+            {
+                changelogVisualElement.SetEnabled(changelogToggle.value);
+            });
+            
+            // Licence
+            licenseVisualElement.SetEnabled(licenseToggle.value);
+            licenseToggle.RegisterValueChangedCallback(evt =>
+            {
+                licenseVisualElement.SetEnabled(licenseToggle.value);
+            });
         }
     }
 }
