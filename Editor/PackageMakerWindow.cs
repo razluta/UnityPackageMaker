@@ -1,40 +1,13 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityPackageMaker.Editor.GuiConstants;
 
 namespace UnityPackageMaker.Editor 
 {
     public class PackageMakerWindow : EditorWindow
     {
-        private const string PackageMakerName = "Package Maker";
-        private const string PackageMakerMenuItemPath = "Raz's Tools/Package Maker";
-        private const string PackageMakerToolsUrl = "https://github.com/razluta/UnityPackageMaker";
-        
-        private const string HeaderUxmlPath = "BT_Header";
-        private const string LoadPackageButtonUxmlPath = "BT_LoadPackage";
-        private const string MainPanelUxmlPath = "CS_PackageMakerCore";
-        private const string IncludedPackageContentsUxmlPath = "CS_IncludedPackageContents";
-        private const string AllPackagesUxmlPath = "CS_AllPackages";
-        private const string PackageManifestUxmlPath = "CS_PackageManifest";
-        private const string ReadmeUxmlPath = "CS_Readme";
-        private const string ChangelogUxmlPath = "CS_Changelog";
-        private const string LicenseUxmlPath = "CS_License";
-        private const string ConsoleLogUxmlPath = "CS_ConsoleLog";
-
-        private const string UpdatePackageButtonUxmlPath = "BT_UpdatePackage";
-        private const string CreatePackageButtonUxmlPath = "BT_CreatePackage";
-
-        private const string PackMakButtonName = "BT_Logo";
-        private const string LeftPanelName = "VE_PmLeftPanel";
-        private const string RightPanelName = "VE_PmRightPanel";
-        private const string AllPackagesVisualElementName = "VE_AllPackages";
-        private const string LoadPackageButtonName = "BT_LoadPackage";
-        private const string ReadmeToggleName = "TG_Readme";
-        private const string ChangelogToggleName = "TG_Changelog";
-        private const string LicenceToggleName = "TG_License";
-        private const string UpdatePackageButtonName = "BT_UpdatePackage";
-        private const string CreatePackageButtonName = "BT_CreatePackage";
-
         private static readonly Vector2 PackageMakerWindowSize = new Vector2(900, 900);
 
         private VisualElement _root;
@@ -88,6 +61,7 @@ namespace UnityPackageMaker.Editor
             var readmeVisualElement = new VisualElement();
             readmeVisualTree.CloneTree(readmeVisualElement);
             _contentsView.Add(readmeVisualElement);
+            var readmeTextField = readmeVisualElement.Q<TextField>(ReadmeTextFieldName);
             
             // Changelog
             var changelogVisualTree = Resources.Load<VisualTreeAsset>(ChangelogUxmlPath);
