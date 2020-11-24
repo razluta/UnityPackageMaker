@@ -71,6 +71,7 @@
 
 .section_title {
     -unity-font-style: bold;
+    flex-grow: 1;
 }
 
 .listview_text_field {
@@ -170,6 +171,7 @@
     padding-left: 1px;
     padding-right: 2px;
     opacity: 0.5;
+    flex-grow: 1;
 }
 
 .separator {
@@ -187,7 +189,7 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    color: rgba(255, 0, 0, 255);
+    color: rgb(255, 0, 0);
 }
 
 .warning {
@@ -196,7 +198,7 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    color: rgba(250, 102, 0, 255);
+    color: rgb(250, 102, 0);
 }
 
 .success {
@@ -204,7 +206,7 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    color: rgba(94, 255, 0, 255);
+    color: rgb(94, 255, 0);
     background-color: rgba(0, 0, 0, 0);
 }
 
