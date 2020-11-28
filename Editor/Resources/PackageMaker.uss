@@ -71,12 +71,12 @@
 
 .section_title {
     -unity-font-style: bold;
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .listview_text_field {
-    min-height: 150px;
-    max-height: 150px;
+    flex-grow: 1;
+    height: 75px;
 }
 
 .description {

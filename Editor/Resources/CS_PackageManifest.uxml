@@ -54,7 +54,7 @@
                     <ui:Label text="ex: A brief description of the package." class="text_example" style="flex-wrap: wrap; white-space: normal;" />
                 </ui:VisualElement>
                 <ui:ListView focusable="True" name="LV_PackageDescription" class="listview_text_field" style="max-height: 150px; min-height: 150px;">
-                    <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_PackageDescription" class="text_field" style="flex-wrap: wrap; white-space: normal; min-height: auto; height: 200px;" />
+                    <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_PackageDescription" class="text_field" style="white-space: normal; min-height: auto; height: 200px;" />
                 </ui:ListView>
             </ui:VisualElement>
         </ui:VisualElement>
@@ -102,10 +102,10 @@
                 <ui:VisualElement name="VE_DependenciesContents" class="property_box">
                     <ui:VisualElement style="flex-direction: row;">
                         <ui:Label text="ex:" style="margin-top: 3px; margin-left: 5px;" />
-                        <ui:Instance template="CS_DependenciesEntry" name="CS_SampleDependenciesEntry" style="opacity: 0.5; flex-grow: 1;" />
+                        <ui:Instance template="CS_DependenciesEntry" name="CS_DependenciesEntry" style="opacity: 0.5; flex-grow: 1;" />
                     </ui:VisualElement>
                     <ui:Button text="Add Dependency" name="BT_DependenciesAdd" class="button_add_dependency" />
-                    <ui:ListView focusable="True" name="LV_Dependencies" class="listview_text_field" style="max-height: 150px; min-height: 0;" />
+                    <ui:ListView focusable="True" name="LV_Dependencies" class="listview_text_field" style="flex-grow: 0;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="VE_Keywords" class="package_contents_row" style="flex-direction: column;">
@@ -119,7 +119,7 @@
                         <ui:Instance template="CS_KeywordsEntry" name="CS_KeywordsEntry" style="opacity: 0.5; flex-grow: 1;" />
                     </ui:VisualElement>
                     <ui:Button text="Add Keyword" name="BT_KeywordsAdd" class="button_add_dependency" />
-                    <ui:ListView focusable="True" name="LV_Keywords" class="listview_text_field" style="max-height: 150px; min-height: 0;" />
+                    <ui:ListView focusable="True" name="LV_Keywords" class="listview_text_field" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

@@ -2,7 +2,7 @@
     <ui:VisualElement name="VE_DependenciesEntry" style="flex-direction: row;">
         <Style src="PackageMaker.uss" />
         <ui:TextField picking-mode="Ignore" value="filler text" text="com.unity.somepackage" name="TF_DependenciesEntryName" style="flex-grow: 1;" />
-        <ui:TextField picking-mode="Ignore" value="filler text" text="1.2.0" name="TF_DependenciesEntryVersion" style="flex-grow: 0; flex-shrink: 1;" />
-        <ui:Button text="X" name="TF_DependenciesEntryRemove" class="button_remove" />
+        <ui:TextField picking-mode="Ignore" value="filler text" text="1.2.0" name="TF_DependenciesEntryVersion" style="flex-grow: 0; flex-shrink: 1; min-width: 50px;" />
+        <ui:Button text="X" name="BT_DependenciesEntryRemove" class="button_remove" />
     </ui:VisualElement>
 </ui:UXML>

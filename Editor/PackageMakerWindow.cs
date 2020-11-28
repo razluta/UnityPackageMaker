@@ -55,7 +55,17 @@ namespace UnityPackageMaker.Editor
             var packageManifestVisualElement = new VisualElement();
             packageManifestVisualTree.CloneTree(packageManifestVisualElement);
             _contentsView.Add(packageManifestVisualElement);
-            
+            var dependenciesListView = packageManifestVisualElement.Q<ListView>(DependenciesListViewName);
+            var dependencyEntryVisualTree = Resources.Load<VisualTreeAsset>(DependencyEntryUxmlPath);
+            var addDependencyButton = packageManifestVisualElement.Q<Button>(AddDependencyButtonName);
+            addDependencyButton.clickable.clicked += () =>
+                AddEntryToDependencies(dependencyEntryVisualTree, dependenciesListView);
+            var keywordsListView = packageManifestVisualElement.Q<ListView>(KeywordsListViewName);
+            var keywordsEntryVisualTree = Resources.Load<VisualTreeAsset>(KeywordEntryUxmlPath);
+            var addKeywordButton = packageManifestVisualElement.Q<Button>(AddKeywordButtonName);
+            addKeywordButton.clickable.clicked += () =>
+                AddEntryToKeywords(keywordsEntryVisualTree, keywordsListView);
+
             // Readme
             var readmeVisualTree = Resources.Load<VisualTreeAsset>(ReadmeUxmlPath);
             var readmeVisualElement = new VisualElement();
@@ -114,6 +124,32 @@ namespace UnityPackageMaker.Editor
             {
                 licenseVisualElement.SetEnabled(licenseToggle.value);
             });
+        }
+
+        private void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
+        {
+            var customVisualElement = new VisualElement();
+            vta.CloneTree(customVisualElement);
+            ve.Add(customVisualElement);
+
+            var entryNameTextField = customVisualElement.Q<TextField>(DependencyEntryNameTextFieldName);
+            entryNameTextField.value = String.Empty;
+            var entryVersionTextField = customVisualElement.Q<TextField>(DependencyEntryVersionTextFieldName);
+            entryVersionTextField.value = String.Empty;
+            var removeButton = customVisualElement.Q<Button>(DependencyEntryRemoveButtonName);
+            removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
+        }
+
+        private void AddEntryToKeywords(VisualTreeAsset vta, VisualElement ve)
+        {
+            var customVisualElement = new VisualElement();
+            vta.CloneTree(customVisualElement);
+            ve.Add(customVisualElement);
+
+            var entryNameTextField = customVisualElement.Q<TextField>(KeywordEntryNameTextFieldName);
+            entryNameTextField.value = String.Empty;
+            var removeButton = customVisualElement.Q<Button>(RemoveKeywordButtonName);
+            removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
     }
 }
