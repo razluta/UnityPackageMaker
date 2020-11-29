@@ -6,7 +6,7 @@
         <ui:Label text="Package Manifest Properties" name="LB_IncludedPackageContents" class="section_title" />
         <ui:VisualElement name="VE_Required" class="property_box">
             <ui:VisualElement name="VE_PackageNameRoot">
-                <ui:Label text="Name" class="text_required" style="margin-top: 1px;" />
+                <ui:Label text="Name" class="text_required" />
                 <ui:Label text="ex: com.company.packagename" class="text_example" />
                 <ui:VisualElement name="VE_PackageName" class="package_contents_row">
                     <ui:TextField picking-mode="Ignore" name="TF_PackageNameExtension" class="text_field" style="flex-shrink: 1;" />
@@ -18,7 +18,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="Separator" class="separator" style="flex-grow: 1; max-height: 1px; min-height: 1px;" />
             <ui:VisualElement name="VE_PackageVersionRoot">
-                <ui:Label text="Version" class="text_required" style="margin-top: 1px;" />
+                <ui:Label text="Version" class="text_required" />
                 <ui:Label text="ex: 0.1.1" class="text_example" />
                 <ui:VisualElement name="VE_PackageVersion" class="package_contents_row">
                     <uie:IntegerField name="IF_PackageVersionMajor" class="text_field" />
@@ -39,7 +39,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_PackageUnityVersionRoot">
-                <ui:Label text="Unity Version" class="text_required" style="flex-grow: 1;" />
+                <ui:Label text="Unity Version" class="text_required" />
                 <ui:Label text="ex: 2019.1" class="text_example" />
                 <ui:VisualElement name="VE_PackageUnityVersion" class="package_contents_row">
                     <uie:IntegerField name="IF_PackageUnityVersionMajor" style="flex-grow: 1;" />
@@ -49,7 +49,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_PackageDescription" class="package_contents_row" style="flex-direction: column;">
-                <ui:Label text="Description" class="text_required" style="flex-grow: 1;" />
+                <ui:Label text="Description" class="text_required" />
                 <ui:VisualElement style="flex-grow: 1; width: 100%;">
                     <ui:Label text="ex: A brief description of the package." class="text_example" style="flex-wrap: wrap; white-space: normal;" />
                 </ui:VisualElement>
@@ -61,7 +61,7 @@
         <ui:VisualElement name="VE_Author" class="property_box">
             <ui:VisualElement name="VE_AuthorNameRoot" style="flex-direction: column;">
                 <ui:VisualElement name="VE_AuthorNameRow" style="flex-direction: row;">
-                    <ui:Label text="Author Name" name="LB_AuthorName" class="text_required" style="flex-grow: 1;" />
+                    <ui:Label text="Author Name" name="LB_AuthorName" class="text_required" />
                     <ui:Toggle name="TG_AuthorName" value="false" class="toggle" />
                 </ui:VisualElement>
                 <ui:Label text="ex: Firstname Lastname" class="text_example" style="flex-wrap: wrap; white-space: normal;" />
@@ -70,7 +70,7 @@
             <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_AuthorEmailRoot">
                 <ui:VisualElement name="VE_AuthorEmailRow" style="flex-direction: row;">
-                    <ui:Label text="Email" name="LB_AuthorEmail" class="text_required" style="flex-grow: 1;" />
+                    <ui:Label text="Email" name="LB_AuthorEmail" class="text_required" />
                     <ui:Toggle name="TG_AuthorEmail" value="false" class="toggle" />
                 </ui:VisualElement>
                 <ui:Label text="ex: contact@firstnamelastname.com" class="text_example" style="flex-wrap: wrap; white-space: normal;" />
@@ -79,16 +79,17 @@
             <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_AuthorUrl">
                 <ui:VisualElement name="VE_AuthorUrlRow" style="flex-direction: row;">
-                    <ui:Label text="Url" name="LB_AuthorUrl" class="text_required" style="flex-grow: 1;" />
+                    <ui:Label text="Url" name="LB_AuthorUrl" class="text_required" />
                     <ui:Toggle name="TG_AuthorUrl" value="false" class="toggle" />
                 </ui:VisualElement>
-                <ui:TextField picking-mode="Ignore" value="www.firstnamelastname.com" text="www.firstnamelastname.com" name="TF_AuthorUrl" class="text_field" />
+                <ui:Label text="ex: www.firstnamelastname.com" class="text_example" style="flex-wrap: wrap; white-space: normal;" />
+                <ui:TextField picking-mode="Ignore" name="TF_AuthorUrl" class="text_field" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="VE_Optional" class="property_box">
             <ui:VisualElement name="VE_UnityRelease" class="package_contents_row" style="flex-direction: column;">
                 <ui:VisualElement name="VE_UnityReleaseRow" style="flex-direction: row;">
-                    <ui:Label text="Unity Release" class="section_title" />
+                    <ui:Label text="Unity Release" class="section_title text_required" />
                     <ui:Toggle name="TG_UnityRelease" value="false" class="toggle" />
                 </ui:VisualElement>
                 <ui:Label text="ex: 0b4" class="text_example" style="flex-wrap: wrap; white-space: normal;" />
@@ -96,7 +97,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="VE_Dependencies" class="package_contents_row" style="flex-direction: column;">
                 <ui:VisualElement style="flex-direction: row;">
-                    <ui:Label text="Dependencies" class="section_title" style="flex-grow: 1;" />
+                    <ui:Label text="Dependencies" class="section_title text_required" />
                     <ui:Toggle name="TG_Dependencies" value="false" class="toggle" />
                 </ui:VisualElement>
                 <ui:VisualElement name="VE_DependenciesContents" class="property_box">
@@ -110,7 +111,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="VE_Keywords" class="package_contents_row" style="flex-direction: column;">
                 <ui:VisualElement style="flex-direction: row;">
-                    <ui:Label text="Keywords" class="section_title" style="flex-grow: 1;" />
+                    <ui:Label text="Keywords" class="section_title text_required" />
                     <ui:Toggle name="TG_Keywords" value="false" class="toggle" />
                 </ui:VisualElement>
                 <ui:VisualElement name="VE_KeywordsContents" class="property_box">

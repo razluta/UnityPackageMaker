@@ -55,11 +55,65 @@ namespace UnityPackageMaker.Editor
             var packageManifestVisualElement = new VisualElement();
             packageManifestVisualTree.CloneTree(packageManifestVisualElement);
             _contentsView.Add(packageManifestVisualElement);
+            
+            // Author Name
+            var authorNameToggle = packageManifestVisualElement.Q<Toggle>(AuthorNameToggleName);
+            var authorNameTextField = packageManifestVisualElement.Q<TextField>(AuthorNameTextFieldName);
+            authorNameTextField.SetEnabled(authorNameToggle.value);
+            authorNameToggle.RegisterValueChangedCallback(evt =>
+            {
+                authorNameTextField.SetEnabled(authorNameToggle.value);
+            });
+            
+            // Author Email
+            var authorEmailToggle = packageManifestVisualElement.Q<Toggle>(AuthorEmailToggleName);
+            var authorEmailTextField = packageManifestVisualElement.Q<TextField>(AuthorEmailTextFieldName);
+            authorEmailTextField.SetEnabled(authorEmailToggle.value);
+            authorEmailToggle.RegisterValueChangedCallback(evt =>
+            {
+                authorEmailTextField.SetEnabled(authorEmailToggle.value);
+            });
+            
+            // Author Url
+            var authorUrlToggle = packageManifestVisualElement.Q<Toggle>(AuthorUrlToggleName);
+            var authorUrlTextField = packageManifestVisualElement.Q<TextField>(AuthorUrlTextFieldName);
+            authorUrlTextField.SetEnabled(authorUrlToggle.value);
+            authorUrlToggle.RegisterValueChangedCallback(evt =>
+            {
+                authorUrlTextField.SetEnabled(authorUrlToggle.value);
+            });
+            
+            // Unity Release
+            var unityReleaseToggle = packageManifestVisualElement.Q<Toggle>(UnityReleaseToggleName);
+            var unityReleaseTextField = packageManifestVisualElement.Q<TextField>(UnityReleaseTextFieldName);
+            unityReleaseTextField.SetEnabled(unityReleaseToggle.value);
+            unityReleaseToggle.RegisterValueChangedCallback(evt =>
+            {
+                unityReleaseTextField.SetEnabled(unityReleaseToggle.value);
+            });
+            
+            // Dependencies
+            var dependenciesToggle = packageManifestVisualElement.Q<Toggle>(DependenciesToggleName);
+            var dependenciesContent = packageManifestVisualElement.Q<VisualElement>(DependenciesContentsVisualElementName);
+            dependenciesContent.SetEnabled(dependenciesToggle.value);
+            dependenciesToggle.RegisterValueChangedCallback(evt =>
+            {
+                dependenciesContent.SetEnabled(dependenciesToggle.value);
+            });
             var dependenciesListView = packageManifestVisualElement.Q<ListView>(DependenciesListViewName);
             var dependencyEntryVisualTree = Resources.Load<VisualTreeAsset>(DependencyEntryUxmlPath);
             var addDependencyButton = packageManifestVisualElement.Q<Button>(AddDependencyButtonName);
             addDependencyButton.clickable.clicked += () =>
                 AddEntryToDependencies(dependencyEntryVisualTree, dependenciesListView);
+            
+            // Keywords
+            var keywordsToggle = packageManifestVisualElement.Q<Toggle>(KeywordsToggleName);
+            var keywordsContent = packageManifestVisualElement.Q<VisualElement>(KeywordsContentsVisualElementName);
+            keywordsContent.SetEnabled(keywordsToggle.value);
+            keywordsToggle.RegisterValueChangedCallback(evt =>
+            {
+                keywordsContent.SetEnabled(keywordsToggle.value);
+            });
             var keywordsListView = packageManifestVisualElement.Q<ListView>(KeywordsListViewName);
             var keywordsEntryVisualTree = Resources.Load<VisualTreeAsset>(KeywordEntryUxmlPath);
             var addKeywordButton = packageManifestVisualElement.Q<Button>(AddKeywordButtonName);

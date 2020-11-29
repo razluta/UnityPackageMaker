@@ -27,12 +27,29 @@ namespace UnityPackageMaker.Editor
         public const string RightPanelName = "VE_PmRightPanel";
         public const string AllPackagesVisualElementName = "VE_AllPackages";
         public const string LoadPackageButtonName = "BT_LoadPackage";
+
+        public const string AuthorNameToggleName = "TG_AuthorName";
+        public const string AuthorNameTextFieldName = "TF_AuthorName";
+
+        public const string AuthorEmailToggleName = "TG_AuthorEmail";
+        public const string AuthorEmailTextFieldName = "TF_AuthorEmail";
+
+        public const string AuthorUrlToggleName = "TG_AuthorUrl";
+        public const string AuthorUrlTextFieldName = "TF_AuthorUrl";
+
+        public const string UnityReleaseToggleName = "TG_UnityRelease";
+        public const string UnityReleaseTextFieldName = "TF_UnityRelease";
+
+        public const string DependenciesToggleName = "TG_Dependencies";
+        public const string DependenciesContentsVisualElementName = "VE_DependenciesContents";
         public const string DependenciesListViewName = "LV_Dependencies";
         public const string AddDependencyButtonName = "BT_DependenciesAdd";
         public const string DependencyEntryNameTextFieldName = "TF_DependenciesEntryName";
         public const string DependencyEntryVersionTextFieldName = "TF_DependenciesEntryVersion";
         public const string DependencyEntryRemoveButtonName = "BT_DependenciesEntryRemove";
 
+        public const string KeywordsToggleName = "TG_Keywords";
+        public const string KeywordsContentsVisualElementName = "VE_KeywordsContents";
         public const string KeywordsListViewName = "LV_Keywords";
         public const string AddKeywordButtonName = "BT_KeywordsAdd";
         public const string KeywordEntryNameTextFieldName = "TF_KeywordsEntryName";

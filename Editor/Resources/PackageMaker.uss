@@ -93,6 +93,7 @@
 
 .text_required {
     -unity-font-style: bold;
+    flex-grow: 1;
 }
 
 .version_text {
