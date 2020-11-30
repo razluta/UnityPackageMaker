@@ -1,8 +1,10 @@
 ﻿using System;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityPackageMaker.Editor.GuiConstants;
+using Object = UnityEngine.Object;
 
 namespace UnityPackageMaker.Editor 
 {
@@ -12,6 +14,7 @@ namespace UnityPackageMaker.Editor
 
         private VisualElement _root;
         private ScrollView _contentsView;
+        private PackageManifest _packageManifest = new PackageManifest();
         
         [MenuItem(PackageMakerMenuItemPath)]
         public static void ShowWindow()
@@ -26,7 +29,7 @@ namespace UnityPackageMaker.Editor
             _root = rootVisualElement;
             _contentsView = new ScrollView();
             
-            // Declaration
+            // INIT
             // Header
             var headerVisualTree = Resources.Load<VisualTreeAsset>(HeaderUxmlPath);
             headerVisualTree.CloneTree(_root);
@@ -156,8 +159,17 @@ namespace UnityPackageMaker.Editor
             // Create Package Button
             var createPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(CreatePackageButtonUxmlPath);
             createPackageButtonVisualTree.CloneTree(_root);
+            var createPackageButton = _root.Q<Button>(CreatePackageButtonName);
 
-            // Behavior
+            // BINDING
+            // Setup
+            
+            // Author Name
+            authorNameTextField.RegisterCallback<ChangeEvent<string>>
+                (e => _packageManifest.AuthorName = (e.target as TextField).value );
+            
+
+            // BEHAVIOR
             // Readme
             readmeVisualElement.SetEnabled(readmeToggle.value);
             readmeToggle.RegisterValueChangedCallback(evt =>
@@ -178,6 +190,9 @@ namespace UnityPackageMaker.Editor
             {
                 licenseVisualElement.SetEnabled(licenseToggle.value);
             });
+            
+            // Create Package Button
+            createPackageButton.clickable.clicked += () => TryCreateNewUnityPackage(_packageManifest);
         }
 
         private void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
@@ -204,6 +219,26 @@ namespace UnityPackageMaker.Editor
             entryNameTextField.value = String.Empty;
             var removeButton = customVisualElement.Q<Button>(RemoveKeywordButtonName);
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
+        }
+
+        private void TryCreateNewUnityPackage(PackageManifest packageManifest)
+        {
+            
+            Debug.Log(packageManifest.AuthorName);
+            
+            return;
+            // Validate
+            if (!packageManifest.IsValidPackageManifest())
+            {
+                return;
+            }
+            
+            // Get path
+            var parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
+            if(String.IsNullOrWhiteSpace(parentDirectoryPath))
+            {
+                return;
+            }
         }
     }
 }

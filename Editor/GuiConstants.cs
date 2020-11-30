@@ -61,5 +61,8 @@ namespace UnityPackageMaker.Editor
         public const string LicenceToggleName = "TG_License";
         public const string UpdatePackageButtonName = "BT_UpdatePackage";
         public const string CreatePackageButtonName = "BT_CreatePackage";
+
+        public const string CreatePackagesWindowTitle = "Browse to the parent folder where you would like to create " +
+                                                        "the package folder.";
     }
 }
