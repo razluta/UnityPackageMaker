@@ -30,14 +30,6 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="VE_Mandatory" class="property_box">
-            <ui:VisualElement name="VE_PackageDisplayNameRoot">
-                <ui:Label text="Display Name" class="text_required" />
-                <ui:Label text="ex: Package Name" class="text_example" />
-                <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
-                    <ui:TextField picking-mode="Ignore" name="TF_PackageDisplayName" class="text_field" />
-                </ui:VisualElement>
-            </ui:VisualElement>
-            <ui:VisualElement name="Separator" class="separator" />
             <ui:VisualElement name="VE_PackageUnityVersionRoot">
                 <ui:Label text="Unity Version" class="text_required" />
                 <ui:Label text="ex: 2019.1" class="text_example" />

@@ -1,4 +1,23 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="VE_NamesContents" class="property_box">
+        <Style src="PackageMaker.uss" />
+        <ui:VisualElement name="VE_PackageDisplayNameRoot" class="property_box">
+            <ui:Label text="Display Name" class="text_required" />
+            <ui:Label text="ex: Package Name" class="text_example" />
+            <ui:VisualElement name="VE_PackageDisplayName" class="package_contents_row">
+                <ui:TextField picking-mode="Ignore" name="TF_PackageDisplayName" class="text_field" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_AuthorNameRow" style="flex-direction: row;">
+                <ui:Label text="* use Display Name as Root Folder Name" name="LB_UseDisplayNameAsRootFolderName" style="flex-grow: 1; -unity-text-align: upper-right; padding-top: 3px; -unity-font-style: italic; font-size: 10px;" />
+                <ui:Toggle name="TG_UseDisplayNameAsRootFolderName" value="false" class="toggle" style="margin-right: 4px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_RootFolderNameContents" class="property_box">
+            <ui:Label text="Root Folder Name" class="text_required" />
+            <ui:Label text="ex: Package Name or PackageName" class="text_example" />
+            <ui:TextField picking-mode="Ignore" name="TF_RootFolderNameContents" class="text_field" />
+        </ui:VisualElement>
+    </ui:VisualElement>
     <ui:VisualElement name="VE_IncludedPackageContents" class="property_box">
         <Style src="PackageMaker.uss" />
         <ui:Label text="Included Package Contents" name="LB_IncludedPackageContents" class="section_title" />

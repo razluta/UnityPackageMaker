@@ -77,6 +77,14 @@ namespace UnityPackageMaker.Editor
             // Samples
             // Screenshots
             
+            // Display Name
+            var displayNameTextField = _root.Q<TextField>(DisplayNameTextFieldName);
+            var useDisplayNameAsRootFolderNameToggle = _root.Q<Toggle>(UseDisplayNameAsRootFolderNameToggleName);
+
+            // Root Folder Name
+            var rootFolderNameContentsVisualElement = _root.Q<VisualElement>(RootFolderNameContentsVisualElementName);
+            var rootFolderNameTextField = _root.Q<TextField>(RootFolderNameTextFieldName);
+            
             // Author Name
             var authorNameToggle = packageManifestVisualElement.Q<Toggle>(AuthorNameToggleName);
             var authorNameTextField = packageManifestVisualElement.Q<TextField>(AuthorNameTextFieldName);
@@ -216,6 +224,32 @@ namespace UnityPackageMaker.Editor
                     testsFolderToggle.value = true;
                 }
             });
+            
+            // Display Name
+            rootFolderNameContentsVisualElement.SetEnabled(!useDisplayNameAsRootFolderNameToggle.value);
+            useDisplayNameAsRootFolderNameToggle.RegisterValueChangedCallback(evt =>
+            {
+                if (useDisplayNameAsRootFolderNameToggle.value)
+                {
+                    rootFolderNameTextField.value = displayNameTextField.value;
+                }
+                else
+                {
+                    rootFolderNameTextField.value = String.Empty;
+                }
+                rootFolderNameContentsVisualElement.SetEnabled(!useDisplayNameAsRootFolderNameToggle.value);
+            });
+            
+            displayNameTextField.RegisterValueChangedCallback(evt =>
+            {
+                if (useDisplayNameAsRootFolderNameToggle.value)
+                {
+                    rootFolderNameTextField.value = displayNameTextField.value;
+                }
+            });
+
+            // Root Folder Name
+            
             
             // Readme
             readmeVisualElement.SetEnabled(readmeToggle.value);
