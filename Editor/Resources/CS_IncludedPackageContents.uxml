@@ -35,7 +35,21 @@
         <ui:VisualElement name="VE_TestsRow" class="package_contents_row">
             <ui:VisualElement name="VE_Tests" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
             <ui:Label text="Tests" name="LB_Tests" class="property_contents_label" />
-            <ui:Toggle name="TG_Tests" value="false" class="toggle" />
+            <ui:Toggle name="TG_Tests" class="toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_TestsChildren">
+            <ui:VisualElement name="VE_TestEditorRow" class="package_contents_children_row">
+                <ui:Label text="L" class="directory_connection_graphic" />
+                <ui:VisualElement name="VE_TestEditor" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+                <ui:Label text="Editor" name="LB_TestEditor" class="property_contents_label" />
+                <ui:Toggle name="TG_TestEditor" class="toggle" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_TestsRuntimeRow" class="package_contents_children_row">
+                <ui:Label text="L" class="directory_connection_graphic" />
+                <ui:VisualElement name="VE_TestRuntime" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
+                <ui:Label text="Runtime" name="LB_TestRuntime" class="property_contents_label" />
+                <ui:Toggle name="TG_TestRuntime" value="false" class="toggle" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="VE_DocumentationRow" class="package_contents_row">
             <ui:VisualElement name="VE_Documentation" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />

@@ -234,3 +234,20 @@
 .log_message_label {
     padding-left: 1px;
 }
+
+.package_contents_children_row {
+    flex-direction: row;
+    -unity-background-scale-mode: stretch-to-fill;
+    padding-left: 12px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    -unity-font-style: normal;
+}
+
+.directory_connection_graphic {
+    -unity-font-style: normal;
+    -unity-text-align: upper-center;
+    margin-top: -3px;
+    opacity: 0.5;
+}

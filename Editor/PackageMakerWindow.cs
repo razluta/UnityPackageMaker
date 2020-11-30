@@ -59,6 +59,24 @@ namespace UnityPackageMaker.Editor
             packageManifestVisualTree.CloneTree(packageManifestVisualElement);
             _contentsView.Add(packageManifestVisualElement);
             
+            // Readme
+            // Changelog
+            // License
+            // Editor Folder
+            // Runtime Folder
+            // Tests Folder
+            var testsFolderToggle = _root.Q<Toggle>(TestsFolderToggleName);
+
+            // Tests Editor Folder
+            var testsEditorFolderToggle = _root.Q<Toggle>(TestsEditorFolderToggleName);
+            
+            // Tests Runtime Folder
+            var testsRuntimeFolderToggle = _root.Q<Toggle>(TestsRuntimeFolderToggleName);
+            
+            // Documentation
+            // Samples
+            // Screenshots
+            
             // Author Name
             var authorNameToggle = packageManifestVisualElement.Q<Toggle>(AuthorNameToggleName);
             var authorNameTextField = packageManifestVisualElement.Q<TextField>(AuthorNameTextFieldName);
@@ -167,9 +185,38 @@ namespace UnityPackageMaker.Editor
             // Author Name
             authorNameTextField.RegisterCallback<ChangeEvent<string>>
                 (e => _packageManifest.AuthorName = (e.target as TextField).value );
-            
 
             // BEHAVIOR
+            // Tests Folder
+            testsFolderToggle.RegisterValueChangedCallback(evt =>
+            {
+                if (testsFolderToggle.value != false)
+                {
+                    return;
+                }
+                testsEditorFolderToggle.value = false;
+                testsRuntimeFolderToggle.value = false;
+            });
+
+            // Tests Editor Folder
+            testsEditorFolderToggle.RegisterValueChangedCallback(evt =>
+            {
+                if (testsEditorFolderToggle.value != true)
+                {
+                    return;
+                }
+                testsFolderToggle.value = true;
+            });
+            
+            // Tests Runtime Folder
+            testsRuntimeFolderToggle.RegisterValueChangedCallback(evt =>
+            {
+                if (testsRuntimeFolderToggle.value == true)
+                {
+                    testsFolderToggle.value = true;
+                }
+            });
+            
             // Readme
             readmeVisualElement.SetEnabled(readmeToggle.value);
             readmeToggle.RegisterValueChangedCallback(evt =>

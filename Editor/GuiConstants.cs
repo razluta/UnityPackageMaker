@@ -25,6 +25,20 @@ namespace UnityPackageMaker.Editor
         public const string PackMakButtonName = "BT_Logo";
         public const string LeftPanelName = "VE_PmLeftPanel";
         public const string RightPanelName = "VE_PmRightPanel";
+        
+        public const string ReadmeToggleName = "TG_Readme";
+        public const string ReadmeTextFieldName = "TF_ReadmeContents";
+        public const string ChangelogToggleName = "TG_Changelog";
+        public const string LicenceToggleName = "TG_License";
+        public const string EditorFolderToggleName = "TG_Editor";
+        public const string RuntimeFolderToggleName = "TG_Runtime";
+        public const string TestsFolderToggleName = "TG_Tests";
+        public const string TestsEditorFolderToggleName = "TG_TestEditor";
+        public const string TestsRuntimeFolderToggleName = "TG_TestRuntime";
+        public const string DocumentationFolderToggleName = "TG_Documentation";
+        public const string SamplesFolderToggleName = "TG_Samples";
+        public const string ScreenshotsFolderToggleName = "TG_Screenshots";
+        
         public const string AllPackagesVisualElementName = "VE_AllPackages";
         public const string LoadPackageButtonName = "BT_LoadPackage";
 
@@ -55,10 +69,6 @@ namespace UnityPackageMaker.Editor
         public const string KeywordEntryNameTextFieldName = "TF_KeywordsEntryName";
         public const string RemoveKeywordButtonName = "BT_KeywordsEntryRemove";
 
-        public const string ReadmeToggleName = "TG_Readme";
-        public const string ReadmeTextFieldName = "TF_ReadmeContents";
-        public const string ChangelogToggleName = "TG_Changelog";
-        public const string LicenceToggleName = "TG_License";
         public const string UpdatePackageButtonName = "BT_UpdatePackage";
         public const string CreatePackageButtonName = "BT_CreatePackage";
 
