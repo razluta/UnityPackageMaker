@@ -25,7 +25,11 @@ namespace UnityPackageMaker.Editor
         public const string PackMakButtonName = "BT_Logo";
         public const string LeftPanelName = "VE_PmLeftPanel";
         public const string RightPanelName = "VE_PmRightPanel";
-        
+
+        public const string DisplayNameTextFieldName = "TF_PackageDisplayName";
+        public const string UseDisplayNameAsRootFolderNameToggleName = "TG_UseDisplayNameAsRootFolderName";
+        public const string RootFolderNameContentsVisualElementName =  "VE_RootFolderNameContents";
+        public const string RootFolderNameTextFieldName = "TF_RootFolderNameContents";
         public const string ReadmeToggleName = "TG_Readme";
         public const string ReadmeTextFieldName = "TF_ReadmeContents";
         public const string ChangelogToggleName = "TG_Changelog";
@@ -38,11 +42,6 @@ namespace UnityPackageMaker.Editor
         public const string DocumentationFolderToggleName = "TG_Documentation";
         public const string SamplesFolderToggleName = "TG_Samples";
         public const string ScreenshotsFolderToggleName = "TG_Screenshots";
-
-        public const string DisplayNameTextFieldName = "TF_PackageDisplayName";
-        public const string UseDisplayNameAsRootFolderNameToggleName = "TG_UseDisplayNameAsRootFolderName";
-        public const string RootFolderNameContentsVisualElementName =  "VE_RootFolderNameContents";
-        public const string RootFolderNameTextFieldName = "TF_RootFolderNameContents";
         
         public const string AllPackagesVisualElementName = "VE_AllPackages";
         public const string LoadPackageButtonName = "BT_LoadPackage";

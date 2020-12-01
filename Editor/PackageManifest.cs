@@ -1,60 +1,295 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace UnityPackageMaker.Editor
 {
-    public class PackageManifest
+    public class PackageManifest : ScriptableObject
     {
-        // Public Properties
-        public bool HasReadme { get; set; }
-        public bool HasChangelog  { get; set; }
-        public bool HasLicense { get; set; }
-        public bool HasEditorFolder { get; set; }
-        public bool HasRuntimeFolder { get; set; }
-        public bool HasTestsFolder { get; set; }
-        public bool HasDocumentationFolder { get; set; }
-        public bool HasSamplesFolder { get; set; }
-        public bool HasScreenshotsFolder { get; set; }
+        #region PRIVATE FIELDS
+        [SerializeField] private string displayName;
+        [SerializeField] private bool isUseDisplayNameAsRootFolderName;
+        [SerializeField] private string rootFolderName;
+        [SerializeField] private bool hasReadme;
+        [SerializeField] private bool hasChangelog;
+        [SerializeField] private bool hasLicense;
+        [SerializeField] private bool hasEditorFolder;
+        [SerializeField] private bool hasRuntimeFolder;
+        [SerializeField] private bool hasTestsFolder;
+        [SerializeField] private bool hasTestsEditorFolder;
+        [SerializeField] private bool hasTestsRuntimeFolder;
+        [SerializeField] private bool hasDocumentationFolder;
+        [SerializeField] private bool hasSamplesFolder;
+        [SerializeField] private bool hasScreenshotsFolder;
+        [SerializeField] private string nameExtension;
+        [SerializeField] private string nameCompany;
+        [SerializeField] private string namePackage;
+        [SerializeField] private int versionMajor;
+        [SerializeField] private int versionMinor;
+        [SerializeField] private int versionPatch;
+        [SerializeField] private int unityVersionMajor;
+        [SerializeField] private int unityVersionMinor;
+        [SerializeField] private string description;
+        [SerializeField] private bool hasAuthorName;
+        [SerializeField] private string authorName;
+        [SerializeField] private bool hasAuthorEmail;
+        [SerializeField] private string authorEmail;
+        [SerializeField] private bool hasAuthorUrl;
+        [SerializeField] private string authorUrl;
+        [SerializeField] private bool hasUnityRelease;
+        [SerializeField] private string unityRelease;
+        [SerializeField] private bool hasDependencies;
+        [SerializeField] private List<PackageDependency> dependencies;
+        [SerializeField] private bool hasKeywords;
+        [SerializeField] private List<string> keywords;
+        [SerializeField] private string readme;
+        [SerializeField] private string changelog;
+        [SerializeField] private string license;
+        #endregion
         
-        public string NameExtension { get; set; }
-        public string NameCompany { get; set; }
-        public string Name { get; set; }
-
-        public int VersionMajor { get; set; }
-        public int VersionMinor { get; set; }
-        public int VersionPatch { get; set; }
-
-        public string DisplayName { get; set; }
-        public int UnityVersionMajor { get; set; }
-        public int UnityVersionMinor { get; set; }
-        public string Description { get; set; }
-
-        public bool HasAuthorName { get; set; }
-        public string AuthorName { get; set; }
-        public bool HasAuthorEmail { get; set; }
-        public string AuthorEmail { get; set; }
-        public bool HasAuthorUrl { get; set; }
-        public string AuthorUrl { get; set; }
-
-        public bool HasUnityRelease { get; set; }
-        public string UnityRelease { get; set; }
-        public bool HasDependencies { get; set; }
-        public List<string> Dependencies { get; set; }
-        public bool HasKeywords { get; set; }
-        public List<string> Keywords { get; set; }
+        #region PUBLIC PROPERTIES
+        public string DisplayName 
+        {
+            get => displayName;
+            set => displayName = value;
+        }
         
-        public string Readme { get; set; }
-        public string Changelog  { get; set; }
-        public string License { get; set; }
+        public bool IsUseDisplayNameAsRootFolderName
+        {
+            get => isUseDisplayNameAsRootFolderName;
+            set => isUseDisplayNameAsRootFolderName = value;
+        }
         
+        public string RootFolderName  
+        {
+            get => rootFolderName;
+            set => rootFolderName = value;
+        }
+
+        public bool HasReadme 
+        {
+            get => hasReadme;
+            set => hasReadme = value;
+        }
+        
+        public bool HasChangelog
+        {
+            get => hasChangelog;
+            set => hasChangelog = value;
+        }
+        
+        public bool HasLicense
+        {
+            get => hasLicense;
+            set => hasLicense = value;
+        }
+        
+        public bool HasEditorFolder
+        {
+            get => hasEditorFolder;
+            set => hasEditorFolder = value;
+        }
+        
+        public bool HasRuntimeFolder
+        {
+            get => hasRuntimeFolder;
+            set => hasRuntimeFolder = value;
+        }
+        
+        public bool HasTestsFolder
+        {
+            get => hasTestsFolder;
+            set => hasTestsFolder = value;
+        }
+        
+        public bool HasTestsEditorFolder
+        {
+            get => hasTestsEditorFolder;
+            set => hasTestsEditorFolder = value;
+        }
+        
+        public bool HasTestsRuntimeFolder
+        {
+            get => hasTestsRuntimeFolder;
+            set => hasTestsRuntimeFolder = value;
+        }
+        
+        public bool HasDocumentationFolder
+        {
+            get => hasDocumentationFolder;
+            set => hasDocumentationFolder = value;
+        }
+        
+        public bool HasSamplesFolder
+        {
+            get => hasSamplesFolder;
+            set => hasSamplesFolder = value;
+        }
+        
+        public bool HasScreenshotsFolder
+        {
+            get => hasScreenshotsFolder;
+            set => hasScreenshotsFolder = value;
+        }
+        
+        public string NameExtension
+        {
+            get => nameExtension;
+            set => nameExtension = value;
+        }
+        
+        public string NameCompany
+        {
+            get => nameCompany;
+            set => nameCompany = value;
+        }
+        
+        public string NamePackage
+        {
+            get => namePackage;
+            set => namePackage = value;
+        }
+        
+        public int VersionMajor
+        {
+            get => versionMajor;
+            set => versionMajor = value;
+        }
+        
+        public int VersionMinor
+        {
+            get => versionMinor;
+            set => versionMinor = value;
+        }
+        
+        public int VersionPatch
+        {
+            get => versionPatch;
+            set => versionPatch = value;
+        }
+        
+        public int UnityVersionMajor
+        {
+            get => unityVersionMajor;
+            set => unityVersionMajor = value;
+        }
+        
+        public int UnityVersionMinor
+        {
+            get => unityVersionMinor;
+            set => unityVersionMinor = value;
+        }
+        
+        public string Description
+        {
+            get => description;
+            set => description = value;
+        }
+        
+        public bool HasAuthorName
+        {
+            get => hasAuthorName;
+            set => hasAuthorName = value;
+        }
+        
+        public string AuthorName
+        {
+            get => authorName;
+            set => authorName = value;
+        }
+        
+        public bool HasAuthorEmail
+        {
+            get => hasAuthorEmail;
+            set => hasAuthorEmail = value;
+        }
+        
+        public string AuthorEmail
+        {
+            get => authorEmail;
+            set => authorEmail = value;
+        }
+        
+        public bool HasAuthorUrl
+        {
+            get => hasAuthorUrl;
+            set => hasAuthorUrl = value;
+        }
+        
+        public string AuthorUrl
+        {
+            get => authorUrl;
+            set => authorUrl = value;
+        }
+        
+        public bool HasUnityRelease
+        {
+            get => hasUnityRelease;
+            set => hasUnityRelease = value;
+        }
+        
+        public string UnityRelease
+        {
+            get => unityRelease;
+            set => unityRelease = value;
+        }
+        
+        public bool HasDependencies
+        {
+            get => hasDependencies;
+            set => hasDependencies = value;
+        }
+        
+        public List<PackageDependency> Dependencies
+        {
+            get => dependencies;
+            set => dependencies = value;
+        }
+        
+        public bool HasKeywords
+        {
+            get => hasKeywords;
+            set => hasKeywords = value;
+        }
+        
+        public List<string> Keywords
+        {
+            get => keywords;
+            set => keywords = value;
+        }
+        
+        public string Readme
+        {
+            get => readme;
+            set => readme = value;
+        }
+        
+        public string Changelog
+        {
+            get => changelog;
+            set => changelog = value;
+        }
+        
+        public string License
+        {
+            get => license;
+            set => license = value;
+        }
+        #endregion
+
         // Private Defaults
+        private const string DisplayNameDefault = "";
+        private const bool IsUseDisplayNameAsRootFolderNameDefault = false;
+        private const string RootFolderNameDefault = "";
         private const bool HasReadmeDefault = false;
         private const bool HasChangelogDefault = false;
         private const bool HasLicenseDefault = false;
         private const bool HasEditorFolderDefault = false;
         private const bool HasRuntimeFolderDefault = false;
         private const bool HasTestsFolderDefault = false;
+        private const bool HasTestsEditorFolderDefault = false;
+        private const bool HasTestsRuntimeFolderDefault = false;
         private const bool HasDocumentationFolderDefault = false;
         private const bool HasSamplesFolderDefault = false;
         private const bool HasScreenshotsDefault = false;
@@ -65,8 +300,7 @@ namespace UnityPackageMaker.Editor
         private const int VersionMajorDefault = 0;
         private const int VersionMinorDefault = 0;
         private const int VersionPathDefault = 0;
-
-        private const string DisplayNameDefault = "";
+        
         private const int UnityVersionMajorDefault = 0;
         private const int UnityVersionMinorDefault = 0;
         private const string DescriptionDefault = "";
@@ -89,7 +323,7 @@ namespace UnityPackageMaker.Editor
 
         // Validation Defaults
         private const int MinimumUnityVersionMajor = 2017;
-        private const int MaxUnityReleaseCharCount = 4;
+        private const int MaxUnityReleaseCharCount = 5;
         
         public PackageManifest()
         {
@@ -98,25 +332,29 @@ namespace UnityPackageMaker.Editor
 
         public void ResetToDefault()
         {
+            DisplayName = DisplayNameDefault;
+            IsUseDisplayNameAsRootFolderName = IsUseDisplayNameAsRootFolderNameDefault;
+            RootFolderName = RootFolderNameDefault;
             HasReadme = HasReadmeDefault;
             HasChangelog = HasChangelogDefault;
             HasLicense = HasLicenseDefault;
             HasEditorFolder = HasEditorFolderDefault;
             HasRuntimeFolder = HasRuntimeFolderDefault;
             HasTestsFolder = HasTestsFolderDefault;
+            HasTestsEditorFolder = HasTestsEditorFolderDefault;
+            HasTestsRuntimeFolder = HasTestsRuntimeFolderDefault;
             HasDocumentationFolder = HasDocumentationFolderDefault;
             HasSamplesFolder = HasSamplesFolderDefault;
             HasScreenshotsFolder = HasScreenshotsDefault;
             
             NameExtension = NameExtensionDefault;
             NameCompany = NameCompanyDefault;
-            Name = NameDefault;
+            NamePackage = NameDefault;
 
             VersionMajor = VersionMajorDefault;
             VersionMinor = VersionMinorDefault;
             VersionPatch = VersionPathDefault;
-
-            DisplayName = DisplayNameDefault;
+            
             UnityVersionMajor = UnityVersionMajorDefault;
             UnityVersionMinor = UnityVersionMinorDefault;
             Description = DescriptionDefault;
@@ -131,7 +369,7 @@ namespace UnityPackageMaker.Editor
             HasUnityRelease = HasUnityReleaseDefault;
             UnityRelease = UnityReleaseDefault;
             HasDependencies = HasDependenciesDefault;
-            Dependencies = new List<string>(); 
+            Dependencies = new List<PackageDependency>(); 
             HasKeywords = HasKeywordsDefault;
             Keywords = new List<string>();
 
@@ -166,7 +404,7 @@ namespace UnityPackageMaker.Editor
             }
             
             // Name 
-            if (String.IsNullOrWhiteSpace(Name))
+            if (String.IsNullOrWhiteSpace(NamePackage))
             {
                 return false;
             }
@@ -223,12 +461,38 @@ namespace UnityPackageMaker.Editor
                 var isSecondCharNumeric = UnityRelease[1].ToString().All(char.IsDigit);
                 var isThirdCharNumeric = UnityRelease[2].ToString().All(char.IsDigit);
 
-                // Four count validation
+                // Five count validation
                 if (unityReleaseCharCount == MaxUnityReleaseCharCount)
                 {
                     var isFourthCharNumeric = UnityRelease[3].ToString().All(char.IsDigit);
+                    var isFifthCharNumeric = UnityRelease[4].ToString().All(char.IsDigit);
+                    
+                    if (!isFirstCharNumeric || !isSecondCharNumeric || 
+                        isThirdCharNumeric || 
+                        !isFourthCharNumeric || !isFifthCharNumeric)
+                    {
+                        return false;
+                    }
+                }
+                
+                // Four count validation
+                if (unityReleaseCharCount == MaxUnityReleaseCharCount - 1)
+                {
+                    var isFourthCharNumeric = UnityRelease[3].ToString().All(char.IsDigit);
+                    var isValidOptionOne = false;
+                    var isValidOptionTwo = false;
+                    
+                    if (isFirstCharNumeric || !isSecondCharNumeric || isThirdCharNumeric || isFourthCharNumeric)
+                    {
+                        isValidOptionOne = true;
+                    }
+                    
+                    if (isFirstCharNumeric || isSecondCharNumeric || !isThirdCharNumeric || isFourthCharNumeric)
+                    {
+                        isValidOptionTwo = true;
+                    }
 
-                    if (!isFirstCharNumeric || !isSecondCharNumeric || isThirdCharNumeric || !isFourthCharNumeric)
+                    if (!isValidOptionOne && !isValidOptionTwo)
                     {
                         return false;
                     }

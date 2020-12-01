@@ -14,7 +14,7 @@ namespace UnityPackageMaker.Editor
 
         private VisualElement _root;
         private ScrollView _contentsView;
-        private PackageManifest _packageManifest = new PackageManifest();
+        private PackageManifest _packageManifest;
         
         [MenuItem(PackageMakerMenuItemPath)]
         public static void ShowWindow()
@@ -29,7 +29,7 @@ namespace UnityPackageMaker.Editor
             _root = rootVisualElement;
             _contentsView = new ScrollView();
             
-            // INIT
+            #region INIT AND QUERY
             // Header
             var headerVisualTree = Resources.Load<VisualTreeAsset>(HeaderUxmlPath);
             headerVisualTree.CloneTree(_root);
@@ -49,6 +49,10 @@ namespace UnityPackageMaker.Editor
             // Included Package Contents
             var includedPackageContentsVisualTree = Resources.Load<VisualTreeAsset>(IncludedPackageContentsUxmlPath);
             includedPackageContentsVisualTree.CloneTree(leftPanel);
+
+
+
+
             var readmeToggle = leftPanel.Q<Toggle>(ReadmeToggleName);
             var changelogToggle = leftPanel.Q<Toggle>(ChangelogToggleName);
             var licenseToggle = leftPanel.Q<Toggle>(LicenceToggleName);
@@ -58,6 +62,14 @@ namespace UnityPackageMaker.Editor
             var packageManifestVisualElement = new VisualElement();
             packageManifestVisualTree.CloneTree(packageManifestVisualElement);
             _contentsView.Add(packageManifestVisualElement);
+            
+            // Display Name
+            var displayNameTextField = _root.Q<TextField>(DisplayNameTextFieldName);
+            var useDisplayNameAsRootFolderNameToggle = _root.Q<Toggle>(UseDisplayNameAsRootFolderNameToggleName);
+
+            // Root Folder Name
+            var rootFolderNameContentsVisualElement = _root.Q<VisualElement>(RootFolderNameContentsVisualElementName);
+            var rootFolderNameTextField = _root.Q<TextField>(RootFolderNameTextFieldName);
             
             // Readme
             // Changelog
@@ -76,15 +88,7 @@ namespace UnityPackageMaker.Editor
             // Documentation
             // Samples
             // Screenshots
-            
-            // Display Name
-            var displayNameTextField = _root.Q<TextField>(DisplayNameTextFieldName);
-            var useDisplayNameAsRootFolderNameToggle = _root.Q<Toggle>(UseDisplayNameAsRootFolderNameToggleName);
 
-            // Root Folder Name
-            var rootFolderNameContentsVisualElement = _root.Q<VisualElement>(RootFolderNameContentsVisualElementName);
-            var rootFolderNameTextField = _root.Q<TextField>(RootFolderNameTextFieldName);
-            
             // Author Name
             var authorNameToggle = packageManifestVisualElement.Q<Toggle>(AuthorNameToggleName);
             var authorNameTextField = packageManifestVisualElement.Q<TextField>(AuthorNameTextFieldName);
@@ -186,15 +190,36 @@ namespace UnityPackageMaker.Editor
             var createPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(CreatePackageButtonUxmlPath);
             createPackageButtonVisualTree.CloneTree(_root);
             var createPackageButton = _root.Q<Button>(CreatePackageButtonName);
-
-            // BINDING
+            #endregion
+            
+            #region BINDINGS
             // Setup
+            _packageManifest = ScriptableObject.CreateInstance<PackageManifest>();
+            var pmSerObj = new UnityEditor.SerializedObject(_packageManifest);
+            
+            // Display Name
+            var displayNameProperty = pmSerObj.FindProperty(PackageManifestConstants.DisplayNamePropName);
+            if (displayNameProperty != null)
+            {
+                displayNameTextField.BindProperty(displayNameProperty);
+            }
+            
+            // Root Folder Name
             
             // Author Name
-            authorNameTextField.RegisterCallback<ChangeEvent<string>>
-                (e => _packageManifest.AuthorName = (e.target as TextField).value );
+            var authorNameProperty = pmSerObj.FindProperty(PackageManifestConstants.AuthorNamePropName);
+            if (authorNameProperty != null)
+            {
+                authorNameTextField.BindProperty(authorNameProperty);
+            }
+            #endregion
+            
+            
+            
+            
+            
 
-            // BEHAVIOR
+            #region BEHAVIOR
             // Tests Folder
             testsFolderToggle.RegisterValueChangedCallback(evt =>
             {
@@ -274,6 +299,7 @@ namespace UnityPackageMaker.Editor
             
             // Create Package Button
             createPackageButton.clickable.clicked += () => TryCreateNewUnityPackage(_packageManifest);
+            #endregion
         }
 
         private void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
