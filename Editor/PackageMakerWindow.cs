@@ -630,11 +630,11 @@ namespace UnityPackageMaker.Editor
         private void TryCreateNewUnityPackage(PackageManifest packageManifest)
         {
             // Validate
-            // if (!packageManifest.IsValidPackageManifest())
-            // {
-            //     EditorUtility.DisplayDialog(InvalidPackageErrorTitle, InvalidPackageErrorMessage, InvalidPackageOk);
-            //     return;
-            // }
+            if (!packageManifest.IsValidPackageManifest())
+            {
+                EditorUtility.DisplayDialog(InvalidPackageErrorTitle, InvalidPackageErrorMessage, InvalidPackageOk);
+                return;
+            }
             
             // Get path
             var parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
@@ -734,6 +734,8 @@ namespace UnityPackageMaker.Editor
             if (packageManifest.HasEditorFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName));
+                File.Create(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName,
+                    PackageManifestConstants.EmptyFileName));
             }
             
             if (packageManifest.HasRuntimeFolder)

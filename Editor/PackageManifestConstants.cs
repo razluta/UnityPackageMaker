@@ -59,6 +59,7 @@ namespace UnityPackageMaker.Editor
         public const string ReadmeMdFileName = "README.MD";
         public const string ChangelogMdFileName = "CHANGELOG.MD";
         public const string LicenseFileName = "LICENSE";
+        public const string EmptyFileName = ".gitnull";
 
         public const string EditorFolderName = "Editor";
         public const string RuntimeFolderName = "Runtime";
