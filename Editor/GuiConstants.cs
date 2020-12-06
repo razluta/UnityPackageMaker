@@ -99,7 +99,8 @@ namespace UnityPackageMaker.Editor
                                                         "the package folder.";
 
         public const string InvalidPackageErrorTitle = "Invalid Package";
-        public const string InvalidPackageErrorMessage = "One or more felds in the Package are invalid, please fix.";
+        public const string InvalidPackageErrorMessage = "One or more felds in the Package are invalid, please check " +
+                                                         "the log and fix them.";
         public const string InvalidPackageOk = "OK";
         public const string Period = ".";
 
@@ -123,7 +124,5 @@ namespace UnityPackageMaker.Editor
         public const string SuccessTextTitle = "Success: ";
         public static readonly Color SuccessTextColor = new Color(0, 1, 0);
         public const string SuccessIconPath = "ConsoleInfoIcon.png";
-        
-        
     }
 }

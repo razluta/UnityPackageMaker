@@ -595,7 +595,7 @@ namespace UnityPackageMaker.Editor
             }
         }
 
-        private void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
+        private static void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
         {
             var customVisualElement = new VisualElement();
             vta.CloneTree(customVisualElement);
@@ -613,7 +613,7 @@ namespace UnityPackageMaker.Editor
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
 
-        private void AddEntryToKeywords(VisualTreeAsset vta, VisualElement ve)
+        private static void AddEntryToKeywords(VisualTreeAsset vta, VisualElement ve)
         {
             var customVisualElement = new VisualElement();
             vta.CloneTree(customVisualElement);
@@ -627,7 +627,7 @@ namespace UnityPackageMaker.Editor
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
 
-        private void TryCreateNewUnityPackage(PackageManifest packageManifest)
+        private static void TryCreateNewUnityPackage(PackageManifest packageManifest)
         {
             // Validate
             if (!packageManifest.IsValidPackageManifest())
