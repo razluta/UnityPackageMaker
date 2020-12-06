@@ -734,29 +734,34 @@ namespace UnityPackageMaker.Editor
             if (packageManifest.HasEditorFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName));
-                File.Create(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName,
+                var editorFolderNullFile = File.Create(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName,
                     PackageManifestConstants.EmptyFileName));
+                editorFolderNullFile.Close();
             }
             
             if (packageManifest.HasRuntimeFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName));
-                File.Create(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName,
+                var runtimeFolderNullFile = File.Create(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName,
                     PackageManifestConstants.EmptyFileName));
+                runtimeFolderNullFile.Close();
             }
             
             if (packageManifest.HasTestsFolder)
             {
                 var testsFolderPath = Path.Combine(rootFolderPath, PackageManifestConstants.TestsFolderName);
                 Directory.CreateDirectory(testsFolderPath);
-                File.Create(Path.Combine(testsFolderPath, PackageManifestConstants.EmptyFileName));
+                var testsFolderNullFile = File.Create(Path.Combine(testsFolderPath, PackageManifestConstants.EmptyFileName));
+                testsFolderNullFile.Close();
                 
                 if (packageManifest.HasTestsEditorFolder)
                 {
                     var testsEditorFolderPath =
                         Path.Combine(testsFolderPath, PackageManifestConstants.TestsEditorFolderName);
                     Directory.CreateDirectory(testsEditorFolderPath);
-                    File.Create(Path.Combine(testsEditorFolderPath, PackageManifestConstants.EmptyFileName));
+                    var testsEditorFolderNullFile = 
+                        File.Create(Path.Combine(testsEditorFolderPath, PackageManifestConstants.EmptyFileName));
+                    testsEditorFolderNullFile.Close();
                 }
                 
                 if (packageManifest.HasTestsRuntimeFolder)
@@ -764,7 +769,9 @@ namespace UnityPackageMaker.Editor
                     var testsRuntimeFolderPath =
                         Path.Combine(rootFolderPath, PackageManifestConstants.TestsRuntimeFolderName);
                     Directory.CreateDirectory(testsRuntimeFolderPath);
-                    File.Create(Path.Combine(testsRuntimeFolderPath, PackageManifestConstants.EmptyFileName));
+                    var testsRuntimeFolderNullFile = 
+                        File.Create(Path.Combine(testsRuntimeFolderPath, PackageManifestConstants.EmptyFileName));
+                    testsRuntimeFolderNullFile.Close();
                 }
             }
             
@@ -773,14 +780,18 @@ namespace UnityPackageMaker.Editor
                 var documentationFolderPath =
                     Path.Combine(rootFolderPath, PackageManifestConstants.DocumentationFolderName);
                 Directory.CreateDirectory(documentationFolderPath);
-                File.Create(Path.Combine(documentationFolderPath, PackageManifestConstants.EmptyFileName));
+                var documentationFolderNullFile = 
+                    File.Create(Path.Combine(documentationFolderPath, PackageManifestConstants.EmptyFileName));
+                documentationFolderNullFile.Close();
             }
             
             if (packageManifest.HasSamplesFolder)
             {
                 var samplesFolderPath = Path.Combine(rootFolderPath, PackageManifestConstants.SamplesFolderName);
                 Directory.CreateDirectory(samplesFolderPath);
-                File.Create(Path.Combine(samplesFolderPath, PackageManifestConstants.EmptyFileName));
+                var samplesFolderNullFile = 
+                    File.Create(Path.Combine(samplesFolderPath, PackageManifestConstants.EmptyFileName));
+                samplesFolderNullFile.Close();
             }
             
             if (packageManifest.HasScreenshotsFolder)
