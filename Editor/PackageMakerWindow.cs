@@ -459,7 +459,8 @@ namespace UnityPackageMaker.Editor
             var dependenciesProperty = pmSerObj.FindProperty(PackageManifestConstants.DependenciesPropName);
             if (dependenciesProperty != null)
             {
-                dependenciesListView.BindProperty(dependenciesProperty);
+                // TODO: bind
+                // dependenciesListView.BindProperty(dependenciesProperty);
             }
 
             // Keywords
@@ -472,6 +473,7 @@ namespace UnityPackageMaker.Editor
             var keywordsProperty = pmSerObj.FindProperty(PackageManifestConstants.KeywordsPropName);
             if (keywordsProperty != null)
             {
+                // TODO: bind
                 // keywordsListView.BindProperty(keywordsProperty);
             }
             
@@ -486,7 +488,7 @@ namespace UnityPackageMaker.Editor
             var changelogProperty = pmSerObj.FindProperty(PackageManifestConstants.ChangelogPropName);
             if (changelogProperty != null)
             {
-                // changelogTextField.BindProperty(changelogProperty);
+                changelogTextField.BindProperty(changelogProperty);
             }
             
             // Licence Contents
@@ -598,8 +600,12 @@ namespace UnityPackageMaker.Editor
 
             var entryNameTextField = customVisualElement.Q<TextField>(DependencyEntryNameTextFieldName);
             entryNameTextField.value = String.Empty;
+            // TODO: bind
+            
             var entryVersionTextField = customVisualElement.Q<TextField>(DependencyEntryVersionTextFieldName);
             entryVersionTextField.value = String.Empty;
+            // TODO: bind
+            
             var removeButton = customVisualElement.Q<Button>(DependencyEntryRemoveButtonName);
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
@@ -612,6 +618,8 @@ namespace UnityPackageMaker.Editor
 
             var entryNameTextField = customVisualElement.Q<TextField>(KeywordEntryNameTextFieldName);
             entryNameTextField.value = String.Empty;
+            // bind
+            
             var removeButton = customVisualElement.Q<Button>(RemoveKeywordButtonName);
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
