@@ -2,9 +2,12 @@
     <ui:VisualElement name="VE_Readme" class="property_box">
         <Style src="PackageMaker.uss" />
         <ui:Label text="&apos;README.md&apos; Contents" name="LB_ReadmeContents" class="section_title" />
-        <ui:VisualElement name="VE_ReadmeContents" class="package_contents_row" style="flex-direction: column;" />
+        <ui:ListView focusable="True" name="LV_ReadmeExample" class="listview_text_field">
+            <ui:Label text="example:&#10;# Title&#10;This is an example paragraph&#10;&#10;## This is an example heading.&#10;### This is an example smaller heading.&#10;#### This is an example for an even smaller heading.&#10;&#10;&gt; &quot;This is a quote block&quot; - person who you are quoting&#10;&#10;Below is a list:&#10;- list item&#10;- list item&#10;- list item&#10;&#10;Below is an ordered list:&#10;1. list item 1&#10;1. list item 2&#10;1. list item 3&#10;&#10; **bold**&#10;_italicized_&#10;\_underscores\_" class="text_example" style="flex-wrap: wrap; white-space: normal; flex-grow: 0;" />
+        </ui:ListView>
+        <ui:VisualElement style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" />
         <ui:ListView focusable="True" name="LV_ReadmeContents" class="listview_text_field">
-            <ui:TextField picking-mode="Ignore" value="Text Description." text="# Title&#10;This is an example paragraph&#10;&#10;## This is an example heading.&#10;### This is an example smaller heading.&#10;#### This is an example for an even smaller heading.&#10;&#10;&gt; &quot;This is a quote block&quot; - person who you are quoting&#10;&#10;Below is a list:&#10;- list item&#10;- list item&#10;- list item&#10;&#10;Below is an ordered list:&#10;1. list item 1&#10;1. list item 2&#10;1. list item 3&#10;&#10; **bold**&#10;_italicized_&#10;\_underscores\_" name="TF_ReadmeContents" class="text_field" style="flex-wrap: wrap; white-space: normal;" />
+            <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_ReadmeContents" class="text_field" style="flex-wrap: wrap; white-space: normal; height: 100px;" />
         </ui:ListView>
     </ui:VisualElement>
 </ui:UXML>

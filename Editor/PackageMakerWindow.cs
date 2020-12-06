@@ -472,7 +472,7 @@ namespace UnityPackageMaker.Editor
             var keywordsProperty = pmSerObj.FindProperty(PackageManifestConstants.KeywordsPropName);
             if (keywordsProperty != null)
             {
-                keywordsListView.BindProperty(keywordsProperty);
+                // keywordsListView.BindProperty(keywordsProperty);
             }
             
             // Readme Contents
@@ -486,7 +486,7 @@ namespace UnityPackageMaker.Editor
             var changelogProperty = pmSerObj.FindProperty(PackageManifestConstants.ChangelogPropName);
             if (changelogProperty != null)
             {
-                changelogTextField.BindProperty(changelogProperty);
+                // changelogTextField.BindProperty(changelogProperty);
             }
             
             // Licence Contents
