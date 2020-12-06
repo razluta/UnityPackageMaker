@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Button name="VE_ConsoleEntry" class="log_message" style="flex-direction: row;">
+        <Style src="PackageMaker.uss" />
+        <ui:VisualElement name="VE_ConsoleEntryIcon" class="console_entry_image" style="background-image: none;" />
+        <ui:VisualElement name="VE_ConsoleEntryBody">
+            <ui:Label text="Example: title." name="TF_ConsoleEntryTitle" class="error" style="-unity-text-align: middle-left;" />
+            <ui:Label text="Message explaining log here." name="TF_ConsoleEntryMessage" class="log_message_label" style="-unity-text-align: middle-left;" />
+        </ui:VisualElement>
+    </ui:Button>
+</ui:UXML>

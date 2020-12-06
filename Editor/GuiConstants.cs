@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace UnityPackageMaker.Editor
 {
     public static class GuiConstants
@@ -78,5 +80,16 @@ namespace UnityPackageMaker.Editor
 
         public const string CreatePackagesWindowTitle = "Browse to the parent folder where you would like to create " +
                                                         "the package folder.";
+
+        public static readonly Color NormalLogTextColor = new Color(1, 1, 1);
+        public const string ErrorTextTitle = "Error: ";
+        public static readonly Color ErrorTextColor = new Color(1, 0, 0);
+        public const string ErrorIconPath = "ConsoleErrorIcon.png";
+        public const string WarningTextTitle = "Warning: ";
+        public static readonly Color WarningTextColor = new Color(1, 0.3f, 0);
+        public const string WarningIconPath = "ConsoleWarnIcon.png";
+        public const string SuccessTextTitle = "Success: ";
+        public static readonly Color SuccessTextColor = new Color(0, 1, 0);
+        public const string SuccessIconPath = "ConsoleInfoIcon.png";
     }
 }

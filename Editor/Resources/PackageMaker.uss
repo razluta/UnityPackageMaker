@@ -190,7 +190,6 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    color: rgb(255, 0, 0);
 }
 
 .warning {
@@ -250,4 +249,13 @@
     -unity-text-align: upper-center;
     margin-top: -3px;
     opacity: 0.5;
+}
+
+.console_entry_image {
+    background-image: resource('ConsoleErrorIcon');
+    -unity-background-scale-mode: scale-to-fit;
+    height: 28px;
+    width: 30px;
+    flex-grow: 0;
+    margin-top: 1px;
 }
