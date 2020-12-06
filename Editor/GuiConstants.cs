@@ -105,9 +105,13 @@ namespace UnityPackageMaker.Editor
 
         public const string OverridePackageTitle = "Override Package?";
         public const string OverridePackageMessage =
-            "The package.json already exists at the path, do you want to override it?";
+            "The package already exists at the path, do you want to override it?";
         public const string OverrideYes = "Yes";
         public const string OverrideCancel = "Cancel";
+
+        public const string SuccessCreatePackageTitle = "Success!";
+        public const string SuccessCreatePackageMessage = "Package has been successfully created.";
+        public const string SuccessCreatePackageOk = "OK";
 
         public static readonly Color NormalLogTextColor = new Color(1, 1, 1);
         public const string ErrorTextTitle = "Error: ";

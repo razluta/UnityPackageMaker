@@ -262,4 +262,5 @@
 
 .unity-text-field__input {
     -unity-text-align: upper-left;
+    white-space: normal;
 }

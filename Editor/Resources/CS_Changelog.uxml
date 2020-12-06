@@ -8,7 +8,7 @@
         <ui:VisualElement style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" />
         <ui:VisualElement name="VE_ChangelogContents" class="package_contents_row" style="flex-direction: column;">
             <ui:ListView focusable="True" name="LV_ChangelogContents" class="listview_text_field">
-                <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_ChangelogContents" class="text_field" style="flex-wrap: wrap; white-space: normal; height: 100px;" />
+                <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_ChangelogContents" multiline="true" class="text_field" style="flex-wrap: wrap; white-space: normal; height: 100px;" />
             </ui:ListView>
         </ui:VisualElement>
     </ui:VisualElement>

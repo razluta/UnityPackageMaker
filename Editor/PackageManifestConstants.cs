@@ -55,5 +55,18 @@ namespace UnityPackageMaker.Editor
         public const string JsonAuthorName = "name";
         public const string JsonAuthorEmail = "email";
         public const string JsonAuthorUrl = "url";
+
+        public const string ReadmeMdFileName = "README.MD";
+        public const string ChangelogMdFileName = "CHANGELOG.MD";
+        public const string LicenseFileName = "LICENSE";
+
+        public const string EditorFolderName = "Editor";
+        public const string RuntimeFolderName = "Runtime";
+        public const string TestsFolderName = "Tests";
+        public const string TestsEditorFolderName = "Editor";
+        public const string TestsRuntimeFolderName = "Runtime";
+        public const string DocumentationFolderName = "Documentation";
+        public const string SamplesFolderName = "Samples";
+        public const string ScreenshotsFolderName = "Screenshots";
     }
 }

@@ -645,11 +645,7 @@ namespace UnityPackageMaker.Editor
             
             // Create Root Folder
             var rootFolderPath = Path.GetFullPath(Path.Combine(parentDirectoryPath, packageManifest.RootFolderName));
-            Directory.CreateDirectory(rootFolderPath);
-            
-            // package.json
-            var packageJsonFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.JsonFileName);
-            if (File.Exists(packageJsonFilePath))
+            if (Directory.Exists(rootFolderPath))
             {
                 var isOverride = EditorUtility.DisplayDialog(OverridePackageTitle, OverridePackageMessage, 
                     OverrideYes,
@@ -659,7 +655,10 @@ namespace UnityPackageMaker.Editor
                     return; 
                 }
             }
+            Directory.CreateDirectory(rootFolderPath);
             
+            // package.json
+            var packageJsonFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.JsonFileName);
             var packageDictionary = new Dictionary<string, object>();
             
             var packageName = 
@@ -703,6 +702,77 @@ namespace UnityPackageMaker.Editor
             packageDictionary[PackageManifestConstants.JsonAuthor] = author;
             
             JsonUtilities.SetData(packageDictionary, packageJsonFilePath);
+            
+            // README.MD
+            if (packageManifest.HasReadme)
+            {
+                var readmeMdFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.ReadmeMdFileName);
+                var readmeWriter = File.CreateText(readmeMdFilePath);
+                readmeWriter.Write(packageManifest.Readme);
+                readmeWriter.Close();
+            }
+
+            // CHANGELOG.MD
+            if (packageManifest.HasChangelog)
+            {
+                var changelogMdFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.ChangelogMdFileName);
+                var changelogWriter = File.CreateText(changelogMdFilePath);
+                changelogWriter.Write(packageManifest.Changelog);
+                changelogWriter.Close();
+            }
+
+            // LICENSE
+            if (packageManifest.HasLicense)
+            {
+                var licenseFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.LicenseFileName);
+                var licenseWriter = File.CreateText(licenseFilePath);
+                licenseWriter.Write(packageManifest.License);
+                licenseWriter.Close();
+            }
+            
+            // Folders
+            if (packageManifest.HasEditorFolder)
+            {
+                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName));
+            }
+            
+            if (packageManifest.HasRuntimeFolder)
+            {
+                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName));
+            }
+            
+            if (packageManifest.HasTestsFolder)
+            {
+                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.TestsFolderName));
+                
+                if (packageManifest.HasTestsEditorFolder)
+                {
+                    Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.TestsEditorFolderName));
+                }
+                
+                if (packageManifest.HasTestsRuntimeFolder)
+                {
+                    Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.TestsRuntimeFolderName));
+                }
+            }
+            
+            if (packageManifest.HasDocumentationFolder)
+            {
+                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.DocumentationFolderName));
+            }
+            
+            if (packageManifest.HasSamplesFolder)
+            {
+                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.SamplesFolderName));
+            }
+            
+            if (packageManifest.HasScreenshotsFolder)
+            {
+                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.ScreenshotsFolderName));
+            }
+
+            // Success prompt
+            EditorUtility.DisplayDialog(SuccessCreatePackageTitle, SuccessCreatePackageMessage, SuccessCreatePackageOk);
         }
     }
 }

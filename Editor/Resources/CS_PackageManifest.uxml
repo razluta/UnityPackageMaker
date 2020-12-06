@@ -46,7 +46,7 @@
                     <ui:Label text="ex: A brief description of the package." class="text_example" style="flex-wrap: wrap; white-space: normal;" />
                 </ui:VisualElement>
                 <ui:ListView focusable="True" name="LV_PackageDescription" class="listview_text_field" style="max-height: 150px; min-height: 150px;">
-                    <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_PackageDescription" class="text_field" style="min-height: auto; height: 200px;" />
+                    <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_PackageDescription" multiline="true" class="text_field" style="min-height: auto; height: 200px; white-space: normal;" />
                 </ui:ListView>
             </ui:VisualElement>
         </ui:VisualElement>
