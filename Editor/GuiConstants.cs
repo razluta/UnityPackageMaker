@@ -28,6 +28,8 @@ namespace UnityPackageMaker.Editor
         public const string LeftPanelName = "VE_PmLeftPanel";
         public const string RightPanelName = "VE_PmRightPanel";
 
+        public const string AllPackagesVisualElementName = "VE_AllPackages";
+        public const string LoadPackageButtonName = "BT_LoadPackage";
         public const string DisplayNameTextFieldName = "TF_PackageDisplayName";
         public const string UseDisplayNameAsRootFolderNameToggleName = "TG_UseDisplayNameAsRootFolderName";
         public const string RootFolderNameContentsVisualElementName =  "VE_RootFolderNameContents";
@@ -35,7 +37,9 @@ namespace UnityPackageMaker.Editor
         public const string ReadmeToggleName = "TG_Readme";
         public const string ReadmeTextFieldName = "TF_ReadmeContents";
         public const string ChangelogToggleName = "TG_Changelog";
+        public const string ChangelogTextFieldName = "TF_ChangelogContents";
         public const string LicenceToggleName = "TG_License";
+        public const string LicenseTextFieldName = "TF_LicenseContents";
         public const string EditorFolderToggleName = "TG_Editor";
         public const string RuntimeFolderToggleName = "TG_Runtime";
         public const string TestsFolderToggleName = "TG_Tests";
@@ -45,8 +49,18 @@ namespace UnityPackageMaker.Editor
         public const string SamplesFolderToggleName = "TG_Samples";
         public const string ScreenshotsFolderToggleName = "TG_Screenshots";
         
-        public const string AllPackagesVisualElementName = "VE_AllPackages";
-        public const string LoadPackageButtonName = "BT_LoadPackage";
+        public const string PackageNameExtensionTextFieldName = "TF_PackageNameExtension";
+        public const string PackageNameCompanyTextFieldName = "TF_PackageNameCompany";
+        public const string PackageNameTextFieldName = "TF_PackageName";
+
+        public const string PackageVersionMajorIntegerFieldName = "IF_PackageVersionMajor";
+        public const string PackageVersionMinorIntegerFieldName = "IF_PackageVersionMinor";
+        public const string PackageVersionPatchIntegerFieldName = "IF_PackageVersionPatch";
+
+        public const string PackageUnityVersionMajorIntegerFieldName = "IF_PackageUnityVersionMajor";
+        public const string PackageUnityVersionMinorIntegerFieldName = "IF_PackageUnityVersionMinor";
+
+        public const string PackageDescriptionTextFieldName = "TF_PackageDescription";
 
         public const string AuthorNameToggleName = "TG_AuthorName";
         public const string AuthorNameTextFieldName = "TF_AuthorName";
@@ -78,6 +92,9 @@ namespace UnityPackageMaker.Editor
         public const string UpdatePackageButtonName = "BT_UpdatePackage";
         public const string CreatePackageButtonName = "BT_CreatePackage";
 
+        public const string LoadPackageWindowTitle = "Browse to the parent folder of the package you would like " +
+                                                     "to load in the tool.";
+        
         public const string CreatePackagesWindowTitle = "Browse to the parent folder where you would like to create " +
                                                         "the package folder.";
 
