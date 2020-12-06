@@ -741,31 +741,46 @@ namespace UnityPackageMaker.Editor
             if (packageManifest.HasRuntimeFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName));
+                File.Create(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName,
+                    PackageManifestConstants.EmptyFileName));
             }
             
             if (packageManifest.HasTestsFolder)
             {
-                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.TestsFolderName));
+                var testsFolderPath = Path.Combine(rootFolderPath, PackageManifestConstants.TestsFolderName);
+                Directory.CreateDirectory(testsFolderPath);
+                File.Create(Path.Combine(testsFolderPath, PackageManifestConstants.EmptyFileName));
                 
                 if (packageManifest.HasTestsEditorFolder)
                 {
-                    Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.TestsEditorFolderName));
+                    var testsEditorFolderPath =
+                        Path.Combine(testsFolderPath, PackageManifestConstants.TestsEditorFolderName);
+                    Directory.CreateDirectory(testsEditorFolderPath);
+                    File.Create(Path.Combine(testsEditorFolderPath, PackageManifestConstants.EmptyFileName));
                 }
                 
                 if (packageManifest.HasTestsRuntimeFolder)
                 {
-                    Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.TestsRuntimeFolderName));
+                    var testsRuntimeFolderPath =
+                        Path.Combine(rootFolderPath, PackageManifestConstants.TestsRuntimeFolderName);
+                    Directory.CreateDirectory(testsRuntimeFolderPath);
+                    File.Create(Path.Combine(testsRuntimeFolderPath, PackageManifestConstants.EmptyFileName));
                 }
             }
             
             if (packageManifest.HasDocumentationFolder)
             {
-                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.DocumentationFolderName));
+                var documentationFolderPath =
+                    Path.Combine(rootFolderPath, PackageManifestConstants.DocumentationFolderName);
+                Directory.CreateDirectory(documentationFolderPath);
+                File.Create(Path.Combine(documentationFolderPath, PackageManifestConstants.EmptyFileName));
             }
             
             if (packageManifest.HasSamplesFolder)
             {
-                Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.SamplesFolderName));
+                var samplesFolderPath = Path.Combine(rootFolderPath, PackageManifestConstants.SamplesFolderName);
+                Directory.CreateDirectory(samplesFolderPath);
+                File.Create(Path.Combine(samplesFolderPath, PackageManifestConstants.EmptyFileName));
             }
             
             if (packageManifest.HasScreenshotsFolder)
