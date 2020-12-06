@@ -40,5 +40,20 @@ namespace UnityPackageMaker.Editor
         public const string ReadmePropName = "readme";
         public const string ChangelogPropName = "changelog";
         public const string LicensePropName = "license";
+        
+        // .json fields
+        public const string JsonFileName = "package.json";
+        public const string JsonName = "name";
+        public const string JsonVersion = "version";
+        public const string JsonDisplayName = "displayName";
+        public const string JsonDescription = "description";
+        public const string JsonUnity = "unity";
+        public const string JsonUnityRelease = "unityRelease";
+        public const string JsonDependencies = "dependencies";
+        public const string JsonKeywords = "keywords";
+        public const string JsonAuthor = "author";
+        public const string JsonAuthorName = "name";
+        public const string JsonAuthorEmail = "email";
+        public const string JsonAuthorUrl = "url";
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityPackageMaker.Editor.SystemUtilities;
 using static UnityPackageMaker.Editor.GuiConstants;
 using Object = UnityEngine.Object;
 
@@ -38,10 +41,10 @@ namespace UnityPackageMaker.Editor
             logoButton.clickable.clicked += () => Application.OpenURL(PackageMakerToolsUrl);
 
             // Load Package Button
-            var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);
-            loadPackageButtonVisualTree.CloneTree(_root);
-            var loadPackageButton = _root.Q<Button>(LoadPackageButtonName);
-            loadPackageButton.clickable.clicked += LoadPackage;
+            // var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);
+            // loadPackageButtonVisualTree.CloneTree(_root);
+            // var loadPackageButton = _root.Q<Button>(LoadPackageButtonName);
+            // loadPackageButton.clickable.clicked += LoadPackage;
 
             // Main Package
             var mainPackageVisualTree = Resources.Load<VisualTreeAsset>(MainPanelUxmlPath);
@@ -219,10 +222,10 @@ namespace UnityPackageMaker.Editor
             // consoleLogVisualTree.CloneTree(_root);
 
             // Update Package Button
-            var updatePackageButtonVisualTree = Resources.Load<VisualTreeAsset>(UpdatePackageButtonUxmlPath);
-            updatePackageButtonVisualTree.CloneTree(_root);
-            var updatePackageButton = _root.Q<Button>(UpdatePackageButtonName);
-            updatePackageButton.SetEnabled(false);
+            // var updatePackageButtonVisualTree = Resources.Load<VisualTreeAsset>(UpdatePackageButtonUxmlPath);
+            // updatePackageButtonVisualTree.CloneTree(_root);
+            // var updatePackageButton = _root.Q<Button>(UpdatePackageButtonName);
+            // updatePackageButton.SetEnabled(false);
 
             // Create Package Button
             var createPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(CreatePackageButtonUxmlPath);
@@ -626,15 +629,12 @@ namespace UnityPackageMaker.Editor
 
         private void TryCreateNewUnityPackage(PackageManifest packageManifest)
         {
-            
-            Debug.Log(packageManifest.AuthorName);
-            
-            return;
             // Validate
-            if (!packageManifest.IsValidPackageManifest())
-            {
-                return;
-            }
+            // if (!packageManifest.IsValidPackageManifest())
+            // {
+            //     EditorUtility.DisplayDialog(InvalidPackageErrorTitle, InvalidPackageErrorMessage, InvalidPackageOk);
+            //     return;
+            // }
             
             // Get path
             var parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
@@ -642,6 +642,67 @@ namespace UnityPackageMaker.Editor
             {
                 return;
             }
+            
+            // Create Root Folder
+            var rootFolderPath = Path.GetFullPath(Path.Combine(parentDirectoryPath, packageManifest.RootFolderName));
+            Directory.CreateDirectory(rootFolderPath);
+            
+            // package.json
+            var packageJsonFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.JsonFileName);
+            if (File.Exists(packageJsonFilePath))
+            {
+                var isOverride = EditorUtility.DisplayDialog(OverridePackageTitle, OverridePackageMessage, 
+                    OverrideYes,
+                    OverrideCancel);
+                if (!isOverride)
+                {
+                    return; 
+                }
+            }
+            
+            var packageDictionary = new Dictionary<string, object>();
+            
+            var packageName = 
+                packageManifest.NameExtension + Period + 
+                packageManifest.NameCompany + Period + 
+                packageManifest.NamePackage;
+            packageDictionary[PackageManifestConstants.JsonName] = packageName;
+
+            var packageVersion =
+                packageManifest.VersionMajor.ToString() + Period +
+                packageManifest.VersionMinor.ToString() + Period +
+                packageManifest.VersionPatch.ToString();
+            packageDictionary[PackageManifestConstants.JsonVersion] = packageVersion;
+
+            var packageDisplayName = packageManifest.DisplayName;
+            packageDictionary[PackageManifestConstants.JsonDisplayName] = packageDisplayName;
+
+            var packageDescription = packageManifest.Description;
+            packageDictionary[PackageManifestConstants.JsonDescription] = packageDescription;
+
+            var packageUnity =
+                packageManifest.UnityVersionMajor.ToString() + Period +
+                packageManifest.UnityVersionMinor.ToString();
+            packageDictionary[PackageManifestConstants.JsonUnity] = packageUnity;
+
+            var packageUnityRelease = packageManifest.UnityRelease;
+            packageDictionary[PackageManifestConstants.JsonUnityRelease] = packageUnityRelease;
+
+            var dependencies = packageManifest.Dependencies;
+            packageDictionary[PackageManifestConstants.JsonDependencies] = dependencies;
+
+            var keywords = packageManifest.Keywords;
+            packageDictionary[PackageManifestConstants.JsonKeywords] = keywords;
+
+            var author = new Dictionary<string, string>
+            {
+                [PackageManifestConstants.JsonAuthorName] = packageManifest.AuthorName,
+                [PackageManifestConstants.JsonAuthorEmail] = packageManifest.AuthorEmail,
+                [PackageManifestConstants.JsonAuthorUrl] = packageManifest.AuthorUrl
+            };
+            packageDictionary[PackageManifestConstants.JsonAuthor] = author;
+            
+            JsonUtilities.SetData(packageDictionary, packageJsonFilePath);
         }
     }
 }

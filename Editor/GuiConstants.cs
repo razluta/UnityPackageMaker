@@ -98,6 +98,17 @@ namespace UnityPackageMaker.Editor
         public const string CreatePackagesWindowTitle = "Browse to the parent folder where you would like to create " +
                                                         "the package folder.";
 
+        public const string InvalidPackageErrorTitle = "Invalid Package";
+        public const string InvalidPackageErrorMessage = "One or more felds in the Package are invalid, please fix.";
+        public const string InvalidPackageOk = "OK";
+        public const string Period = ".";
+
+        public const string OverridePackageTitle = "Override Package?";
+        public const string OverridePackageMessage =
+            "The package.json already exists at the path, do you want to override it?";
+        public const string OverrideYes = "Yes";
+        public const string OverrideCancel = "Cancel";
+
         public static readonly Color NormalLogTextColor = new Color(1, 1, 1);
         public const string ErrorTextTitle = "Error: ";
         public static readonly Color ErrorTextColor = new Color(1, 0, 0);
@@ -108,5 +119,7 @@ namespace UnityPackageMaker.Editor
         public const string SuccessTextTitle = "Success: ";
         public static readonly Color SuccessTextColor = new Color(0, 1, 0);
         public const string SuccessIconPath = "ConsoleInfoIcon.png";
+        
+        
     }
 }
