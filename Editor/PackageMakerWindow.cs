@@ -584,10 +584,12 @@ namespace UnityPackageMaker.Editor
             });
             
             // Update Package Button
-            // updatePackageButton.clickable.clicked += () => null;
+            updatePackageButton.clickable.clicked += () => 
+                TryCreateNewUnityPackage(_packageManifest, _packageManifest.PackageAbsolutePath);
             
             // Create Package Button
-            createPackageButton.clickable.clicked += () => TryCreateNewUnityPackage(_packageManifest);
+            createPackageButton.clickable.clicked += () => 
+                TryCreateNewUnityPackage(_packageManifest);
             #endregion
         }
 
@@ -599,6 +601,7 @@ namespace UnityPackageMaker.Editor
             {
                 return;
             }
+            _packageManifest.PackageAbsolutePath = parentDirectoryPath;
             
             // package.json
             #region package.json

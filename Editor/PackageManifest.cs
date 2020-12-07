@@ -8,6 +8,7 @@ namespace UnityPackageMaker.Editor
     public class PackageManifest : ScriptableObject
     {
         #region PRIVATE FIELDS
+        [SerializeField] private string packageAbsolutePath;
         [SerializeField] private string displayName;
         [SerializeField] private bool isUseDisplayNameAsRootFolderName;
         [SerializeField] private string rootFolderName;
@@ -49,6 +50,12 @@ namespace UnityPackageMaker.Editor
         #endregion
         
         #region PUBLIC PROPERTIES
+        public string PackageAbsolutePath
+        {
+            get => packageAbsolutePath;
+            set => packageAbsolutePath = value;
+        }
+
         public string DisplayName 
         {
             get => displayName;
