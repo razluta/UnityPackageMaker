@@ -4,9 +4,6 @@
 	"displayName": "Package Maker",
 	"description": "A Unity Package for making the base setup for a new Unity Package compatible with the Unity Package Manager.",
 	"unity": "2019.3",
-	"unityRelease": "",
-	"dependencies": {},
-	"keywords": [],
 	"author": {
 		"name": "Razvan Luta",
 		"email": "contact@razluta.com",
