@@ -560,7 +560,17 @@ namespace UnityPackageMaker.Editor
             });
 
             // Root Folder Name
-            
+            // The user can't change the folder name in the Update Mode - they have to click Create New instead.
+            rootFolderNameTextField.RegisterValueChangedCallback(evt =>
+            {
+                if (!Directory.Exists(_packageManifest.PackageAbsolutePath))
+                {
+                    return;
+                }
+                
+                var directoryName = new DirectoryInfo(_packageManifest.PackageAbsolutePath).Name;
+                updatePackageButton.SetEnabled(rootFolderNameTextField.value == directoryName);
+            });
             
             // Readme
             readmeVisualElement.SetEnabled(readmeToggle.value);
