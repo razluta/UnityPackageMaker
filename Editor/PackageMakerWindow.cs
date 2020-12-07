@@ -221,6 +221,11 @@ namespace UnityPackageMaker.Editor
             // var consoleLogVisualTree = Resources.Load<VisualTreeAsset>(ConsoleLogUxmlPath);
             // consoleLogVisualTree.CloneTree(_root);
 
+            // Clear All Button
+            var clearAllButtonVisualTree = Resources.Load<VisualTreeAsset>(ClearALlButtonUxmlPath);
+            clearAllButtonVisualTree.CloneTree(_root);
+            var clearAllButton = _root.Q<Button>(ClearAllButtonName);
+            
             // Update Package Button
             var updatePackageButtonVisualTree = Resources.Load<VisualTreeAsset>(UpdatePackageButtonUxmlPath);
             updatePackageButtonVisualTree.CloneTree(_root);
@@ -592,6 +597,9 @@ namespace UnityPackageMaker.Editor
             {
                 licenseVisualElement.SetEnabled(licenseToggle.value);
             });
+            
+            // Clear All Button
+            clearAllButton.clickable.clicked += _packageManifest.ResetToDefault;
             
             // Update Package Button
             updatePackageButton.clickable.clicked += () => 

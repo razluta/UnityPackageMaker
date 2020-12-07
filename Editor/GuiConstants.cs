@@ -21,6 +21,7 @@ namespace UnityPackageMaker.Editor
         public const string LicenseUxmlPath = "CS_License";
         public const string ConsoleLogUxmlPath = "CS_ConsoleLog";
 
+        public const string ClearALlButtonUxmlPath = "BT_ClearAll";
         public const string UpdatePackageButtonUxmlPath = "BT_UpdatePackage";
         public const string CreatePackageButtonUxmlPath = "BT_CreatePackage";
 
@@ -89,6 +90,7 @@ namespace UnityPackageMaker.Editor
         public const string KeywordEntryNameTextFieldName = "TF_KeywordsEntryName";
         public const string RemoveKeywordButtonName = "BT_KeywordsEntryRemove";
 
+        public const string ClearAllButtonName = "BT_ClearAll";
         public const string UpdatePackageButtonName = "BT_UpdatePackage";
         public const string CreatePackageButtonName = "BT_CreatePackage";
 
