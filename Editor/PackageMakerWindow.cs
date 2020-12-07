@@ -41,10 +41,9 @@ namespace UnityPackageMaker.Editor
             logoButton.clickable.clicked += () => Application.OpenURL(PackageMakerToolsUrl);
 
             // Load Package Button
-            // var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);
-            // loadPackageButtonVisualTree.CloneTree(_root);
-            // var loadPackageButton = _root.Q<Button>(LoadPackageButtonName);
-            // loadPackageButton.clickable.clicked += LoadPackage;
+            var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);
+            loadPackageButtonVisualTree.CloneTree(_root);
+            var loadPackageButton = _root.Q<Button>(LoadPackageButtonName);
 
             // Main Package
             var mainPackageVisualTree = Resources.Load<VisualTreeAsset>(MainPanelUxmlPath);
@@ -503,6 +502,9 @@ namespace UnityPackageMaker.Editor
             #endregion
 
             #region BEHAVIOR
+            // Load Button
+            loadPackageButton.clickable.clicked += LoadPackage;
+            
             // Tests Folder
             testsFolderToggle.RegisterValueChangedCallback(evt =>
             {
@@ -593,6 +595,72 @@ namespace UnityPackageMaker.Editor
             {
                 return;
             }
+            
+            // package.json
+            #region package.json
+            // Package Reading
+            var packageJsonPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.JsonFileName);
+            Debug.Log("package path: " + packageJsonPath);
+
+            if (!File.Exists(packageJsonPath))
+            {
+                EditorUtility.DisplayDialog(NoPackageManifestTitle, NoPackageManifestMessage, NoPackageManifestOk);
+                return;
+            }
+            
+            var dictionary = JsonUtilities.GetData(packageJsonPath);
+            if (dictionary == null)
+            {
+                return;
+            }
+
+            // Display Name
+
+            // Root Folder Name
+
+            // Name
+
+            // Version
+
+            // Unity Version
+
+            // Description
+
+            // Author Name
+
+            // Author Email
+
+            // Author Url
+
+            // Unity Release
+
+            // Dependencies
+
+            // Keywords
+
+            #endregion
+
+            // README.MD
+
+            // CHANGELOG.MD
+
+            // LICENSE
+
+            // Editor Folder
+
+            // Runtime Folder
+
+            // Tests Folder
+
+            // Tests Editor Folder
+
+            // Tests Runtime Folder
+
+            // Documentation Folder
+
+            // Samples Folder
+
+            // Screenshots Folder
         }
 
         private static void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)

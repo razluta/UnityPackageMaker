@@ -98,6 +98,11 @@ namespace UnityPackageMaker.Editor
         public const string CreatePackagesWindowTitle = "Browse to the parent folder where you would like to create " +
                                                         "the package folder.";
 
+        public const string NoPackageManifestTitle = "No Package found";
+        public const string NoPackageManifestMessage = "The selected folder does not contain a package manifest " +
+                                                       "(package.json) and is hence invalid!";
+        public const string NoPackageManifestOk = "OK";
+        
         public const string InvalidPackageErrorTitle = "Invalid Package";
         public const string InvalidPackageErrorMessage = "One or more felds in the Package are invalid, please check " +
                                                          "the log and fix them.";
