@@ -715,8 +715,18 @@ namespace UnityPackageMaker.Editor
             if (dictionary.ContainsKey(PackageManifestConstants.JsonAuthor))
             {
                 var authorContents = dictionary[PackageManifestConstants.JsonAuthor];
-                var serializedAuthorContents = JsonConvert.SerializeObject(authorContents);
-                var authorDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(serializedAuthorContents);
+
+                var authorDictionary = new Dictionary<string, string>();
+                try
+                {
+                    var serializedAuthorContents = JsonConvert.SerializeObject(authorContents);
+                    authorDictionary =
+                        JsonConvert.DeserializeObject<Dictionary<string, string>>(serializedAuthorContents);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                }
 
                 if (authorDictionary != null)
                 {
