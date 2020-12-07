@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -600,7 +601,6 @@ namespace UnityPackageMaker.Editor
             #region package.json
             // Package Reading
             var packageJsonPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.JsonFileName);
-            Debug.Log("package path: " + packageJsonPath);
 
             if (!File.Exists(packageJsonPath))
             {
@@ -615,38 +615,196 @@ namespace UnityPackageMaker.Editor
             }
 
             // Display Name
+            var displayName = string.Empty;
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonDisplayName))
+            {
+                displayName = (string) dictionary[PackageManifestConstants.JsonDisplayName];
+            }
+            _packageManifest.DisplayName = displayName;
 
             // Root Folder Name
+            var rootFolderName = new DirectoryInfo(parentDirectoryPath).Name;
+            _packageManifest.RootFolderName = rootFolderName;
+            _packageManifest.IsUseDisplayNameAsRootFolderName = displayName == rootFolderName;
 
             // Name
+            var fullName = string.Empty;
+            var nameExtension = string.Empty;
+            var nameCompany = string.Empty;
+            var namePackage = string.Empty;
+            
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonName))
+            {
+                fullName = (string) dictionary[PackageManifestConstants.JsonName];
+            }
+            
+            if (!string.IsNullOrWhiteSpace(fullName))
+            {
+                var namePieces = fullName.Split(Period);
+                
+                // TODO: Validate contents
+                
+                nameExtension = namePieces[0];
+                nameCompany = namePieces[1];
+                namePackage = namePieces[2];
+            }
+
+            _packageManifest.NameExtension = nameExtension;
+            _packageManifest.NameCompany = nameCompany;
+            _packageManifest.NamePackage = namePackage;
 
             // Version
+            var fullVersion = string.Empty;
+            var versionMajor = string.Empty;
+            var versionMinor = string.Empty;
+            var versionPatch = string.Empty;
+
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonVersion))
+            {
+                fullVersion = (string) dictionary[PackageManifestConstants.JsonVersion];
+            }
+
+            if (!string.IsNullOrWhiteSpace(fullVersion))
+            {
+                var versionPieces = fullVersion.Split(Period);
+                
+                // TODO: Validate contents
+
+                versionMajor = versionPieces[0];
+                versionMinor = versionPieces[1];
+                versionPatch = versionPieces[2];
+            }
+
+            _packageManifest.VersionMajor = int.Parse(versionMajor);
+            _packageManifest.VersionMinor = int.Parse(versionMinor);
+            _packageManifest.VersionPatch = int.Parse(versionPatch);
 
             // Unity Version
+            var fullUnityVersion = string.Empty;
+            var unityVersionMajor = string.Empty;
+            var unityVersionMinor = string.Empty;
+
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonUnity))
+            {
+                fullUnityVersion = (string) dictionary[PackageManifestConstants.JsonUnity];
+            }
+            
+            if (!string.IsNullOrWhiteSpace(fullUnityVersion))
+            {
+                var unityVersionPieces = fullUnityVersion.Split(Period);
+                
+                // TODO: Validate contents
+
+                unityVersionMajor = unityVersionPieces[0];
+                unityVersionMinor = unityVersionPieces[1];
+            }
+
+            _packageManifest.UnityVersionMajor = int.Parse(unityVersionMajor);
+            _packageManifest.UnityVersionMinor = int.Parse(unityVersionMinor);
 
             // Description
+            var description = string.Empty;
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonDescription))
+            {
+                description = (string) dictionary[PackageManifestConstants.JsonDescription];
+            }
 
-            // Author Name
+            _packageManifest.Description = description;
 
-            // Author Email
+            // Author
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonAuthor))
+            {
+                var authorContents = dictionary[PackageManifestConstants.JsonAuthor];
+                var serializedAuthorContents = JsonConvert.SerializeObject(authorContents);
+                var authorDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(serializedAuthorContents);
 
-            // Author Url
+                if (authorDictionary != null)
+                {
+                    // Author Name
+                    if (authorDictionary.ContainsKey(PackageManifestConstants.JsonAuthorName))
+                    {
+                        var authorName = authorDictionary[PackageManifestConstants.JsonAuthorName];
+                        _packageManifest.HasAuthorName = true;
+                        _packageManifest.AuthorName = authorName;
+                    }
+                    
+                    // Author Email
+                    if (authorDictionary.ContainsKey(PackageManifestConstants.JsonAuthorEmail))
+                    {
+                        var authorEmail = authorDictionary[PackageManifestConstants.JsonAuthorEmail];
+                        _packageManifest.HasAuthorEmail = true;
+                        _packageManifest.AuthorEmail = authorEmail;
+                    }
+                    
+                    // Author Url
+                    if (authorDictionary.ContainsKey(PackageManifestConstants.JsonAuthorUrl))
+                    {
+                        var authorUrl = authorDictionary[PackageManifestConstants.JsonAuthorUrl];
+                        _packageManifest.HasAuthorUrl = true;
+                        _packageManifest.AuthorUrl = authorUrl;
+                    }
+                }
+            }
 
             // Unity Release
-
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonUnityRelease))
+            {
+                var unityRelease = (string) dictionary[PackageManifestConstants.JsonUnityRelease];
+                _packageManifest.HasUnityRelease = true;
+                _packageManifest.UnityRelease = unityRelease;
+            }
+            
             // Dependencies
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonDependencies))
+            {
+                // var dependencies = (PackageDependency) dictionary[PackageManifestConstants.JsonDependencies];
+                _packageManifest.HasDependencies = true;
+                // TODO: Figure out dependencies de-serialization after the serialization part is done.
+                //_packageManifest.Dependencies = dependencies;
+            }
 
             // Keywords
-
+            if (dictionary.ContainsKey(PackageManifestConstants.JsonKeywords))
+            {
+                // var keywords = ...
+                _packageManifest.HasKeywords = true;
+                // TODO: Figure out keywords de-serialization after the serialization part is done
+                //_packageManifest.Keywords = keywords;
+            }
             #endregion
 
             // README.MD
+            var readmeMdPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.ReadmeMdFileName);
+            if (File.Exists(readmeMdPath))
+            {
+                var streamReader = new StreamReader(readmeMdPath);
+                var readme = streamReader.ReadToEnd();
+                _packageManifest.HasReadme = true;
+                _packageManifest.Readme = readme;
+            }
 
             // CHANGELOG.MD
+            var changelogMdPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.ChangelogMdFileName);
+            if (File.Exists(changelogMdPath))
+            {
+                var streamReader = new StreamReader(changelogMdPath);
+                var changelog = streamReader.ReadToEnd();
+                _packageManifest.HasChangelog = true;
+                _packageManifest.Changelog = changelog;
+            }
 
             // LICENSE
+            var licensePath = Path.Combine(parentDirectoryPath, PackageManifestConstants.LicenseFileName);
+            if (File.Exists(licensePath))
+            {
+                var streamReader = new StreamReader(licensePath);
+                var license = streamReader.ReadToEnd();
+                _packageManifest.HasLicense = true;
+                _packageManifest.License = license;
+            }
 
             // Editor Folder
+            
 
             // Runtime Folder
 

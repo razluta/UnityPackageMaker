@@ -107,7 +107,7 @@ namespace UnityPackageMaker.Editor
         public const string InvalidPackageErrorMessage = "One or more felds in the Package are invalid, please check " +
                                                          "the log and fix them.";
         public const string InvalidPackageOk = "OK";
-        public const string Period = ".";
+        public const char Period = '.';
 
         public const string OverridePackageTitle = "Override Package?";
         public const string OverridePackageMessage =
