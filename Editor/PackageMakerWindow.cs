@@ -605,6 +605,9 @@ namespace UnityPackageMaker.Editor
 
         private void LoadPackage(Button updatePackageButton)
         {
+            // Clear the package manifest
+            _packageManifest.ResetToDefault();
+            
             // Get path
             var parentDirectoryPath = EditorUtility.OpenFolderPanel(LoadPackageWindowTitle, "", "");
             if(String.IsNullOrWhiteSpace(parentDirectoryPath))
