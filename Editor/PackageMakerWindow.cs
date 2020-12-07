@@ -906,7 +906,7 @@ namespace UnityPackageMaker.Editor
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
 
-        private static void TryCreateNewUnityPackage(PackageManifest packageManifest, string parentDirectoryPath="")
+        private static void TryCreateNewUnityPackage(PackageManifest packageManifest, string rootFolderPath="")
         {
             // Validate
             if (!packageManifest.IsValidPackageManifest())
@@ -916,29 +916,29 @@ namespace UnityPackageMaker.Editor
             }
 
             // Get path if it doesn't exists
-            if (string.IsNullOrWhiteSpace(parentDirectoryPath))
+            if (string.IsNullOrWhiteSpace(rootFolderPath))
             {
-                parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
+                var parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
                 if(String.IsNullOrWhiteSpace(parentDirectoryPath))
                 {
                     return;
                 }
+                
+                // Create Root Folder
+                rootFolderPath = Path.GetFullPath(Path.Combine(parentDirectoryPath, packageManifest.RootFolderName));
+                if (Directory.Exists(rootFolderPath))
+                {
+                    var isOverride = EditorUtility.DisplayDialog(OverridePackageTitle, OverridePackageMessage, 
+                        OverrideYes,
+                        OverrideCancel);
+                    if (!isOverride)
+                    {
+                        return; 
+                    }
+                }
+                Directory.CreateDirectory(rootFolderPath);
             }
 
-            // Create Root Folder
-            var rootFolderPath = Path.GetFullPath(Path.Combine(parentDirectoryPath, packageManifest.RootFolderName));
-            if (Directory.Exists(rootFolderPath))
-            {
-                var isOverride = EditorUtility.DisplayDialog(OverridePackageTitle, OverridePackageMessage, 
-                    OverrideYes,
-                    OverrideCancel);
-                if (!isOverride)
-                {
-                    return; 
-                }
-            }
-            Directory.CreateDirectory(rootFolderPath);
-            
             // package.json
             var packageJsonFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.JsonFileName);
             var packageDictionary = new Dictionary<string, object>();
