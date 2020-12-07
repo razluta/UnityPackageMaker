@@ -56,8 +56,8 @@ namespace UnityPackageMaker.Editor
         public const string JsonAuthorEmail = "email";
         public const string JsonAuthorUrl = "url";
 
-        public const string ReadmeMdFileName = "README.MD";
-        public const string ChangelogMdFileName = "CHANGELOG.MD";
+        public const string ReadmeMdFileName = "README.md";
+        public const string ChangelogMdFileName = "CHANGELOG.md";
         public const string LicenseFileName = "LICENSE";
         public const string EmptyFileName = ".gitnull";
 
