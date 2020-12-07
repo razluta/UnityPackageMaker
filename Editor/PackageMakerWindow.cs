@@ -222,10 +222,10 @@ namespace UnityPackageMaker.Editor
             // consoleLogVisualTree.CloneTree(_root);
 
             // Update Package Button
-            // var updatePackageButtonVisualTree = Resources.Load<VisualTreeAsset>(UpdatePackageButtonUxmlPath);
-            // updatePackageButtonVisualTree.CloneTree(_root);
-            // var updatePackageButton = _root.Q<Button>(UpdatePackageButtonName);
-            // updatePackageButton.SetEnabled(false);
+            var updatePackageButtonVisualTree = Resources.Load<VisualTreeAsset>(UpdatePackageButtonUxmlPath);
+            updatePackageButtonVisualTree.CloneTree(_root);
+            var updatePackageButton = _root.Q<Button>(UpdatePackageButtonName);
+            updatePackageButton.SetEnabled(false);
 
             // Create Package Button
             var createPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(CreatePackageButtonUxmlPath);
@@ -504,7 +504,7 @@ namespace UnityPackageMaker.Editor
 
             #region BEHAVIOR
             // Load Button
-            loadPackageButton.clickable.clicked += LoadPackage;
+            loadPackageButton.clickable.clicked += () => LoadPackage(updatePackageButton);
             
             // Tests Folder
             testsFolderToggle.RegisterValueChangedCallback(evt =>
@@ -583,12 +583,15 @@ namespace UnityPackageMaker.Editor
                 licenseVisualElement.SetEnabled(licenseToggle.value);
             });
             
+            // Update Package Button
+            // updatePackageButton.clickable.clicked += () => null;
+            
             // Create Package Button
             createPackageButton.clickable.clicked += () => TryCreateNewUnityPackage(_packageManifest);
             #endregion
         }
 
-        private void LoadPackage()
+        private void LoadPackage(Button updatePackageButton)
         {
             // Get path
             var parentDirectoryPath = EditorUtility.OpenFolderPanel(LoadPackageWindowTitle, "", "");
@@ -863,6 +866,9 @@ namespace UnityPackageMaker.Editor
             var screenshotsFolderPath =
                 Path.Combine(parentDirectoryPath, PackageManifestConstants.ScreenshotsFolderName);
             _packageManifest.HasScreenshotsFolder = Directory.Exists(screenshotsFolderPath);
+            
+            // Enable Update Button
+            updatePackageButton.SetEnabled(true);
         }
 
         private static void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
@@ -897,7 +903,7 @@ namespace UnityPackageMaker.Editor
             removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
         }
 
-        private static void TryCreateNewUnityPackage(PackageManifest packageManifest)
+        private static void TryCreateNewUnityPackage(PackageManifest packageManifest, string parentDirectoryPath="")
         {
             // Validate
             if (!packageManifest.IsValidPackageManifest())
@@ -905,14 +911,17 @@ namespace UnityPackageMaker.Editor
                 EditorUtility.DisplayDialog(InvalidPackageErrorTitle, InvalidPackageErrorMessage, InvalidPackageOk);
                 return;
             }
-            
-            // Get path
-            var parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
-            if(String.IsNullOrWhiteSpace(parentDirectoryPath))
+
+            // Get path if it doesn't exists
+            if (string.IsNullOrWhiteSpace(parentDirectoryPath))
             {
-                return;
+                parentDirectoryPath = EditorUtility.OpenFolderPanel(CreatePackagesWindowTitle, "", "");
+                if(String.IsNullOrWhiteSpace(parentDirectoryPath))
+                {
+                    return;
+                }
             }
-            
+
             // Create Root Folder
             var rootFolderPath = Path.GetFullPath(Path.Combine(parentDirectoryPath, packageManifest.RootFolderName));
             if (Directory.Exists(rootFolderPath))
