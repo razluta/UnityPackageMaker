@@ -14,7 +14,7 @@ namespace UnityPackageMaker.Editor
 {
     public class PackageMakerWindow : EditorWindow
     {
-        private static readonly Vector2 PackageMakerWindowSize = new Vector2(900, 900);
+        private static readonly Vector2 PackageMakerWindowSize = new Vector2(1400, 900);
 
         private VisualElement _root;
         private ScrollView _contentsView;
@@ -50,6 +50,7 @@ namespace UnityPackageMaker.Editor
             var mainPackageVisualTree = Resources.Load<VisualTreeAsset>(MainPanelUxmlPath);
             mainPackageVisualTree.CloneTree(_root);
             var leftPanel = _root.Q<VisualElement>(LeftPanelName);
+            var centerPanel = _root.Q<VisualElement>(CenterPanelName);
             var rightPanel = _root.Q<VisualElement>(RightPanelName);
 
             // Included Package Contents
@@ -196,26 +197,29 @@ namespace UnityPackageMaker.Editor
             var readmeVisualTree = Resources.Load<VisualTreeAsset>(ReadmeUxmlPath);
             var readmeVisualElement = new VisualElement();
             readmeVisualTree.CloneTree(readmeVisualElement);
-            _contentsView.Add(readmeVisualElement);
+            readmeVisualElement.style.flexGrow = 1;
+            rightPanel.Add(readmeVisualElement);
             var readmeTextField = readmeVisualElement.Q<TextField>(ReadmeTextFieldName);
 
             // Changelog
             var changelogVisualTree = Resources.Load<VisualTreeAsset>(ChangelogUxmlPath);
             var changelogVisualElement = new VisualElement();
             changelogVisualTree.CloneTree(changelogVisualElement);
-            _contentsView.Add(changelogVisualElement);
+            changelogVisualElement.style.flexGrow = 1;
+            rightPanel.Add(changelogVisualElement);
             var changelogTextField = changelogVisualElement.Q<TextField>(ChangelogTextFieldName);
 
             // License
             var licenseVisualTree = Resources.Load<VisualTreeAsset>(LicenseUxmlPath);
             var licenseVisualElement = new VisualElement();
             licenseVisualTree.CloneTree(licenseVisualElement);
-            _contentsView.Add(licenseVisualElement);
+            licenseVisualElement.style.flexGrow = 1;
+            rightPanel.Add(licenseVisualElement);
             var licenseTextField = licenseVisualElement.Q<TextField>(LicenseTextFieldName);
 
             // Add contents to root
             _contentsView.style.flexGrow = 1.0f;
-            rightPanel.Add(_contentsView);
+            centerPanel.Add(_contentsView);
 
             // Add console to root
             // var consoleLogVisualTree = Resources.Load<VisualTreeAsset>(ConsoleLogUxmlPath);

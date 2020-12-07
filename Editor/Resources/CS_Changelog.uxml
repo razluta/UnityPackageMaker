@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="VE_Changelog" class="property_box">
+    <ui:VisualElement name="VE_Changelog" class="property_box" style="flex-grow: 1;">
         <Style src="PackageMaker.uss" />
         <ui:Label text="&apos;CHANGELOG.md&apos; Contents" name="LB_ChangelogContents" class="section_title" />
         <ui:ListView focusable="True" name="LV_ChangelogExample" class="listview_text_field">

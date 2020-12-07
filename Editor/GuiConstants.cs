@@ -27,6 +27,7 @@ namespace UnityPackageMaker.Editor
 
         public const string PackMakButtonName = "BT_Logo";
         public const string LeftPanelName = "VE_PmLeftPanel";
+        public const string CenterPanelName = "VE_PmCenterPanel";
         public const string RightPanelName = "VE_PmRightPanel";
 
         public const string AllPackagesVisualElementName = "VE_AllPackages";
