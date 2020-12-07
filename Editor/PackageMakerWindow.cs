@@ -782,6 +782,10 @@ namespace UnityPackageMaker.Editor
                 _packageManifest.HasReadme = true;
                 _packageManifest.Readme = readme;
             }
+            else
+            {
+                _packageManifest.HasReadme = false;
+            }
 
             // CHANGELOG.MD
             var changelogMdPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.ChangelogMdFileName);
@@ -791,6 +795,10 @@ namespace UnityPackageMaker.Editor
                 var changelog = streamReader.ReadToEnd();
                 _packageManifest.HasChangelog = true;
                 _packageManifest.Changelog = changelog;
+            }
+            else
+            {
+                _packageManifest.HasChangelog = false;
             }
 
             // LICENSE
@@ -802,23 +810,49 @@ namespace UnityPackageMaker.Editor
                 _packageManifest.HasLicense = true;
                 _packageManifest.License = license;
             }
+            else
+            {
+                _packageManifest.HasLicense = false;
+            }
 
             // Editor Folder
-            
+            var editorFolderPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.EditorFolderName);
+            _packageManifest.HasEditorFolder = Directory.Exists(editorFolderPath);
 
             // Runtime Folder
+            var runtimeFolderPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.RuntimeFolderName);
+            _packageManifest.HasRuntimeFolder = Directory.Exists(runtimeFolderPath);
 
             // Tests Folder
+            var testsFolderPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.TestsFolderName);
+            if (Directory.Exists(testsFolderPath))
+            {
+                _packageManifest.HasTestsFolder = true;
+                
+                // Tests Editor Folder
+                var testsEditorFolderPath =
+                    Path.Combine(testsFolderPath, PackageManifestConstants.TestsEditorFolderName);
+                _packageManifest.HasTestsEditorFolder = Directory.Exists(testsEditorFolderPath);
 
-            // Tests Editor Folder
-
-            // Tests Runtime Folder
-
+                // Tests Runtime Folder
+                var testsRuntimeFolderPath =
+                    Path.Combine(testsFolderPath, PackageManifestConstants.TestsRuntimeFolderName);
+                _packageManifest.HasTestsRuntimeFolder = Directory.Exists(testsRuntimeFolderPath);
+            }
+            
             // Documentation Folder
+            var documentationFolderPath =
+                Path.Combine(parentDirectoryPath, PackageManifestConstants.DocumentationFolderName);
+            _packageManifest.HasDocumentationFolder = Directory.Exists(documentationFolderPath);
 
             // Samples Folder
+            var samplesFolderPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.SamplesFolderName);
+            _packageManifest.HasSamplesFolder = Directory.Exists(samplesFolderPath);
 
             // Screenshots Folder
+            var screenshotsFolderPath =
+                Path.Combine(parentDirectoryPath, PackageManifestConstants.ScreenshotsFolderName);
+            _packageManifest.HasScreenshotsFolder = Directory.Exists(screenshotsFolderPath);
         }
 
         private static void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
