@@ -907,7 +907,7 @@ namespace UnityPackageMaker.Editor
                 Path.Combine(parentDirectoryPath, PackageManifestConstants.ThirdPartyNoticesFileName);
             if (File.Exists(thirdPartyNoticesPath))
             {
-                var streamReader = new StreamReader(licensePath);
+                var streamReader = new StreamReader(thirdPartyNoticesPath);
                 var thirdPartyNotices = streamReader.ReadToEnd();
                 _packageManifest.HasThirdPartyNotices = true;
                 _packageManifest.ThirdPartyNotices = thirdPartyNotices;
