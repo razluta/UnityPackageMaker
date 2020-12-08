@@ -15,6 +15,7 @@ namespace UnityPackageMaker.Editor
         [SerializeField] private bool hasReadme;
         [SerializeField] private bool hasChangelog;
         [SerializeField] private bool hasLicense;
+        [SerializeField] private bool hasThirdPartyNotices;
         [SerializeField] private bool hasEditorFolder;
         [SerializeField] private bool hasRuntimeFolder;
         [SerializeField] private bool hasTestsFolder;
@@ -47,6 +48,7 @@ namespace UnityPackageMaker.Editor
         [SerializeField] private string readme;
         [SerializeField] private string changelog;
         [SerializeField] private string license;
+        [SerializeField] private string thirdPartyNotices;
         #endregion
         
         #region PUBLIC PROPERTIES
@@ -91,7 +93,13 @@ namespace UnityPackageMaker.Editor
             get => hasLicense;
             set => hasLicense = value;
         }
-        
+
+        public bool HasThirdPartyNotices
+        {
+            get => hasThirdPartyNotices;
+            set => hasThirdPartyNotices = value;
+        }
+
         public bool HasEditorFolder
         {
             get => hasEditorFolder;
@@ -283,6 +291,12 @@ namespace UnityPackageMaker.Editor
             get => license;
             set => license = value;
         }
+        
+        public string ThirdPartyNotices
+        {
+            get => thirdPartyNotices;
+            set => thirdPartyNotices = value;
+        }
         #endregion
 
         // Private Defaults
@@ -292,6 +306,7 @@ namespace UnityPackageMaker.Editor
         private const bool HasReadmeDefault = false;
         private const bool HasChangelogDefault = false;
         private const bool HasLicenseDefault = false;
+        private const bool HasThirdPartyNoticesDefault = false;
         private const bool HasEditorFolderDefault = false;
         private const bool HasRuntimeFolderDefault = false;
         private const bool HasTestsFolderDefault = false;
@@ -327,6 +342,7 @@ namespace UnityPackageMaker.Editor
         private const string ReadmeDefault = "";
         private const string ChangelogDefault = "";
         private const string LicenseDefault = "";
+        private const string ThirdPartyNoticesDefault = "";
 
         // Validation Defaults
         private const int MinimumUnityVersionMajor = 2017;
@@ -345,6 +361,7 @@ namespace UnityPackageMaker.Editor
             HasReadme = HasReadmeDefault;
             HasChangelog = HasChangelogDefault;
             HasLicense = HasLicenseDefault;
+            HasThirdPartyNotices = HasThirdPartyNoticesDefault;
             HasEditorFolder = HasEditorFolderDefault;
             HasRuntimeFolder = HasRuntimeFolderDefault;
             HasTestsFolder = HasTestsFolderDefault;
@@ -386,6 +403,7 @@ namespace UnityPackageMaker.Editor
             Changelog = ChangelogDefault;
             HasLicense = HasLicenseDefault;
             License = LicenseDefault;
+            ThirdPartyNotices = ThirdPartyNoticesDefault;
         }
 
         public bool IsValidPackageManifest()
@@ -538,6 +556,12 @@ namespace UnityPackageMaker.Editor
             
             // License
             if (HasLicense && String.IsNullOrWhiteSpace(License))
+            {
+                return false;
+            }
+            
+            // License
+            if (HasThirdPartyNotices && String.IsNullOrWhiteSpace(ThirdPartyNotices))
             {
                 return false;
             }

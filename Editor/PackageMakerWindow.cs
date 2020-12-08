@@ -33,8 +33,7 @@ namespace UnityPackageMaker.Editor
             _root = rootVisualElement;
             _contentsView = new ScrollView();
 
-            #region INIT AND QUERY
-
+            #region INITIALIZATION AND QUERY
             // Header
             var headerVisualTree = Resources.Load<VisualTreeAsset>(HeaderUxmlPath);
             headerVisualTree.CloneTree(_root);
@@ -60,6 +59,7 @@ namespace UnityPackageMaker.Editor
             var leftPanel = _root.Q<VisualElement>(LeftPanelName);
             var centerPanel = _root.Q<VisualElement>(CenterPanelName);
             var rightPanel = _root.Q<VisualElement>(RightPanelName);
+            var rightPanelListView = _root.Q<ListView>(RightPanelListViewName);
 
             // Included Package Contents
             var includedPackageContentsVisualTree = Resources.Load<VisualTreeAsset>(IncludedPackageContentsUxmlPath);
@@ -88,6 +88,9 @@ namespace UnityPackageMaker.Editor
 
             // License
             var licenseToggle = leftPanel.Q<Toggle>(LicenceToggleName);
+            
+            // Third Party Notices
+            var thirdPartyNoticesToggle = leftPanel.Q<Toggle>(ThirdPartyNoticesToggleName);
 
             // Editor Folder
             var editorFolderToggle = leftPanel.Q<Toggle>(EditorFolderToggleName);
@@ -206,7 +209,7 @@ namespace UnityPackageMaker.Editor
             var readmeVisualElement = new VisualElement();
             readmeVisualTree.CloneTree(readmeVisualElement);
             readmeVisualElement.style.flexGrow = 1;
-            rightPanel.Add(readmeVisualElement);
+            rightPanelListView.Add(readmeVisualElement);
             var readmeTextField = readmeVisualElement.Q<TextField>(ReadmeTextFieldName);
 
             // Changelog
@@ -214,7 +217,7 @@ namespace UnityPackageMaker.Editor
             var changelogVisualElement = new VisualElement();
             changelogVisualTree.CloneTree(changelogVisualElement);
             changelogVisualElement.style.flexGrow = 1;
-            rightPanel.Add(changelogVisualElement);
+            rightPanelListView.Add(changelogVisualElement);
             var changelogTextField = changelogVisualElement.Q<TextField>(ChangelogTextFieldName);
 
             // License
@@ -222,9 +225,17 @@ namespace UnityPackageMaker.Editor
             var licenseVisualElement = new VisualElement();
             licenseVisualTree.CloneTree(licenseVisualElement);
             licenseVisualElement.style.flexGrow = 1;
-            rightPanel.Add(licenseVisualElement);
+            rightPanelListView.Add(licenseVisualElement);
             var licenseTextField = licenseVisualElement.Q<TextField>(LicenseTextFieldName);
 
+            // Third Party Notices
+            var thirdPartyNoticesVisualTree = Resources.Load<VisualTreeAsset>(ThirdPartyNoticesUxmlPath);
+            var thirdPartyNoticesVisualElement = new VisualElement();
+            thirdPartyNoticesVisualTree.CloneTree(thirdPartyNoticesVisualElement);
+            thirdPartyNoticesVisualElement.style.flexGrow = 1;
+            rightPanelListView.Add(thirdPartyNoticesVisualElement);
+            var thirdPartyNoticesTextField = thirdPartyNoticesVisualElement.Q<TextField>(ThirdPartyNoticesTextFieldName);
+            
             // Add contents to root
             _contentsView.style.flexGrow = 1.0f;
             centerPanel.Add(_contentsView);
@@ -291,6 +302,13 @@ namespace UnityPackageMaker.Editor
             if (hasLicenseProperty != null)
             {
                 licenseToggle.BindProperty(hasLicenseProperty);
+            }
+            
+            // Third Party Notices
+            var hasThirdPartyNoticesProperty = pmSerObj.FindProperty(PackageManifestConstants.HasThirdPartyNoticesPropName);
+            if (hasThirdPartyNoticesProperty != null)
+            {
+                thirdPartyNoticesToggle.BindProperty(hasThirdPartyNoticesProperty);
             }
 
             // Editor Folder
@@ -511,6 +529,13 @@ namespace UnityPackageMaker.Editor
             {
                 licenseTextField.BindProperty(licenseProperty);
             }
+            
+            // Third Party Notices
+            var thirdPartyNoticesProperty = pmSerObj.FindProperty(PackageManifestConstants.ThirdPartyNoticesPropName);
+            if (thirdPartyNoticesProperty != null)
+            {
+                thirdPartyNoticesTextField.BindProperty(thirdPartyNoticesProperty);
+            }
             #endregion
 
             #region BEHAVIOR
@@ -588,6 +613,13 @@ namespace UnityPackageMaker.Editor
             readmeToggle.RegisterValueChangedCallback(evt =>
             {
                 readmeVisualElement.SetEnabled(readmeToggle.value);
+            });
+            
+            // Third Party Notices
+            thirdPartyNoticesVisualElement.SetEnabled(thirdPartyNoticesToggle.value);
+            thirdPartyNoticesToggle.RegisterValueChangedCallback(evt =>
+            {
+                thirdPartyNoticesVisualElement.SetEnabled(thirdPartyNoticesToggle.value);
             });
             
             // Changelog
@@ -857,6 +889,21 @@ namespace UnityPackageMaker.Editor
             {
                 _packageManifest.HasLicense = false;
             }
+            
+            // Third Party Notices.md
+            var thirdPartyNoticesPath =
+                Path.Combine(parentDirectoryPath, PackageManifestConstants.ThirdPartyNoticesFileName);
+            if (File.Exists(thirdPartyNoticesPath))
+            {
+                var streamReader = new StreamReader(licensePath);
+                var thirdPartyNotices = streamReader.ReadToEnd();
+                _packageManifest.HasThirdPartyNotices = true;
+                _packageManifest.ThirdPartyNotices = thirdPartyNotices;
+            }
+            else
+            {
+                _packageManifest.HasThirdPartyNotices = false;
+            }
 
             // Editor Folder
             var editorFolderPath = Path.Combine(parentDirectoryPath, PackageManifestConstants.EditorFolderName);
@@ -1037,6 +1084,15 @@ namespace UnityPackageMaker.Editor
                 var licenseWriter = File.CreateText(licenseFilePath);
                 licenseWriter.Write(packageManifest.License);
                 licenseWriter.Close();
+            }
+            
+            // Third Party Notices.md
+            if (packageManifest.HasThirdPartyNotices)
+            {
+                var thirdPartyNoticesFilePath = Path.Combine(rootFolderPath, PackageManifestConstants.ThirdPartyNoticesFileName);
+                var thirdPartyNoticesWriter = File.CreateText(thirdPartyNoticesFilePath);
+                thirdPartyNoticesWriter.Write(packageManifest.ThirdPartyNotices);
+                thirdPartyNoticesWriter.Close();
             }
             
             // Folders

@@ -19,6 +19,7 @@ namespace UnityPackageMaker.Editor
         public const string ReadmeUxmlPath = "CS_Readme";
         public const string ChangelogUxmlPath = "CS_Changelog";
         public const string LicenseUxmlPath = "CS_License";
+        public const string ThirdPartyNoticesUxmlPath = "CS_ThirdPartyNotices";
 
         public const string ClearALlButtonUxmlPath = "BT_ClearAll";
         public const string UpdatePackageButtonUxmlPath = "BT_UpdatePackage";
@@ -28,6 +29,7 @@ namespace UnityPackageMaker.Editor
         public const string LeftPanelName = "VE_PmLeftPanel";
         public const string CenterPanelName = "VE_PmCenterPanel";
         public const string RightPanelName = "VE_PmRightPanel";
+        public const string RightPanelListViewName = "LV_PmRightPanel";
 
         public const string AllPackagesVisualElementName = "VE_AllPackages";
         public const string LoadPackageButtonName = "BT_LoadPackage";
@@ -40,7 +42,9 @@ namespace UnityPackageMaker.Editor
         public const string ChangelogToggleName = "TG_Changelog";
         public const string ChangelogTextFieldName = "TF_ChangelogContents";
         public const string LicenceToggleName = "TG_License";
+        public const string ThirdPartyNoticesToggleName = "TG_ThirdPartyNotices";
         public const string LicenseTextFieldName = "TF_LicenseContents";
+        public const string ThirdPartyNoticesTextFieldName = "TF_ThirdPartyNotices";
         public const string EditorFolderToggleName = "TG_Editor";
         public const string RuntimeFolderToggleName = "TG_Runtime";
         public const string TestsFolderToggleName = "TG_Tests";

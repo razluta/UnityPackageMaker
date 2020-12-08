@@ -8,6 +8,7 @@ namespace UnityPackageMaker.Editor
         public const string HasReadmePropName = "hasReadme";
         public const string HasChangelogPropName = "hasChangelog";
         public const string HasLicensePropName = "hasLicense";
+        public const string HasThirdPartyNoticesPropName = "hasThirPartyNotices";
         public const string HasEditorFolderPropName = "hasEditorFolder";
         public const string HasRuntimeFolderPropName = "hasRuntimeFolder";
         public const string HasTestsFolderPropName = "hasTestsFolder";
@@ -40,6 +41,7 @@ namespace UnityPackageMaker.Editor
         public const string ReadmePropName = "readme";
         public const string ChangelogPropName = "changelog";
         public const string LicensePropName = "license";
+        public const string ThirdPartyNoticesPropName = "thirdPartyNotices";
         
         // .json fields
         public const string JsonFileName = "package.json";
@@ -59,6 +61,7 @@ namespace UnityPackageMaker.Editor
         public const string ReadmeMdFileName = "README.md";
         public const string ChangelogMdFileName = "CHANGELOG.md";
         public const string LicenseFileName = "LICENSE";
+        public const string ThirdPartyNoticesFileName = "Third Party Notices.md";
         public const string EmptyFileName = ".gitnull";
 
         public const string EditorFolderName = "Editor";

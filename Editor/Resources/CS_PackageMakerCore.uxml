@@ -1,14 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:VisualElement name="CS_PackageMaker" style="flex-direction: row; flex-grow: 1;">
         <Style src="PackageMaker.uss" />
-        <ui:VisualElement name="VE_PmLeftPanel" class="property_box" style="flex-grow: 1;">
+        <ui:VisualElement name="VE_PmLeftPanel" class="property_box" style="flex-shrink: 1;">
             <ui:Label text="Core Properties" class="core_boxes_text" />
         </ui:VisualElement>
-        <ui:VisualElement name="VE_PmCenterPanel" class="property_box" style="flex-grow: 1;">
+        <ui:VisualElement name="VE_PmCenterPanel" class="property_box" style="flex-grow: 0.5;">
             <ui:Label text="Detailed Properties" class="core_boxes_text" />
         </ui:VisualElement>
         <ui:VisualElement name="VE_PmRightPanel" class="property_box" style="flex-grow: 1;">
             <ui:Label text="Optional Documents" class="core_boxes_text" />
+            <ui:ListView focusable="True" name="LV_PmRightPanel" style="flex-grow: 1; flex-shrink: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

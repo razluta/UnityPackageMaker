@@ -41,6 +41,11 @@
             <ui:Label text="LICENSE" name="LB_License" class="property_contents_label" />
             <ui:Toggle name="TG_License" class="toggle" />
         </ui:VisualElement>
+        <ui:VisualElement name="VE_ThirdPartyNoticesRow" class="package_contents_row">
+            <ui:VisualElement name="VE_ThirdPartyNotices" class="package_contents_image" style="background-image: resource(&apos;FileIcon&apos;);" />
+            <ui:Label text="Third Party Notices.md" name="LB_ThirdPartyNotices" class="property_contents_label" />
+            <ui:Toggle name="TG_ThirdPartyNotices" class="toggle" />
+        </ui:VisualElement>
         <ui:VisualElement name="VE_EditorRow" class="package_contents_row">
             <ui:VisualElement name="VE_Editor" class="package_contents_image" style="background-image: resource(&apos;FolderIcon&apos;);" />
             <ui:Label text="Editor" name="LB_Editor" class="property_contents_label" />
