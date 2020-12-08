@@ -8,7 +8,7 @@ namespace UnityPackageMaker.Editor
         public const string HasReadmePropName = "hasReadme";
         public const string HasChangelogPropName = "hasChangelog";
         public const string HasLicensePropName = "hasLicense";
-        public const string HasThirdPartyNoticesPropName = "hasThirPartyNotices";
+        public const string HasThirdPartyNoticesPropName = "hasThirdPartyNotices";
         public const string HasEditorFolderPropName = "hasEditorFolder";
         public const string HasRuntimeFolderPropName = "hasRuntimeFolder";
         public const string HasTestsFolderPropName = "hasTestsFolder";

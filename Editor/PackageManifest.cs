@@ -401,7 +401,6 @@ namespace UnityPackageMaker.Editor
             Readme = ReadmeDefault;
             HasChangelog = HasChangelogDefault;
             Changelog = ChangelogDefault;
-            HasLicense = HasLicenseDefault;
             License = LicenseDefault;
             ThirdPartyNotices = ThirdPartyNoticesDefault;
         }
