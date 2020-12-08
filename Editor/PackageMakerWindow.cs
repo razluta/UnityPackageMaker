@@ -145,29 +145,14 @@ namespace UnityPackageMaker.Editor
             // Author Name
             var authorNameToggle = packageManifestVisualElement.Q<Toggle>(AuthorNameToggleName);
             var authorNameTextField = packageManifestVisualElement.Q<TextField>(AuthorNameTextFieldName);
-            authorNameTextField.SetEnabled(authorNameToggle.value);
-            authorNameToggle.RegisterValueChangedCallback(evt =>
-            {
-                authorNameTextField.SetEnabled(authorNameToggle.value);
-            });
 
             // Author Email
             var authorEmailToggle = packageManifestVisualElement.Q<Toggle>(AuthorEmailToggleName);
             var authorEmailTextField = packageManifestVisualElement.Q<TextField>(AuthorEmailTextFieldName);
-            authorEmailTextField.SetEnabled(authorEmailToggle.value);
-            authorEmailToggle.RegisterValueChangedCallback(evt =>
-            {
-                authorEmailTextField.SetEnabled(authorEmailToggle.value);
-            });
 
             // Author Url
             var authorUrlToggle = packageManifestVisualElement.Q<Toggle>(AuthorUrlToggleName);
             var authorUrlTextField = packageManifestVisualElement.Q<TextField>(AuthorUrlTextFieldName);
-            authorUrlTextField.SetEnabled(authorUrlToggle.value);
-            authorUrlToggle.RegisterValueChangedCallback(evt =>
-            {
-                authorUrlTextField.SetEnabled(authorUrlToggle.value);
-            });
 
             // Unity Release
             var unityReleaseToggle = packageManifestVisualElement.Q<Toggle>(UnityReleaseToggleName);
@@ -435,13 +420,21 @@ namespace UnityPackageMaker.Editor
             {
                 authorNameToggle.BindProperty(hasAuthorNameProperty);
             }
-            
+
             var authorNameProperty = pmSerObj.FindProperty(PackageManifestConstants.AuthorNamePropName);
             if (authorNameProperty != null)
             {
                 authorNameTextField.BindProperty(authorNameProperty);
             }
             
+            authorNameTextField.SetEnabled(authorNameToggle.value);
+            authorNameToggle.RegisterValueChangedCallback(evt =>
+            {
+                authorNameTextField.SetEnabled(authorNameToggle.value);
+                authorEmailToggle.value = authorNameToggle.value;
+                authorUrlToggle.value = authorNameToggle.value;
+            });
+
             // Author Email
             var hasAuthorEmailProperty = pmSerObj.FindProperty(PackageManifestConstants.HasAuthorEmailPropName);
             if (hasAuthorEmailProperty != null)
@@ -455,6 +448,14 @@ namespace UnityPackageMaker.Editor
                 authorEmailTextField.BindProperty(authorEmailProperty);
             }
             
+            authorEmailTextField.SetEnabled(authorEmailToggle.value);
+            authorEmailToggle.RegisterValueChangedCallback(evt =>
+            {
+                authorEmailTextField.SetEnabled(authorEmailToggle.value);
+                authorNameToggle.value = authorEmailToggle.value;
+                authorUrlToggle.value = authorEmailToggle.value;
+            });
+
             // Author Url
             var hasAuthorUrlProperty = pmSerObj.FindProperty(PackageManifestConstants.HasAuthorUrlPropName);
             if (hasAuthorUrlProperty != null)
@@ -467,6 +468,14 @@ namespace UnityPackageMaker.Editor
             {
                 authorUrlTextField.BindProperty(authorUrlProperty);
             }
+            
+            authorUrlTextField.SetEnabled(authorUrlToggle.value);
+            authorUrlToggle.RegisterValueChangedCallback(evt =>
+            {
+                authorUrlTextField.SetEnabled(authorUrlToggle.value);
+                authorNameToggle.value = authorUrlToggle.value;
+                authorEmailToggle.value = authorUrlToggle.value;
+            });
 
             // Unity Release
             var hasUnityReleaseProperty = pmSerObj.FindProperty(PackageManifestConstants.HasUnityReleasePropName);
@@ -1040,22 +1049,34 @@ namespace UnityPackageMaker.Editor
                 packageManifest.UnityVersionMinor.ToString();
             packageDictionary[PackageManifestConstants.JsonUnity] = packageUnity;
 
-            var packageUnityRelease = packageManifest.UnityRelease;
-            packageDictionary[PackageManifestConstants.JsonUnityRelease] = packageUnityRelease;
-
-            var dependencies = packageManifest.Dependencies;
-            packageDictionary[PackageManifestConstants.JsonDependencies] = dependencies;
-
-            var keywords = packageManifest.Keywords;
-            packageDictionary[PackageManifestConstants.JsonKeywords] = keywords;
-
-            var author = new Dictionary<string, string>
+            if (packageManifest.HasUnityRelease)
             {
-                [PackageManifestConstants.JsonAuthorName] = packageManifest.AuthorName,
-                [PackageManifestConstants.JsonAuthorEmail] = packageManifest.AuthorEmail,
-                [PackageManifestConstants.JsonAuthorUrl] = packageManifest.AuthorUrl
-            };
-            packageDictionary[PackageManifestConstants.JsonAuthor] = author;
+                var packageUnityRelease = packageManifest.UnityRelease;
+                packageDictionary[PackageManifestConstants.JsonUnityRelease] = packageUnityRelease;
+            }
+
+            if (packageManifest.HasDependencies)
+            {
+                var dependencies = packageManifest.Dependencies;
+                packageDictionary[PackageManifestConstants.JsonDependencies] = dependencies;
+            }
+
+            if (packageManifest.HasKeywords)
+            {
+                var keywords = packageManifest.Keywords;
+                packageDictionary[PackageManifestConstants.JsonKeywords] = keywords;
+            }
+
+            if (packageManifest.HasAuthorName || packageManifest.HasAuthorEmail || packageManifest.HasAuthorUrl)
+            {
+                var author = new Dictionary<string, string>
+                {
+                    [PackageManifestConstants.JsonAuthorName] = packageManifest.AuthorName,
+                    [PackageManifestConstants.JsonAuthorEmail] = packageManifest.AuthorEmail,
+                    [PackageManifestConstants.JsonAuthorUrl] = packageManifest.AuthorUrl
+                };
+                packageDictionary[PackageManifestConstants.JsonAuthor] = author;
+            }
             
             JsonUtilities.SetData(packageDictionary, packageJsonFilePath);
             
