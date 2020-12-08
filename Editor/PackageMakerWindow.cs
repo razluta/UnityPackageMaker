@@ -865,6 +865,7 @@ namespace UnityPackageMaker.Editor
                 var readme = streamReader.ReadToEnd();
                 _packageManifest.HasReadme = true;
                 _packageManifest.Readme = readme;
+                streamReader.Close();
             }
             else
             {
@@ -879,6 +880,7 @@ namespace UnityPackageMaker.Editor
                 var changelog = streamReader.ReadToEnd();
                 _packageManifest.HasChangelog = true;
                 _packageManifest.Changelog = changelog;
+                streamReader.Close();
             }
             else
             {
@@ -893,6 +895,7 @@ namespace UnityPackageMaker.Editor
                 var license = streamReader.ReadToEnd();
                 _packageManifest.HasLicense = true;
                 _packageManifest.License = license;
+                streamReader.Close();
             }
             else
             {
@@ -908,6 +911,7 @@ namespace UnityPackageMaker.Editor
                 var thirdPartyNotices = streamReader.ReadToEnd();
                 _packageManifest.HasThirdPartyNotices = true;
                 _packageManifest.ThirdPartyNotices = thirdPartyNotices;
+                streamReader.Close();
             }
             else
             {
