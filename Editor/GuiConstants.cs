@@ -19,7 +19,6 @@ namespace UnityPackageMaker.Editor
         public const string ReadmeUxmlPath = "CS_Readme";
         public const string ChangelogUxmlPath = "CS_Changelog";
         public const string LicenseUxmlPath = "CS_License";
-        public const string ConsoleLogUxmlPath = "CS_ConsoleLog";
 
         public const string ClearALlButtonUxmlPath = "BT_ClearAll";
         public const string UpdatePackageButtonUxmlPath = "BT_UpdatePackage";

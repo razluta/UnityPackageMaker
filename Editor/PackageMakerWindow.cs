@@ -221,10 +221,6 @@ namespace UnityPackageMaker.Editor
             _contentsView.style.flexGrow = 1.0f;
             centerPanel.Add(_contentsView);
 
-            // Add console to root
-            // var consoleLogVisualTree = Resources.Load<VisualTreeAsset>(ConsoleLogUxmlPath);
-            // consoleLogVisualTree.CloneTree(_root);
-
             // Clear All Button
             var clearAllButtonVisualTree = Resources.Load<VisualTreeAsset>(ClearALlButtonUxmlPath);
             clearAllButtonVisualTree.CloneTree(_root);
