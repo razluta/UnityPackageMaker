@@ -1,7 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:VisualElement name="VE_LoadUnityPackage" class="property_box">
-        <Style src="BT_CreatePackage.uss" />
         <Style src="PackageMaker.uss" />
-        <ui:Button text="Load Existing Unity Package" name="BT_LoadPackage" class="create_package_button" />
+        <ui:Button text="Load Existing Unity Package" name="BT_LoadPackage" class="generic_package_button" />
     </ui:VisualElement>
 </ui:UXML>

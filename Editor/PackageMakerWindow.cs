@@ -236,11 +236,9 @@ namespace UnityPackageMaker.Editor
             var createPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(CreatePackageButtonUxmlPath);
             createPackageButtonVisualTree.CloneTree(_root);
             var createPackageButton = _root.Q<Button>(CreatePackageButtonName);
-
             #endregion
 
             #region BINDINGS
-
             // Setup
             _packageManifest = ScriptableObject.CreateInstance<PackageManifest>();
             var pmSerObj = new UnityEditor.SerializedObject(_packageManifest);

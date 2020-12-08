@@ -1,7 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:VisualElement name="VE_ClearAll" class="property_box">
-        <Style src="BT_CreatePackage.uss" />
         <Style src="PackageMaker.uss" />
-        <ui:Button text="Clear All" name="BT_ClearAll" class="create_package_button innactive" />
+        <ui:Button text="Clear All" name="BT_ClearAll" class="innactive generic_package_button" />
     </ui:VisualElement>
 </ui:UXML>

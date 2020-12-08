@@ -264,3 +264,18 @@
     -unity-text-align: upper-left;
     white-space: normal;
 }
+
+.generic_package_button {
+    margin-left: -3px;
+    margin-right: -3px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
