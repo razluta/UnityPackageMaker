@@ -477,6 +477,11 @@ namespace UnityPackageMaker.Editor
             if (HasUnityRelease && String.IsNullOrWhiteSpace(UnityRelease))
             {
                 var unityReleaseCharCount = UnityRelease.Length;
+                if (unityReleaseCharCount == 0)
+                {
+                    return false;
+                }
+                
                 if (unityReleaseCharCount > MaxUnityReleaseCharCount)
                 {
                     return false;
