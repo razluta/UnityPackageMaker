@@ -1096,6 +1096,7 @@ namespace UnityPackageMaker.Editor
             }
             
             // Folders
+            // Editor Folder
             if (packageManifest.HasEditorFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.EditorFolderName));
@@ -1104,6 +1105,7 @@ namespace UnityPackageMaker.Editor
                 editorFolderNullFile.Close();
             }
             
+            // Runtime Folder
             if (packageManifest.HasRuntimeFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.RuntimeFolderName));
@@ -1112,6 +1114,7 @@ namespace UnityPackageMaker.Editor
                 runtimeFolderNullFile.Close();
             }
             
+            // Tests Folder
             if (packageManifest.HasTestsFolder)
             {
                 var testsFolderPath = Path.Combine(rootFolderPath, PackageManifestConstants.TestsFolderName);
@@ -1119,6 +1122,7 @@ namespace UnityPackageMaker.Editor
                 var testsFolderNullFile = File.Create(Path.Combine(testsFolderPath, PackageManifestConstants.EmptyFileName));
                 testsFolderNullFile.Close();
                 
+                // Tests Editor Folder
                 if (packageManifest.HasTestsEditorFolder)
                 {
                     var testsEditorFolderPath =
@@ -1129,6 +1133,7 @@ namespace UnityPackageMaker.Editor
                     testsEditorFolderNullFile.Close();
                 }
                 
+                // Tests Runtime Folder
                 if (packageManifest.HasTestsRuntimeFolder)
                 {
                     var testsRuntimeFolderPath =
@@ -1140,6 +1145,7 @@ namespace UnityPackageMaker.Editor
                 }
             }
             
+            // Documentation Folder
             if (packageManifest.HasDocumentationFolder)
             {
                 var documentationFolderPath =
@@ -1150,6 +1156,7 @@ namespace UnityPackageMaker.Editor
                 documentationFolderNullFile.Close();
             }
             
+            // Samples Folder
             if (packageManifest.HasSamplesFolder)
             {
                 var samplesFolderPath = Path.Combine(rootFolderPath, PackageManifestConstants.SamplesFolderName);
@@ -1159,6 +1166,7 @@ namespace UnityPackageMaker.Editor
                 samplesFolderNullFile.Close();
             }
             
+            // Screenshots Folder
             if (packageManifest.HasScreenshotsFolder)
             {
                 Directory.CreateDirectory(Path.Combine(rootFolderPath, PackageManifestConstants.ScreenshotsFolderName));
