@@ -121,15 +121,7 @@ namespace UnityPackageMaker.Editor
         public const string SuccessCreatePackageMessage = "Package has been successfully created.";
         public const string SuccessCreatePackageOk = "OK";
 
-        public static readonly Color NormalLogTextColor = new Color(1, 1, 1);
-        public const string ErrorTextTitle = "Error: ";
-        public static readonly Color ErrorTextColor = new Color(1, 0, 0);
-        public const string ErrorIconPath = "ConsoleErrorIcon.png";
-        public const string WarningTextTitle = "Warning: ";
-        public static readonly Color WarningTextColor = new Color(1, 0.3f, 0);
-        public const string WarningIconPath = "ConsoleWarnIcon.png";
-        public const string SuccessTextTitle = "Success: ";
-        public static readonly Color SuccessTextColor = new Color(0, 1, 0);
-        public const string SuccessIconPath = "ConsoleInfoIcon.png";
+        public static readonly Color HeaderHoverNotActiveColor = new Color(0, 0, 0, 0);
+        public static readonly Color HeaderHoverActiveColor = new Color(1, 1, 1, 0.1f);
     }
 }

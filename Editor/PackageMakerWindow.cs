@@ -40,6 +40,14 @@ namespace UnityPackageMaker.Editor
             headerVisualTree.CloneTree(_root);
             var logoButton = _root.Q<Button>(PackMakButtonName);
             logoButton.clickable.clicked += () => Application.OpenURL(PackageMakerToolsUrl);
+            logoButton.RegisterCallback<MouseEnterEvent>(evt =>
+            {
+                (evt.target as VisualElement).style.backgroundColor = new StyleColor(HeaderHoverActiveColor);
+            });
+            logoButton.RegisterCallback<MouseLeaveEvent>(evt =>
+            {
+                (evt.target as VisualElement).style.backgroundColor = new StyleColor(HeaderHoverNotActiveColor);
+            });
 
             // Load Package Button
             var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);

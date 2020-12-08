@@ -1,9 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:Button name="BT_Logo" style="border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgb(36, 36, 36); border-bottom-color: rgb(36, 36, 36); border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; flex-direction: row; background-color: rgba(93, 93, 93, 0);">
+    <ui:Button name="BT_Logo" class="header property_box" style="flex-direction: row; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgb(36, 36, 36); border-bottom-color: rgb(36, 36, 36); background-color: rgba(93, 93, 93, 0);">
         <Style src="PackageMaker.uss" />
-        <ui:Label text="PACMAK" name="LB_Title" style="flex-grow: 1; flex-shrink: 1; -unity-text-align: middle-center; font-size: 100%; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
-        <ui:VisualElement name="VE_PackageMakerTutorial" class="property_box" style="flex-shrink: 1; margin-top: 4px; flex-grow: 1;">
-            <ui:Label text="The Unity Package Maker is a tool for creating and/or updating package information and data in Unity packages." name="LB_Tutorial" class="description" style="white-space: normal; -unity-text-align: middle-left;" />
+        <ui:VisualElement class="property_box" style="margin-left: 0;">
+            <ui:Label text="PACMAK" name="LB_Title" style="flex-grow: 1; flex-shrink: 1; -unity-text-align: middle-center; font-size: 100%; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_PackageMakerTutorial" class="property_box" style="flex-shrink: 1; margin-top: 4px; flex-grow: 1; margin-right: 0;">
+            <ui:Label text="The Unity Package Maker is a tool for creating and/or updating package information and data in Unity packages." name="LB_Tutorial" class="description" style="white-space: normal; -unity-text-align: middle-center; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;" />
         </ui:VisualElement>
     </ui:Button>
 </ui:UXML>
