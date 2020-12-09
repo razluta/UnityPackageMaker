@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace UnityPackageMaker.Editor
 {
+    [Serializable]
     public class PackageDependency
     {
-        [SerializeField] private string _dependencyName;
-        [SerializeField] private string _dependencyVersion;
+        [SerializeField] private string dependencyName;
+        [SerializeField] private string dependencyVersion;
 
         public PackageDependency()
         {
@@ -15,14 +17,14 @@ namespace UnityPackageMaker.Editor
 
         public string DependencyName
         {
-            get => _dependencyName;
-            set => _dependencyName = value;
+            get => dependencyName;
+            set => dependencyName = value;
         }
 
         public string DependencyVersion
         {
-            get => _dependencyVersion;
-            set => _dependencyVersion = value;
+            get => dependencyVersion;
+            set => dependencyVersion = value;
         }
     }
 }

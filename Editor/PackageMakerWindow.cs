@@ -167,27 +167,16 @@ namespace UnityPackageMaker.Editor
             var dependenciesToggle = packageManifestVisualElement.Q<Toggle>(DependenciesToggleName);
             var dependenciesContent =
                 packageManifestVisualElement.Q<VisualElement>(DependenciesContentsVisualElementName);
-            dependenciesContent.SetEnabled(dependenciesToggle.value);
-            dependenciesToggle.RegisterValueChangedCallback(evt =>
-            {
-                dependenciesContent.SetEnabled(dependenciesToggle.value);
-            });
             var dependenciesListView = packageManifestVisualElement.Q<ListView>(DependenciesListViewName);
             var dependencyEntryVisualTree = Resources.Load<VisualTreeAsset>(DependencyEntryUxmlPath);
             var addDependencyButton = packageManifestVisualElement.Q<Button>(AddDependencyButtonName);
-            addDependencyButton.clickable.clicked += () =>
-                AddEntryToDependencies(dependencyEntryVisualTree, dependenciesListView);
 
             // Keywords
             var keywordsToggle = packageManifestVisualElement.Q<Toggle>(KeywordsToggleName);
             var keywordsContent = packageManifestVisualElement.Q<VisualElement>(KeywordsContentsVisualElementName);
-            keywordsContent.SetEnabled(keywordsToggle.value);
-            keywordsToggle.RegisterValueChangedCallback(evt => { keywordsContent.SetEnabled(keywordsToggle.value); });
             var keywordsListView = packageManifestVisualElement.Q<ListView>(KeywordsListViewName);
             var keywordsEntryVisualTree = Resources.Load<VisualTreeAsset>(KeywordEntryUxmlPath);
             var addKeywordButton = packageManifestVisualElement.Q<Button>(AddKeywordButtonName);
-            addKeywordButton.clickable.clicked += () =>
-                AddEntryToKeywords(keywordsEntryVisualTree, keywordsListView);
 
             // Readme
             var readmeVisualTree = Resources.Load<VisualTreeAsset>(ReadmeUxmlPath);
@@ -498,11 +487,6 @@ namespace UnityPackageMaker.Editor
             }
 
             var dependenciesProperty = pmSerObj.FindProperty(PackageManifestConstants.DependenciesPropName);
-            if (dependenciesProperty != null)
-            {
-                // TODO: bind
-                // dependenciesListView.BindProperty(dependenciesProperty);
-            }
 
             // Keywords
             var hasKeywordsProperty = pmSerObj.FindProperty(PackageManifestConstants.HasKeywordsPropName);
@@ -603,6 +587,21 @@ namespace UnityPackageMaker.Editor
                     rootFolderNameTextField.value = displayNameTextField.value;
                 }
             });
+            
+            // Dependencies
+            dependenciesContent.SetEnabled(dependenciesToggle.value);
+            dependenciesToggle.RegisterValueChangedCallback(evt =>
+            {
+                dependenciesContent.SetEnabled(dependenciesToggle.value);
+            });
+            addDependencyButton.clickable.clicked += () =>
+                AddEntryToDependencies(dependencyEntryVisualTree, dependenciesListView);
+            
+            // Keywords
+            keywordsContent.SetEnabled(keywordsToggle.value);
+            keywordsToggle.RegisterValueChangedCallback(evt => { keywordsContent.SetEnabled(keywordsToggle.value); });
+            addKeywordButton.clickable.clicked += () =>
+                AddEntryToKeywords(keywordsEntryVisualTree, keywordsListView);
 
             // Root Folder Name
             // The user can't change the folder name in the Update Mode - they have to click Create New instead.
