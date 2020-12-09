@@ -19,6 +19,9 @@ namespace UnityPackageMaker.Editor
         private VisualElement _root;
         private ScrollView _contentsView;
         private PackageManifest _packageManifest;
+
+        private ListView _dependenciesListView;
+        private VisualTreeAsset _dependencyEntryVisualTreeAsset;
         
         [MenuItem(PackageMakerMenuItemPath)]
         public static void ShowWindow()
@@ -167,8 +170,8 @@ namespace UnityPackageMaker.Editor
             var dependenciesToggle = packageManifestVisualElement.Q<Toggle>(DependenciesToggleName);
             var dependenciesContent =
                 packageManifestVisualElement.Q<VisualElement>(DependenciesContentsVisualElementName);
-            var dependenciesListView = packageManifestVisualElement.Q<ListView>(DependenciesListViewName);
-            var dependencyEntryVisualTree = Resources.Load<VisualTreeAsset>(DependencyEntryUxmlPath);
+            _dependenciesListView = packageManifestVisualElement.Q<ListView>(DependenciesListViewName);
+            _dependencyEntryVisualTreeAsset = Resources.Load<VisualTreeAsset>(DependencyEntryUxmlPath);
             var addDependencyButton = packageManifestVisualElement.Q<Button>(AddDependencyButtonName);
 
             // Keywords
@@ -486,8 +489,6 @@ namespace UnityPackageMaker.Editor
                 dependenciesToggle.BindProperty(hasDependenciesProperty);
             }
 
-            var dependenciesProperty = pmSerObj.FindProperty(PackageManifestConstants.DependenciesPropName);
-
             // Keywords
             var hasKeywordsProperty = pmSerObj.FindProperty(PackageManifestConstants.HasKeywordsPropName);
             if (hasKeywordsProperty != null)
@@ -594,8 +595,7 @@ namespace UnityPackageMaker.Editor
             {
                 dependenciesContent.SetEnabled(dependenciesToggle.value);
             });
-            addDependencyButton.clickable.clicked += () =>
-                AddEntryToDependencies(dependencyEntryVisualTree, dependenciesListView);
+            addDependencyButton.clickable.clicked += () => AddEntryToDependencies();
             
             // Keywords
             keywordsContent.SetEnabled(keywordsToggle.value);
@@ -645,7 +645,11 @@ namespace UnityPackageMaker.Editor
             });
             
             // Clear All Button
-            clearAllButton.clickable.clicked += _packageManifest.ResetToDefault;
+            clearAllButton.clickable.clicked += () =>
+            {
+                _packageManifest.ResetToDefault();
+                _dependenciesListView.Clear();
+            };
             
             // Update Package Button
             updatePackageButton.clickable.clicked += () => 
@@ -840,10 +844,29 @@ namespace UnityPackageMaker.Editor
             // Dependencies
             if (dictionary.ContainsKey(PackageManifestConstants.JsonDependencies))
             {
-                // var dependencies = (PackageDependency) dictionary[PackageManifestConstants.JsonDependencies];
                 _packageManifest.HasDependencies = true;
-                // TODO: Figure out dependencies de-serialization after the serialization part is done.
-                //_packageManifest.Dependencies = dependencies;
+                
+                var dependenciesContents = dictionary[PackageManifestConstants.JsonDependencies];
+
+                var dependenciesDictionary = new Dictionary<string, string>();
+                try
+                {
+                    var serializedDependenciesContents = JsonConvert.SerializeObject(dependenciesContents);
+                    dependenciesDictionary =
+                        JsonConvert.DeserializeObject<Dictionary<string, string>>(serializedDependenciesContents);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                }
+
+                foreach (var dependencyRelationship in dependenciesDictionary)
+                {
+                    var dependency = ScriptableObject.CreateInstance<PackageDependency>();
+                    dependency.DependencyName = dependencyRelationship.Key;
+                    dependency.DependencyVersion = dependencyRelationship.Value;
+                    AddEntryToDependencies(dependency.DependencyName, dependency.DependencyVersion);
+                }
             }
 
             // Keywords
@@ -960,22 +983,32 @@ namespace UnityPackageMaker.Editor
             updatePackageButton.SetEnabled(true);
         }
 
-        private static void AddEntryToDependencies(VisualTreeAsset vta, VisualElement ve)
+        private void AddEntryToDependencies(string dependencyName="", string dependencyVersion="")
         {
             var customVisualElement = new VisualElement();
-            vta.CloneTree(customVisualElement);
-            ve.Add(customVisualElement);
+            _dependencyEntryVisualTreeAsset.CloneTree(customVisualElement);
+            _dependenciesListView.Add(customVisualElement);
+            
+            var packageDependency = ScriptableObject.CreateInstance<PackageDependency>();
+            var pmSerObjPackageDependency = new UnityEditor.SerializedObject(packageDependency);
+            var dependencyNameProperty = pmSerObjPackageDependency.FindProperty(PackageDependencyConstants.DependencyNamePropName);
+            var dependencyVersionProperty = pmSerObjPackageDependency.FindProperty(PackageDependencyConstants.DependencyVersionPropName);
+            _packageManifest.Dependencies.Add(packageDependency);
 
             var entryNameTextField = customVisualElement.Q<TextField>(DependencyEntryNameTextFieldName);
-            entryNameTextField.value = String.Empty;
-            // TODO: bind
-            
+            entryNameTextField.BindProperty(dependencyNameProperty);
+            entryNameTextField.value = dependencyName;
+
             var entryVersionTextField = customVisualElement.Q<TextField>(DependencyEntryVersionTextFieldName);
-            entryVersionTextField.value = String.Empty;
-            // TODO: bind
+            entryVersionTextField.BindProperty(dependencyVersionProperty);
+            entryVersionTextField.value = dependencyVersion;
             
             var removeButton = customVisualElement.Q<Button>(DependencyEntryRemoveButtonName);
-            removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
+            removeButton.clickable.clicked += () =>
+            {
+                _dependenciesListView.Remove(customVisualElement);
+                _packageManifest.Dependencies.Remove(packageDependency);
+            };
         }
 
         private static void AddEntryToKeywords(VisualTreeAsset vta, VisualElement ve)
@@ -1061,7 +1094,14 @@ namespace UnityPackageMaker.Editor
             if (packageManifest.HasDependencies)
             {
                 var dependencies = packageManifest.Dependencies;
-                packageDictionary[PackageManifestConstants.JsonDependencies] = dependencies;
+                var dependenciesDictionary = new Dictionary<string, string>();
+                
+                foreach (var dependency in dependencies)
+                {
+                    dependenciesDictionary[dependency.DependencyName] = dependency.DependencyVersion;
+                }
+
+                packageDictionary[PackageManifestConstants.JsonDependencies] = dependenciesDictionary;
             }
 
             if (packageManifest.HasKeywords)

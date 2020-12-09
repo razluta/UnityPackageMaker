@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityPackageMaker.Editor
 {
     [Serializable]
-    public class PackageDependency
+    public class PackageDependency : ScriptableObject
     {
         [SerializeField] private string dependencyName;
         [SerializeField] private string dependencyVersion;

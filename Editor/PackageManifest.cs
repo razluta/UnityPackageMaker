@@ -395,9 +395,9 @@ namespace UnityPackageMaker.Editor
             HasUnityRelease = HasUnityReleaseDefault;
             UnityRelease = UnityReleaseDefault;
             HasDependencies = HasDependenciesDefault;
-            Dependencies = DependenciesDefault;
+            Dependencies = new List<PackageDependency>();
             HasKeywords = HasKeywordsDefault;
-            Keywords = KeywordsDefault;
+            Keywords = new List<string>();
 
             HasReadme = HasReadmeDefault;
             Readme = ReadmeDefault;
