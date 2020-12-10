@@ -348,8 +348,11 @@ namespace UnityPackageMaker.Editor
 
         // Validation Defaults
         private const int MinimumUnityVersionMajor = 2017;
+        private const int MinimumUnityVersionMinor = 1;
+        private const int MaximumUnityVersionMinor = 4;
+        private const int MinUnityReleaseCharCount = 3;
         private const int MaxUnityReleaseCharCount = 5;
-        
+
         public PackageManifest()
         {
             ResetToDefault();
@@ -409,30 +412,36 @@ namespace UnityPackageMaker.Editor
 
         public bool IsValidPackageManifest()
         {
+            var isValidPackageManifest = true;
+            
             // Name Extension
             if (String.IsNullOrWhiteSpace(NameExtension))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.NameExtensionErrorEmpty);
+                isValidPackageManifest = false;
             }
             else
             {
                 var containsNumbers = NameExtension.Any(char.IsDigit);
                 if (containsNumbers)
                 {
-                    return false;
+                    PmLogger.LogError(LoggingConstants.NameExtensionErrorContainsNumber);
+                    isValidPackageManifest = false;
                 }
             }
 
             // Name Company
             if (String.IsNullOrWhiteSpace(NameCompany))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.NameCompanyErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Name 
             if (String.IsNullOrWhiteSpace(NamePackage))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.NamePackageErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Version
@@ -441,138 +450,157 @@ namespace UnityPackageMaker.Editor
             // Display Name
             if (String.IsNullOrWhiteSpace(DisplayName))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.DisplayNameErrorEmpty);
+                isValidPackageManifest = false;
             }
             
-            // Unity Version
+            // Root Folder Name
+            if (String.IsNullOrWhiteSpace(RootFolderName))
+            {
+                PmLogger.LogError(LoggingConstants.RootFolderNameErrorEmpty);
+                isValidPackageManifest = false;
+            }
+            
+            // Unity Version Major
             if (UnityVersionMajor < MinimumUnityVersionMajor)
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.UnityVersionMajorErrorMinimum + MinimumUnityVersionMajor);
+                isValidPackageManifest = false;
+            }
+            
+            // Unity Version Minor
+            if (UnityVersionMinor < MinimumUnityVersionMinor)
+            {
+                PmLogger.LogError(LoggingConstants.UnityVersionMinorErrorMinimum + MinimumUnityVersionMinor);
+                isValidPackageManifest = false;
+            }
+
+            if (UnityVersionMinor > MaximumUnityVersionMinor)
+            {
+                PmLogger.LogError(LoggingConstants.UnityVersionMinorErrorMaximum + MaximumUnityVersionMinor);
+                isValidPackageManifest = false;
             }
             
             // Description
             if (String.IsNullOrWhiteSpace(Description))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.DescriptionErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Author Name
             if (HasAuthorName && String.IsNullOrWhiteSpace(AuthorName))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.AuthorNameErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Author Email
             if (HasAuthorEmail && String.IsNullOrWhiteSpace(AuthorEmail))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.AuthorEmailErrorEmpty);
+                isValidPackageManifest = false;
+            }
+            else
+            {
+                if (HasAuthorEmail)
+                {
+                    if (!AuthorEmail.Contains(PackageManifestConstants.EmailAtSymbol))
+                    {
+                        PmLogger.LogError(LoggingConstants.AuthorEmailErrorSymbol);
+                        isValidPackageManifest = false;
+                    }
+                }
             }
             
             // Author Url
             if (HasAuthorUrl && String.IsNullOrWhiteSpace(AuthorUrl))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.AuthorUrlErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Unity Release
             if (HasUnityRelease && String.IsNullOrWhiteSpace(UnityRelease))
             {
-                var unityReleaseCharCount = UnityRelease.Length;
-                if (unityReleaseCharCount == 0)
+                PmLogger.LogError(LoggingConstants.UnityReleaseErrorEmpty);
+                isValidPackageManifest = false;
+            }
+            else
+            {
+                if (HasUnityRelease)
                 {
-                    return false;
-                }
-                
-                if (unityReleaseCharCount > MaxUnityReleaseCharCount)
-                {
-                    return false;
-                }
-                
-                var isFirstCharNumeric = UnityRelease[0].ToString().All(char.IsDigit);
-                var isSecondCharNumeric = UnityRelease[1].ToString().All(char.IsDigit);
-                var isThirdCharNumeric = UnityRelease[2].ToString().All(char.IsDigit);
+                    var unityReleaseCharCount = UnityRelease.Length;
 
-                // Five count validation
-                if (unityReleaseCharCount == MaxUnityReleaseCharCount)
-                {
-                    var isFourthCharNumeric = UnityRelease[3].ToString().All(char.IsDigit);
-                    var isFifthCharNumeric = UnityRelease[4].ToString().All(char.IsDigit);
-                    
-                    if (!isFirstCharNumeric || !isSecondCharNumeric || 
-                        isThirdCharNumeric || 
-                        !isFourthCharNumeric || !isFifthCharNumeric)
+                    if (unityReleaseCharCount < MinUnityReleaseCharCount)
                     {
-                        return false;
+                        PmLogger.LogError(LoggingConstants.UnityReleaseErrorTooFew + MinUnityReleaseCharCount);   
+                        isValidPackageManifest = false;
                     }
-                }
                 
-                // Four count validation
-                if (unityReleaseCharCount == MaxUnityReleaseCharCount - 1)
-                {
-                    var isFourthCharNumeric = UnityRelease[3].ToString().All(char.IsDigit);
-                    var isValidOptionOne = false;
-                    var isValidOptionTwo = false;
-                    
-                    if (isFirstCharNumeric || !isSecondCharNumeric || isThirdCharNumeric || isFourthCharNumeric)
+                    if (unityReleaseCharCount > MaxUnityReleaseCharCount)
                     {
-                        isValidOptionOne = true;
-                    }
-                    
-                    if (isFirstCharNumeric || isSecondCharNumeric || !isThirdCharNumeric || isFourthCharNumeric)
-                    {
-                        isValidOptionTwo = true;
+                        PmLogger.LogError(LoggingConstants.UnityReleaseErrorTooMany + MaxUnityReleaseCharCount);
+                        isValidPackageManifest = false;
                     }
 
-                    if (!isValidOptionOne && !isValidOptionTwo)
+                    if (UnityRelease.All(char.IsDigit))
                     {
-                        return false;
+                        PmLogger.LogError(LoggingConstants.UnityReleaseErrorAllDigits);
+                        isValidPackageManifest = false;
                     }
-                }
-                
-                // Three count validation
-                if (!isFirstCharNumeric || isSecondCharNumeric || !isThirdCharNumeric)
-                {
-                    return false;
+
+                    if (UnityRelease.Any(char.IsDigit))
+                    {
+                        PmLogger.LogError(LoggingConstants.UnityReleaseErrorNoDigits);
+                        isValidPackageManifest = false;
+                    }
                 }
             }
             
             // Dependencies
             if (HasDependencies && Dependencies.Count == 0)
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.DependenciesErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Keywords
             if (HasKeywords && Keywords.Count == 0)
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.KeywordsErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Readme
             if (HasReadme && String.IsNullOrWhiteSpace(Readme))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.ReadmeErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // Changelog
             if (HasChangelog && String.IsNullOrWhiteSpace(Changelog))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.ChangelogErrorEmpty);
+                isValidPackageManifest = false;
             }
             
             // License
             if (HasLicense && String.IsNullOrWhiteSpace(License))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.LicenceErrorEmpty);
+                isValidPackageManifest = false;
             }
             
-            // License
+            // Third Party Notices
             if (HasThirdPartyNotices && String.IsNullOrWhiteSpace(ThirdPartyNotices))
             {
-                return false;
+                PmLogger.LogError(LoggingConstants.ThirdPartyNoticesErrorEmpty);
+                isValidPackageManifest = false;
             }
 
-            return true;
+            return isValidPackageManifest;
         }
     }
 }

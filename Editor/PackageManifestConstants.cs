@@ -72,5 +72,8 @@ namespace UnityPackageMaker.Editor
         public const string DocumentationFolderName = "Documentation";
         public const string SamplesFolderName = "Samples";
         public const string ScreenshotsFolderName = "Screenshots";
+        
+        // Validation constants
+        public const string EmailAtSymbol = "@";
     }
 }

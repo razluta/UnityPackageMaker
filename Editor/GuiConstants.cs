@@ -111,7 +111,7 @@ namespace UnityPackageMaker.Editor
         
         public const string InvalidPackageErrorTitle = "Invalid Package";
         public const string InvalidPackageErrorMessage = "One or more felds in the Package are invalid, please check " +
-                                                         "the log and fix them.";
+                                                         "the console debug log and fix them.";
         public const string InvalidPackageOk = "OK";
         public const char Period = '.';
 

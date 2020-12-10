@@ -798,7 +798,7 @@ namespace UnityPackageMaker.Editor
                 }
                 catch (Exception e)
                 {
-                    PmLogger.Log(e.ToString());
+                    PmLogger.LogError(e.ToString());
                 }
 
                 if (authorDictionary != null)
@@ -853,7 +853,7 @@ namespace UnityPackageMaker.Editor
                 }
                 catch (Exception e)
                 {
-                    PmLogger.Log(e.ToString());
+                    PmLogger.LogError(e.ToString());
                 }
 
                 foreach (var dependencyRelationship in dependenciesDictionary)
@@ -881,7 +881,7 @@ namespace UnityPackageMaker.Editor
                 }
                 catch (Exception e)
                 {
-                    PmLogger.Log(e.ToString());
+                    PmLogger.LogError(e.ToString());
                 }
 
                 foreach (var keywordValue in keywordsList)
