@@ -415,7 +415,7 @@ namespace UnityPackageMaker.Editor
             var isValidPackageManifest = true;
             
             // Name Extension
-            if (String.IsNullOrWhiteSpace(NameExtension))
+            if (string.IsNullOrWhiteSpace(NameExtension))
             {
                 PmLogger.LogError(LoggingConstants.NameExtensionErrorEmpty);
                 isValidPackageManifest = false;
@@ -431,14 +431,14 @@ namespace UnityPackageMaker.Editor
             }
 
             // Name Company
-            if (String.IsNullOrWhiteSpace(NameCompany))
+            if (string.IsNullOrWhiteSpace(NameCompany))
             {
                 PmLogger.LogError(LoggingConstants.NameCompanyErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // Name 
-            if (String.IsNullOrWhiteSpace(NamePackage))
+            if (string.IsNullOrWhiteSpace(NamePackage))
             {
                 PmLogger.LogError(LoggingConstants.NamePackageErrorEmpty);
                 isValidPackageManifest = false;
@@ -448,14 +448,14 @@ namespace UnityPackageMaker.Editor
             // Version is always valid because it resets to 0
             
             // Display Name
-            if (String.IsNullOrWhiteSpace(DisplayName))
+            if (string.IsNullOrWhiteSpace(DisplayName))
             {
                 PmLogger.LogError(LoggingConstants.DisplayNameErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // Root Folder Name
-            if (String.IsNullOrWhiteSpace(RootFolderName))
+            if (string.IsNullOrWhiteSpace(RootFolderName))
             {
                 PmLogger.LogError(LoggingConstants.RootFolderNameErrorEmpty);
                 isValidPackageManifest = false;
@@ -489,14 +489,14 @@ namespace UnityPackageMaker.Editor
             }
             
             // Author Name
-            if (HasAuthorName && String.IsNullOrWhiteSpace(AuthorName))
+            if (HasAuthorName && string.IsNullOrWhiteSpace(AuthorName))
             {
                 PmLogger.LogError(LoggingConstants.AuthorNameErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // Author Email
-            if (HasAuthorEmail && String.IsNullOrWhiteSpace(AuthorEmail))
+            if (HasAuthorEmail && string.IsNullOrWhiteSpace(AuthorEmail))
             {
                 PmLogger.LogError(LoggingConstants.AuthorEmailErrorEmpty);
                 isValidPackageManifest = false;
@@ -514,14 +514,14 @@ namespace UnityPackageMaker.Editor
             }
             
             // Author Url
-            if (HasAuthorUrl && String.IsNullOrWhiteSpace(AuthorUrl))
+            if (HasAuthorUrl && string.IsNullOrWhiteSpace(AuthorUrl))
             {
                 PmLogger.LogError(LoggingConstants.AuthorUrlErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // Unity Release
-            if (HasUnityRelease && String.IsNullOrWhiteSpace(UnityRelease))
+            if (HasUnityRelease && string.IsNullOrWhiteSpace(UnityRelease))
             {
                 PmLogger.LogError(LoggingConstants.UnityReleaseErrorEmpty);
                 isValidPackageManifest = false;
@@ -573,28 +573,28 @@ namespace UnityPackageMaker.Editor
             }
             
             // Readme
-            if (HasReadme && String.IsNullOrWhiteSpace(Readme))
+            if (HasReadme && string.IsNullOrWhiteSpace(Readme))
             {
                 PmLogger.LogError(LoggingConstants.ReadmeErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // Changelog
-            if (HasChangelog && String.IsNullOrWhiteSpace(Changelog))
+            if (HasChangelog && string.IsNullOrWhiteSpace(Changelog))
             {
                 PmLogger.LogError(LoggingConstants.ChangelogErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // License
-            if (HasLicense && String.IsNullOrWhiteSpace(License))
+            if (HasLicense && string.IsNullOrWhiteSpace(License))
             {
                 PmLogger.LogError(LoggingConstants.LicenceErrorEmpty);
                 isValidPackageManifest = false;
             }
             
             // Third Party Notices
-            if (HasThirdPartyNotices && String.IsNullOrWhiteSpace(ThirdPartyNotices))
+            if (HasThirdPartyNotices && string.IsNullOrWhiteSpace(ThirdPartyNotices))
             {
                 PmLogger.LogError(LoggingConstants.ThirdPartyNoticesErrorEmpty);
                 isValidPackageManifest = false;
