@@ -339,7 +339,7 @@ namespace UnityPackageMaker.Editor
         private const bool HasDependenciesDefault = false;
         private static readonly List<PackageDependency> DependenciesDefault = new List<PackageDependency>();
         private const bool HasKeywordsDefault = false;
-        private static readonly List<string> KeywordsDefault = new List<string>();
+        private static readonly List<PackageKeyword> KeywordsDefault = new List<PackageKeyword>();
 
         private const string ReadmeDefault = "";
         private const string ChangelogDefault = "";
@@ -398,9 +398,9 @@ namespace UnityPackageMaker.Editor
             HasUnityRelease = HasUnityReleaseDefault;
             UnityRelease = UnityReleaseDefault;
             HasDependencies = HasDependenciesDefault;
-            Dependencies = new List<PackageDependency>();
+            Dependencies = DependenciesDefault;
             HasKeywords = HasKeywordsDefault;
-            Keywords = new List<PackageKeyword>();
+            Keywords = KeywordsDefault;
 
             HasReadme = HasReadmeDefault;
             Readme = ReadmeDefault;
