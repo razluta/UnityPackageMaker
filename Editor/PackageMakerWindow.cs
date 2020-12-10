@@ -8,7 +8,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityPackageMaker.Editor.SystemUtilities;
 using static UnityPackageMaker.Editor.GuiConstants;
-using Object = UnityEngine.Object;
 
 namespace UnityPackageMaker.Editor 
 {
