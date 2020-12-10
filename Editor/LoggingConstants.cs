@@ -25,7 +25,7 @@ namespace UnityPackageMaker.Editor
         public const string AuthorEmailErrorSymbol = "Author email must contain @ symbol.";
         public const string AuthorUrlErrorEmpty = "Author url cannot be empty if enabled.";
 
-        public const string UnityReleaseErrorEmpty = "Unity Release cannot be empty.";
+        public const string UnityReleaseErrorEmpty = "Unity Release cannot be empty if enabled.";
         public const string UnityReleaseErrorTooMany = "Unity Release max character count is: ";
         public const string UnityReleaseErrorTooFew = "Unity Release min character count is: ";
         public const string UnityReleaseErrorAllDigits = "Unity Release must contains letters, not just numbers - see example.";
