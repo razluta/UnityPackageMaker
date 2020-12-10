@@ -1,7 +1,7 @@
 # Unity Package Maker [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 ![](/Screenshots/PackMak_Header.png)
 
-This repository is a Unity Editor tool for creating new Unity packages (or updating existing ones).
+This repository is a Unity Editor tool for creating new Unity packages (or updating existing ones). See the manual for manual instructions for [Creating custom Unity packages](https://docs.unity3d.com/Manual/CustomPackages.html).
 
 The tool has been verified on the following versions of Unity:
 - 2019.4
