@@ -1,6 +1,6 @@
 namespace UnityPackageMaker.Editor
 {
-    public class PackageDependencyConstants
+    public static class PackageDependencyConstants
     {
         public const string DependencyNamePropName = "dependencyName";
         public const string DependencyVersionPropName = "dependencyVersion";
