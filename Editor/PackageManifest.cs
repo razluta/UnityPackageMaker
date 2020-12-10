@@ -550,7 +550,7 @@ namespace UnityPackageMaker.Editor
                         isValidPackageManifest = false;
                     }
 
-                    if (UnityRelease.Any(char.IsDigit))
+                    if (!UnityRelease.Any(char.IsDigit))
                     {
                         PmLogger.LogError(LoggingConstants.UnityReleaseErrorNoDigits);
                         isValidPackageManifest = false;
