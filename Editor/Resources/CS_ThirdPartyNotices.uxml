@@ -1,13 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="VE_ThirdPartyNotices" class="property_box" style="flex-grow: 1;">
+    <ui:VisualElement name="VE_ThirdPartyNotices" class="property_box tf_parent" style="flex-grow: 1;">
         <Style src="PackageMaker.uss" />
         <ui:Label text="&apos;Third Party Notices.md&apos; Contents" name="LB_ThirdPartyNotices" class="section_title" />
-        <ui:ListView focusable="True" name="LV_LB_ThirdPartyNoticesExample" class="listview_text_field">
+        <ui:ListView focusable="True" name="LV_LB_ThirdPartyNoticesExample" class="listview_text_field" style="max-height: 100px;">
             <ui:Label text="example:&#10;Component Name: MyComponent&#10;License Type: &quot;MyLicense&quot;&#10;[MyComponent License](https://www.mycompany.com/licenses/License.txt)&#10;&#10;Component Name: MyOtherComponent&#10;License Type: &quot;MyOtherLicense&quot;&#10;[MyOtherComponent License](https://www.mycompany.com/licenses/License.txt)&#10;..." style="opacity: 0.5; margin-left: 3px; white-space: normal;" />
         </ui:ListView>
+        <ui:VisualElement style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" />
         <ui:VisualElement name="VE_ThirdPartyNotices" class="package_contents_row" style="flex-direction: column; flex-grow: 1;">
             <ui:ListView focusable="True" name="LV_ThirdPartyNotices" class="listview_text_field">
-                <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_ThirdPartyNotices" multiline="true" class="text_field" style="flex-wrap: wrap; white-space: normal; color: rgb(84, 84, 84); min-height: 150px;" />
+                <ui:TextField picking-mode="Ignore" value="Text Description." name="TF_ThirdPartyNotices" multiline="true" class="text_field tf_child" style="flex-wrap: wrap; white-space: normal; color: rgb(84, 84, 84); min-height: 500px;" />
             </ui:ListView>
         </ui:VisualElement>
     </ui:VisualElement>

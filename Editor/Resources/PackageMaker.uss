@@ -76,7 +76,7 @@
 
 .listview_text_field {
     flex-grow: 1;
-    height: 75px;
+    min-height: 100px;
 }
 
 .description {
@@ -278,4 +278,12 @@
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.tf_parent {
+    min-height: 500px;
+}
+
+.tf_child {
+    min-height: 300px;
 }
