@@ -44,15 +44,6 @@ namespace UnityPackageMaker.Editor
             var headerVisualTree = Resources.Load<VisualTreeAsset>(HeaderUxmlPath);
             headerVisualTree.CloneTree(_root);
             var logoButton = _root.Q<Button>(PackMakButtonName);
-            logoButton.clickable.clicked += () => Application.OpenURL(PackageMakerToolsUrl);
-            logoButton.RegisterCallback<MouseEnterEvent>(evt =>
-            {
-                (evt.target as VisualElement).style.backgroundColor = new StyleColor(HeaderHoverActiveColor);
-            });
-            logoButton.RegisterCallback<MouseLeaveEvent>(evt =>
-            {
-                (evt.target as VisualElement).style.backgroundColor = new StyleColor(HeaderHoverNotActiveColor);
-            });
 
             // Load Package Button
             var loadPackageButtonVisualTree = Resources.Load<VisualTreeAsset>(LoadPackageButtonUxmlPath);
@@ -163,11 +154,6 @@ namespace UnityPackageMaker.Editor
             // Unity Release
             var unityReleaseToggle = packageManifestVisualElement.Q<Toggle>(UnityReleaseToggleName);
             var unityReleaseTextField = packageManifestVisualElement.Q<TextField>(UnityReleaseTextFieldName);
-            unityReleaseTextField.SetEnabled(unityReleaseToggle.value);
-            unityReleaseToggle.RegisterValueChangedCallback(evt =>
-            {
-                unityReleaseTextField.SetEnabled(unityReleaseToggle.value);
-            });
 
             // Dependencies
             var dependenciesToggle = packageManifestVisualElement.Q<Toggle>(DependenciesToggleName);
@@ -529,6 +515,17 @@ namespace UnityPackageMaker.Editor
             #endregion
 
             #region BEHAVIOR
+            // Header
+            logoButton.clickable.clicked += () => Application.OpenURL(PackageMakerToolsUrl);
+            logoButton.RegisterCallback<MouseEnterEvent>(evt =>
+            {
+                (evt.target as VisualElement).style.backgroundColor = new StyleColor(HeaderHoverActiveColor);
+            });
+            logoButton.RegisterCallback<MouseLeaveEvent>(evt =>
+            {
+                (evt.target as VisualElement).style.backgroundColor = new StyleColor(HeaderHoverNotActiveColor);
+            });
+            
             // Load Button
             loadPackageButton.clickable.clicked += () => LoadPackage(updatePackageButton);
             
@@ -583,6 +580,13 @@ namespace UnityPackageMaker.Editor
                 {
                     rootFolderNameTextField.value = displayNameTextField.value;
                 }
+            });
+            
+            // Unity Release
+            unityReleaseTextField.SetEnabled(unityReleaseToggle.value);
+            unityReleaseToggle.RegisterValueChangedCallback(evt =>
+            {
+                unityReleaseTextField.SetEnabled(unityReleaseToggle.value);
             });
             
             // Dependencies
