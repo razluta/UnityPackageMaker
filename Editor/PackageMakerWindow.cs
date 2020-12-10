@@ -22,6 +22,9 @@ namespace UnityPackageMaker.Editor
 
         private ListView _dependenciesListView;
         private VisualTreeAsset _dependencyEntryVisualTreeAsset;
+
+        private ListView _keywordsListView;
+        private VisualTreeAsset _keywordsEntryVisualTreeAsset;
         
         [MenuItem(PackageMakerMenuItemPath)]
         public static void ShowWindow()
@@ -177,8 +180,8 @@ namespace UnityPackageMaker.Editor
             // Keywords
             var keywordsToggle = packageManifestVisualElement.Q<Toggle>(KeywordsToggleName);
             var keywordsContent = packageManifestVisualElement.Q<VisualElement>(KeywordsContentsVisualElementName);
-            var keywordsListView = packageManifestVisualElement.Q<ListView>(KeywordsListViewName);
-            var keywordsEntryVisualTree = Resources.Load<VisualTreeAsset>(KeywordEntryUxmlPath);
+            _keywordsListView = packageManifestVisualElement.Q<ListView>(KeywordsListViewName);
+            _keywordsEntryVisualTreeAsset = Resources.Load<VisualTreeAsset>(KeywordEntryUxmlPath);
             var addKeywordButton = packageManifestVisualElement.Q<Button>(AddKeywordButtonName);
 
             // Readme
@@ -496,13 +499,6 @@ namespace UnityPackageMaker.Editor
                 keywordsToggle.BindProperty(hasKeywordsProperty);
             }
 
-            var keywordsProperty = pmSerObj.FindProperty(PackageManifestConstants.KeywordsPropName);
-            if (keywordsProperty != null)
-            {
-                // TODO: bind
-                // keywordsListView.BindProperty(keywordsProperty);
-            }
-            
             // Readme Contents
             var readmeProperty = pmSerObj.FindProperty(PackageManifestConstants.ReadmePropName);
             if (readmeProperty != null)
@@ -600,8 +596,7 @@ namespace UnityPackageMaker.Editor
             // Keywords
             keywordsContent.SetEnabled(keywordsToggle.value);
             keywordsToggle.RegisterValueChangedCallback(evt => { keywordsContent.SetEnabled(keywordsToggle.value); });
-            addKeywordButton.clickable.clicked += () =>
-                AddEntryToKeywords(keywordsEntryVisualTree, keywordsListView);
+            addKeywordButton.clickable.clicked += () => AddEntryToKeywords();
 
             // Root Folder Name
             // The user can't change the folder name in the Update Mode - they have to click Create New instead.
@@ -649,6 +644,7 @@ namespace UnityPackageMaker.Editor
             {
                 _packageManifest.ResetToDefault();
                 _dependenciesListView.Clear();
+                _keywordsListView.Clear();
             };
             
             // Update Package Button
@@ -872,10 +868,27 @@ namespace UnityPackageMaker.Editor
             // Keywords
             if (dictionary.ContainsKey(PackageManifestConstants.JsonKeywords))
             {
-                // var keywords = ...
                 _packageManifest.HasKeywords = true;
-                // TODO: Figure out keywords de-serialization after the serialization part is done
-                //_packageManifest.Keywords = keywords;
+
+                var keywordsContents = dictionary[PackageManifestConstants.JsonKeywords];
+
+                var keywordsList = new List<string>();
+                try
+                {
+                    var serializedKeywordsContents = JsonConvert.SerializeObject(keywordsContents);
+                    keywordsList =
+                        JsonConvert.DeserializeObject<List<string>>(serializedKeywordsContents);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                }
+
+                foreach (var keywordValue in keywordsList)
+                {
+                    AddEntryToKeywords(keywordValue);
+                }
+
             }
             #endregion
 
@@ -1011,18 +1024,28 @@ namespace UnityPackageMaker.Editor
             };
         }
 
-        private static void AddEntryToKeywords(VisualTreeAsset vta, VisualElement ve)
+        private void AddEntryToKeywords(string keywordName="")
         {
             var customVisualElement = new VisualElement();
-            vta.CloneTree(customVisualElement);
-            ve.Add(customVisualElement);
+            _keywordsEntryVisualTreeAsset.CloneTree(customVisualElement);
+            _keywordsListView.Add(customVisualElement);
 
-            var entryNameTextField = customVisualElement.Q<TextField>(KeywordEntryNameTextFieldName);
-            entryNameTextField.value = String.Empty;
-            // bind
+            var packageKeyword = ScriptableObject.CreateInstance<PackageKeyword>();
+            var pmSerObjPackageKeyword = new UnityEditor.SerializedObject(packageKeyword);
+            var keywordValueProperty =
+                pmSerObjPackageKeyword.FindProperty(PackageKeywordConstants.KeywordValuePropName);
+            _packageManifest.Keywords.Add(packageKeyword);
             
+            var entryNameTextField = customVisualElement.Q<TextField>(KeywordEntryNameTextFieldName);
+            entryNameTextField.BindProperty(keywordValueProperty);
+            entryNameTextField.value = keywordName;
+
             var removeButton = customVisualElement.Q<Button>(RemoveKeywordButtonName);
-            removeButton.clickable.clicked += () => ve.Remove(customVisualElement);
+            removeButton.clickable.clicked += () =>
+            {
+                _keywordsListView.Remove(customVisualElement);
+                _packageManifest.Keywords.Remove(packageKeyword);
+            };
         }
 
         private static void TryCreateNewUnityPackage(PackageManifest packageManifest, string rootFolderPath="")
@@ -1107,7 +1130,14 @@ namespace UnityPackageMaker.Editor
             if (packageManifest.HasKeywords)
             {
                 var keywords = packageManifest.Keywords;
-                packageDictionary[PackageManifestConstants.JsonKeywords] = keywords;
+                var keywordsList = new List<string>();
+
+                foreach (var keyword in keywords)
+                {
+                    keywordsList.Add(keyword.KeywordValue);
+                }
+
+                packageDictionary[PackageManifestConstants.JsonKeywords] = keywordsList;
             }
 
             if (packageManifest.HasAuthorName || packageManifest.HasAuthorEmail || packageManifest.HasAuthorUrl)

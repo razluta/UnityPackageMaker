@@ -44,7 +44,7 @@ namespace UnityPackageMaker.Editor
         [SerializeField] private bool hasDependencies;
         [SerializeField] private List<PackageDependency> dependencies;
         [SerializeField] private bool hasKeywords;
-        [SerializeField] private List<string> keywords;
+        [SerializeField] private List<PackageKeyword> keywords;
         [SerializeField] private string readme;
         [SerializeField] private string changelog;
         [SerializeField] private string license;
@@ -268,7 +268,7 @@ namespace UnityPackageMaker.Editor
             set => hasKeywords = value;
         }
         
-        public List<string> Keywords
+        public List<PackageKeyword> Keywords
         {
             get => keywords;
             set => keywords = value;
@@ -397,7 +397,7 @@ namespace UnityPackageMaker.Editor
             HasDependencies = HasDependenciesDefault;
             Dependencies = new List<PackageDependency>();
             HasKeywords = HasKeywordsDefault;
-            Keywords = new List<string>();
+            Keywords = new List<PackageKeyword>();
 
             HasReadme = HasReadmeDefault;
             Readme = ReadmeDefault;
